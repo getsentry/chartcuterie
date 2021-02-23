@@ -1,15 +1,14 @@
-/*eslint-env node*/
-
 import * as webpack from 'webpack';
 import path from 'path';
 import nodeExternals from 'webpack-node-externals';
+import WebpackHookPlugin from 'webpack-hook-plugin';
 
 const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 
 const config: webpack.Configuration = {
   mode: IS_PRODUCTION ? 'production' : 'development',
   target: 'node',
-  //devtool: IS_PRODUCTION ? 'source-map' : 'cheap-module-eval-source-map',
+  devtool: IS_PRODUCTION ? 'source-map' : 'eval-cheap-module-source-map',
 
   externals: [nodeExternals()],
   node: {
@@ -17,9 +16,6 @@ const config: webpack.Configuration = {
     __filename: false,
   },
   resolve: {
-    alias: {
-      src: path.join(__dirname, 'src'),
-    },
     modules: ['node_modules'],
     extensions: ['.js', '.json', '.ts'],
   },

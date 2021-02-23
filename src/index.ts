@@ -3,9 +3,9 @@ import * as util from 'util';
 
 import {createCanvas} from 'canvas';
 import * as echarts from 'echarts';
-import {RenderData, StyleConfig, StyleDescriptor} from 'src/types';
+import {RenderData, StyleConfig, StyleDescriptor} from './types';
 import yargsInit from 'yargs';
-import {registerCanvasFonts} from 'src/utils';
+import {registerCanvasFonts, disabledOptions} from './utils';
 
 registerCanvasFonts();
 const initCanvas = createCanvas(0, 0);
@@ -13,14 +13,6 @@ const initCanvas = createCanvas(0, 0);
 // @ts-ignore setCanvasCreator is not documented in typescript [0]
 // [0]: https://github.com/apache/echarts/issues/9727
 echarts.setCanvasCreator(() => initCanvas);
-
-const disabledOptions: echarts.EChartOption = {
-  animation: false,
-  toolbox: undefined,
-  tooltip: undefined,
-};
-
-const readAsync = util.promisify(fs.readFile);
 
 /**
  * Renders a single chart
@@ -34,6 +26,8 @@ function renderSync(style: StyleDescriptor, series: echarts.EChartOption.Series[
 
   return [canvas.createPNGStream(), () => chart.dispose()] as const;
 }
+
+const readAsync = util.promisify(fs.readFile);
 
 /**
  * Take JSON input from stdin and generate and output a graph to stdout

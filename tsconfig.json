@@ -31,10 +31,7 @@
     "esModuleInterop": true,
     "jsx": "preserve",
     "baseUrl": "./",
-    "outDir": "./build",
-    "paths": {
-      "src/*": ["src/*"]
-    }
+    "outDir": "./build"
   },
   "include": ["./src", "./tests"],
   "exclude": ["./node_modules"]
