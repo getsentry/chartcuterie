@@ -59,10 +59,12 @@ const config: webpack.Configuration = {
       },
     ],
   },
-  plugins: [],
+  plugins: [
+    new webpack.BannerPlugin({banner: '#!/usr/bin/env node', raw: true}),
+    new WebpackHookPlugin({onBuildEnd: ['chmod +x lib/chartRenderer.js']}),
+  ],
   output: {
-    globalObject: 'this',
-    path: path.join(__dirname, 'build'),
+    path: path.join(__dirname, 'lib'),
   },
 };
 

@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "bin": {
+    "chart-renderer": "./lib/chartRenderer.js"
+  },
   "scripts": {
     "build": "webpack",
     "watch": "webpack --watch"
@@ -13,6 +16,7 @@
     "canvas": "^2.6.1",
     "echarts": "4.7.0",
     "express": "^4.17.1",
+    "webpack-hook-plugin": "^1.0.7",
     "yargs": "^16.2.0"
   },
   "devDependencies": {
