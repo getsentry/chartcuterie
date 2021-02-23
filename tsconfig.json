@@ -1,0 +1,41 @@
+{
+  "compilerOptions": {
+    "allowJs": false,
+    "checkJs": false,
+    "alwaysStrict": false,
+    "declaration": false,
+    "declarationMap": false,
+    "downlevelIteration": true,
+    "inlineSources": false,
+    "importHelpers": true,
+    "lib": ["esnext"],
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "noEmitHelpers": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": false,
+    "noImplicitReturns": true,
+    "noImplicitUseStrict": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "pretty": false,
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "strict": true,
+    "target": "ESNext",
+    "strictBindCallApply": false,
+    "experimentalDecorators": true,
+    // Skip type checking of all declaration files
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "jsx": "preserve",
+    "baseUrl": "./",
+    "outDir": "./build",
+    "paths": {
+      "src/*": ["src/*"]
+    }
+  },
+  "include": ["./src", "./tests"],
+  "exclude": ["./node_modules"]
+}
