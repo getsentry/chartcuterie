@@ -7,13 +7,17 @@
     "chart-renderer": "./lib/chartRenderer.js"
   },
   "scripts": {
+    "lint": "tsc && eslint src/**.ts",
     "build": "webpack",
     "watch": "webpack --watch"
   },
   "dependencies": {
+    "@sentry/node": "^6.2.0",
     "@types/echarts": "^4.9.3",
+    "@types/express": "^4.17.11",
     "@types/yargs": "^16.0.0",
     "canvas": "^2.6.1",
+    "dotenv": "^8.2.0",
     "echarts": "4.7.0",
     "express": "^4.17.1",
     "webpack-hook-plugin": "^1.0.7",
@@ -28,6 +32,7 @@
     "eslint": "5.11.1",
     "eslint-config-sentry-app": "1.50.0",
     "file-loader": "^6.2.0",
+    "fork-ts-checker-webpack-plugin": "^6.1.0",
     "jest": "^26.6.3",
     "null-loader": "^4.0.1",
     "prettier": "^2.2.1",

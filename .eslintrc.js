@@ -1,5 +1,5 @@
 module.exports = {
-  env: 'node',
+  env: {node: true},
   extends: ['sentry-app/strict'],
   globals: {
     require: false,
@@ -11,7 +11,9 @@ module.exports = {
     jest: true,
   },
 
-  rules: {},
+  rules: {
+    'import/no-nodejs-modules': 'off',
+  },
 
   overrides: [
     {

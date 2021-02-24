@@ -2,6 +2,7 @@ import * as webpack from 'webpack';
 import path from 'path';
 import nodeExternals from 'webpack-node-externals';
 import WebpackHookPlugin from 'webpack-hook-plugin';
+import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 
 const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 
@@ -58,6 +59,7 @@ const config: webpack.Configuration = {
   plugins: [
     new webpack.BannerPlugin({banner: '#!/usr/bin/env node', raw: true}),
     new WebpackHookPlugin({onBuildEnd: ['chmod +x lib/chartRenderer.js']}),
+    new ForkTsCheckerWebpackPlugin({}),
   ],
   output: {
     path: path.join(__dirname, 'lib'),
