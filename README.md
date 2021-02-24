@@ -6,4 +6,4 @@ This is a small service written in NodeJS to generate chart graphics using
 configuration file defining styles, accepts JSON input for series data, and
 produces a png image to stdout.
 
-It can also opearte in a web-server mode to produce charts.
+It can also operate in a web-server mode to produce charts.
