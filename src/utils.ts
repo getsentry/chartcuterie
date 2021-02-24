@@ -1,16 +1,17 @@
-import {registerFont} from 'canvas';
+import * as path from 'path';
 
-import rubikMedium from './fonts/rubik-medium.woff';
-import rubikRegular from './fonts/rubik-regular.woff';
+import {registerFont} from 'canvas';
 
 /**
  * Make our fonts available in node-canvas
  */
 export function registerCanvasFonts() {
   const lastDir = process.cwd();
-  process.chdir(__dirname);
-  registerFont(rubikRegular, {family: 'Rubik', weight: 'normal'});
-  registerFont(rubikMedium, {family: 'Rubik', weight: 'medium'});
+  process.chdir(path.resolve(__dirname, '../fonts'));
+
+  registerFont('./rubik-regular.woff', {family: 'Rubik', weight: 'normal'});
+  registerFont('./rubik-medium.woff', {family: 'Rubik', weight: 'medium'});
+
   process.chdir(lastDir);
 }
 

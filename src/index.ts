@@ -4,22 +4,10 @@ import yargsInit from 'yargs';
 
 import {renderServer} from './renderServer';
 import {renderStream} from './renderStream';
-import {validateStyleConfig} from './validate';
+import {stylesConfigLoader} from './stlyesLoader';
 
 dotenv.config();
 Sentry.init({dsn: process.env.SENTRY_DSN});
-
-/**
- * Load external style configurations
- */
-function styleConfigLoader(path: string) {
-  const config = require(/* webpackIgnore: true */ path).default;
-
-  if (!validateStyleConfig(config)) {
-    throw new Error('Invalid style configuration');
-  }
-  return config;
-}
 
 yargsInit(process.argv.slice(2))
   .option('styles', {
@@ -27,7 +15,7 @@ yargsInit(process.argv.slice(2))
     desc: 'Chart style configuration module',
     type: 'string',
   })
-  .coerce('styles', styleConfigLoader)
+  .coerce('styles', stylesConfigLoader)
   .demandOption('styles')
   .command(
     'server [port]',
