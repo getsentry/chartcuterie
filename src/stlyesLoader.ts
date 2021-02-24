@@ -2,6 +2,7 @@ import * as vm from 'vm';
 
 import fetch from 'node-fetch';
 
+import {logger} from './logging';
 import {validateStyleConfig} from './validate';
 
 /**
@@ -14,6 +15,7 @@ async function loadViaHttp(path: string) {
   });
 
   const configJavascript = await resp.text();
+  logger.info(`Style config fetched from ${path}`);
 
   const exports = {default: null};
   vm.runInNewContext(configJavascript, {require, console, exports});
@@ -33,13 +35,20 @@ export async function resolveStylesConfig(path: string) {
     // Not a valid URL
   }
 
-  const config = url?.protocol?.startsWith('http')
+  const isHttpUrl = url?.protocol?.startsWith('http');
+  logger.info(`Resolving style config via ${isHttpUrl ? 'HTTP' : 'provided file'}`);
+
+  const config = isHttpUrl
     ? await loadViaHttp(path)
     : require(/* webpackIgnore: true */ path).default;
 
-  if (!validateStyleConfig(config)) {
-    throw new Error('Invalid style configuration');
+  const [styleConfig, errors] = validateStyleConfig(config);
+
+  if (errors !== undefined) {
+    throw new Error(errors?.message);
   }
 
-  return config;
+  logger.info(`Style config valid. ${styleConfig.size} styles available.`);
+
+  return styleConfig;
 }

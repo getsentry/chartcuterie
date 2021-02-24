@@ -15,7 +15,6 @@ yargsInit(process.argv.slice(2))
     desc: 'Chart style configuration module',
     type: 'string',
   })
-  .coerce('styles', resolveStylesConfig)
   .demandOption('styles')
   .command(
     'server [port]',
@@ -28,13 +27,19 @@ yargsInit(process.argv.slice(2))
         })
         .coerce('port', Number);
     },
-    async ({styles, port}) => renderServer({styles: await styles, port: port as number})
+    async argv => {
+      const styles = await resolveStylesConfig(argv.styles);
+      renderServer({styles, port: argv.port as number});
+    }
   )
   .command(
     'render',
     'renders a chart from a valid JSON input',
     () => {},
-    async ({styles}) => renderStream(await styles)
+    async argv => {
+      const styles = await resolveStylesConfig(argv.styles);
+      renderStream(styles);
+    }
   )
   .demandCommand(1, '')
   .parse();

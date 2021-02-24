@@ -11,7 +11,7 @@ const readAsync = util.promisify(fs.readFile);
  * Take JSON input from stdin and generate and output a graph to stdout
  */
 export async function renderStream(styles: StyleConfig) {
-  const json = await readAsync(0, {encoding: 'utf8'});
+  const json = await readAsync(process.stdin.fd, {encoding: 'utf8'});
 
   let data: any;
   try {
@@ -20,24 +20,25 @@ export async function renderStream(styles: StyleConfig) {
     throw new Error(`Invalid JSON input: ${err}`);
   }
 
-  if (!validateRenderData(data)) {
-    throw new Error('Invalid series data provided on stdin');
+  const [renderData, errors] = validateRenderData(styles, data);
+
+  if (errors !== undefined) {
+    throw new Error(errors.message);
   }
 
-  const style = styles.get(data.style);
+  const style = styles.get(renderData.style);
 
   if (style === undefined) {
     throw new Error('Invalid style key provided');
   }
 
-  const [stream, dispose] = renderSync(style, data.series);
+  const [stream, dispose] = renderSync(style, renderData.series);
 
   stream.pipe(process.stdout);
 
-  await new Promise((resolve, reject) => {
-    stream.on('end', resolve);
-    stream.on('error', reject);
-  });
-
-  dispose();
+  try {
+    await new Promise((resolve, reject) => stream.on('end', resolve).on('error', reject));
+  } finally {
+    dispose();
+  }
 }

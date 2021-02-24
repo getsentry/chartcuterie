@@ -11,7 +11,7 @@
     // Skip type checking of all declaration files
     "skipLibCheck": true,
     "esModuleInterop": true,
-    "jsx": "preserve",
+    "declaration": true,
     "baseUrl": "./",
     "outDir": "./lib"
   },

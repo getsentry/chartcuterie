@@ -31,6 +31,10 @@ export type StyleConfig<D extends string = string> = Map<D, StyleDescriptor<D>>;
  */
 export type RenderData = {
   /**
+   * Globally unique render ID.
+   */
+  requestId: string;
+  /**
    * The style config key
    */
   style: string;
