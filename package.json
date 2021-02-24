@@ -11,10 +11,12 @@
   },
   "dependencies": {
     "@sentry/node": "^6.2.0",
+    "@types/node-fetch": "^2.5.8",
     "canvas": "^2.6.1",
     "dotenv": "^8.2.0",
     "echarts": "4.7.0",
     "express": "^4.17.1",
+    "node-fetch": "^2.6.1",
     "yargs": "^16.2.0"
   },
   "devDependencies": {

@@ -19,4 +19,4 @@ RUN NODE_ENV=production yarn build
 
 EXPOSE 8000
 
-
+CMD ["node", "./lib/index.js", "server"]

@@ -19,8 +19,6 @@ export function renderServer({styles, port}: Options) {
   app.use(express.json());
   app.use(Sentry.Handlers.requestHandler());
 
-  console.log('booting');
-
   app.post('/render', async (request, response) => {
     const data = request.body;
 
