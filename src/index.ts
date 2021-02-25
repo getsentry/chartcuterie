@@ -10,12 +10,13 @@ dotenv.config();
 Sentry.init({dsn: process.env.SENTRY_DSN});
 
 yargsInit(process.argv.slice(2))
+  .env('CHART_RENDERER')
   .option('styles', {
     alias: 's',
     desc: 'Chart style configuration module',
     type: 'string',
   })
-  .demandOption('styles')
+  .demandOption('styles', 'You must provided a file/url to load the chart styles config')
   .command(
     'server [port]',
     'start the graph rendering web api',
