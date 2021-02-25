@@ -1,0 +1,8 @@
+# Ignore everything
+*
+
+!/package.json
+!/webpack.config.ts
+!/tsconfig.json
+!/yarn.lock
+!/src

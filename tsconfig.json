@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "downlevelIteration": true,
+    "lib": ["esnext"],
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "strict": true,
+    "target": "ES2015",
+    "experimentalDecorators": true,
+    // Skip type checking of all declaration files
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "declaration": true,
+    "baseUrl": "./",
+    "outDir": "./lib"
+  },
+  "include": ["./src", "./tests"],
+  "exclude": ["./node_modules"]
+}
