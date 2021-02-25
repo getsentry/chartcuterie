@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import * as Sentry from '@sentry/node';
 import dotenv from 'dotenv';
 import yargsInit from 'yargs';
