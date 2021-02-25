@@ -1,5 +1,5 @@
 {
-  "name": "sentry-graph-renderer",
+  "name": "@sentry-internal/chart-renderer",
   "version": "0.1.0",
   "license": "BUSL-1.1",
   "homepage": "https://github.com/getsentry/chart-renderer",
@@ -7,10 +7,12 @@
     "chart-renderer": "./lib/index.js"
   },
   "scripts": {
+    "prepare": "yarn build",
     "lint": "tsc --noEmit && eslint src/**.ts",
     "build": "tsc",
     "watch": "tsc-watch"
   },
+  "files": ["lib/**/*", "fonts/**/*", "package.json", "LICENSE", "README"],
   "dependencies": {
     "@sentry/node": "^6.2.0",
     "@types/echarts": "^4.9.3",
