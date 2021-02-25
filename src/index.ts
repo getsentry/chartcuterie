@@ -4,6 +4,7 @@ import * as Sentry from '@sentry/node';
 import dotenv from 'dotenv';
 import yargsInit from 'yargs';
 
+import * as logging from './logging';
 import {renderServer} from './renderServer';
 import {renderStream} from './renderStream';
 import {resolveStylesConfig} from './stylesLoader';
@@ -31,7 +32,9 @@ yargsInit(process.argv.slice(2))
         .coerce('port', Number);
     },
     async argv => {
+      logging.registerConsoleLogger();
       const styles = await resolveStylesConfig(argv.styles);
+
       renderServer({styles, port: argv.port as number});
     }
   )
@@ -40,7 +43,11 @@ yargsInit(process.argv.slice(2))
     'renders a chart from a valid JSON input',
     () => {},
     async argv => {
+      // All logging output needs to happen over stderr, otherwise we'll
+      // pollute the image output produced when rendering a chart.
+      logging.registerConsoleLogger({stderrLevels: ['error', 'info', 'debug']});
       const styles = await resolveStylesConfig(argv.styles);
+
       renderStream(styles);
     }
   )
