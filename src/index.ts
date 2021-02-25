@@ -4,7 +4,7 @@ import yargsInit from 'yargs';
 
 import {renderServer} from './renderServer';
 import {renderStream} from './renderStream';
-import {resolveStylesConfig} from './stlyesLoader';
+import {resolveStylesConfig} from './stylesLoader';
 
 dotenv.config();
 Sentry.init({dsn: process.env.SENTRY_DSN});
