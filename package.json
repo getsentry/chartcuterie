@@ -1,10 +1,10 @@
 {
-  "name": "@sentry-internal/chart-renderer",
+  "name": "@sentry-internal/chartcuterie",
   "version": "0.1.0",
   "license": "BUSL-1.1",
-  "homepage": "https://github.com/getsentry/chart-renderer",
+  "homepage": "https://github.com/getsentry/chartcuterie",
   "bin": {
-    "chart-renderer": "./lib/index.js"
+    "chartcuterie": "./lib/index.js"
   },
   "scripts": {
     "prepare": "yarn build",

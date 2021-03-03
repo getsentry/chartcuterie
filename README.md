@@ -1,4 +1,6 @@
-# Sentry Chart Renderer
+<img src="./assets/logo.svg" width="200px" alt="Chartcuterie" />
+
+> Chartcuterie offers fresh slices and dices of absolutely delectable graphs.
 
 This is a small service written in NodeJS to generate chart graphics using
 [node-canvas](https://www.npmjs.com/package/canvas)
