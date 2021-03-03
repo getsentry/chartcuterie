@@ -13,7 +13,7 @@ dotenv.config();
 Sentry.init({dsn: process.env.SENTRY_DSN});
 
 yargsInit(process.argv.slice(2))
-  .env('CHART_RENDERER')
+  .env('CHARTCUTERIE')
   .option('styles', {
     alias: 's',
     desc: 'Chart style configuration module',
