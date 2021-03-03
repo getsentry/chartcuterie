@@ -5,7 +5,7 @@ export type RenderOption = Omit<EChartOption, 'animation' | 'tooltip' | 'toolbox
 /**
  * Describes configuration for a renderable chart style
  */
-export type StyleDescriptor<D extends string = string> = {
+export type RenderDescriptor<D extends string = string> = {
   key: D;
   /**
    * Height of the produced image in pixels
@@ -16,15 +16,17 @@ export type StyleDescriptor<D extends string = string> = {
    */
   width: number;
   /**
-   * Produce the echart option config for rendering the charts series
+   * Produce the echart option config for rendering the charts series. It is up
+   * to the implementation to declare what data it should receive, as long as
+   * it produces a valid ECharts Option config.
    */
-  getOption: (series: EChartOption.Series[]) => RenderOption;
+  getOption: (data: any) => RenderOption;
 };
 
 /**
- * Maps style keys to configratuins
+ * Maps style keys to style descriptor configuration
  */
-export type StyleConfig<D extends string = string> = Map<D, StyleDescriptor<D>>;
+export type RenderConfig<D extends string = string> = Map<D, RenderDescriptor<D>>;
 
 /**
  * The data given to the service to render a chart
@@ -39,7 +41,8 @@ export type RenderData = {
    */
   style: string;
   /**
-   * Echarts series data
+   * Arbitrary series data. The RenderDescriptor.getOption should transform this
+   * into a valid echarts series.
    */
-  series: EChartOption.Series[];
+  data: any;
 };

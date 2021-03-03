@@ -1,7 +1,7 @@
 import {createCanvas, PngConfig} from 'canvas';
 import * as echarts from 'echarts';
 
-import {StyleDescriptor} from './types';
+import {RenderDescriptor} from './types';
 import {disabledOptions, registerCanvasFonts} from './utils';
 
 registerCanvasFonts();
@@ -19,7 +19,7 @@ const pngConfig: PngConfig = {
  * Renders a single chart
  */
 export function renderSync(
-  style: StyleDescriptor,
+  style: RenderDescriptor,
   series: echarts.EChartOption.Series[]
 ) {
   const canvas = createCanvas(style.width, style.height);
