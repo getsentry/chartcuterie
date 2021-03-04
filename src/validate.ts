@@ -40,7 +40,7 @@ export function validateRenderData(config: ConfigService, data: any) {
 
     style: Joi.string()
       .description('Indicates what rendering style to use for the chart')
-      .allow(config.renderStyles())
+      .valid(...config.renderStyles())
       .required(),
 
     data: Joi.any(),

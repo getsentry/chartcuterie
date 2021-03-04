@@ -40,7 +40,9 @@ yargsInit(process.argv.slice(2))
       const config = new ConfigService(argv.config);
       await config.resolve();
 
-      renderServer({config, port: argv.port as number});
+      const server = renderServer(config);
+      server.listen(argv.port as number);
+      logging.logger.info(`Server listening for render requests on port ${argv.port}`);
     }
   )
   .command(
