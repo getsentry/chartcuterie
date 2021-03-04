@@ -132,6 +132,4 @@ node lib/index.js --config=exampleConfig.js render < example-data.json > example
 
 ## License
 
-Like Sentry, Chartcuterie is licensed under the BSL. See the `LICENSE` file and [this
-forum post](https://forum.sentry.io/t/re-licensing-sentry-faq-discussion/8044)
-for more information.
+Chartcuterie is licensed under the Apache License 2.0.
