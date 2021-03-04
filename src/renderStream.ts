@@ -1,8 +1,8 @@
 import * as fs from 'fs';
 import * as util from 'util';
 
+import ConfigService from './config';
 import {renderSync} from './render';
-import {StyleConfig} from './types';
 import {validateRenderData} from './validate';
 
 const readAsync = util.promisify(fs.readFile);
@@ -10,7 +10,7 @@ const readAsync = util.promisify(fs.readFile);
 /**
  * Take JSON input from stdin and generate and output a graph to stdout
  */
-export async function renderStream(styles: StyleConfig) {
+export async function renderStream(config: ConfigService) {
   const json = await readAsync(process.stdin.fd, {encoding: 'utf8'});
 
   let data: any;
@@ -20,24 +20,27 @@ export async function renderStream(styles: StyleConfig) {
     throw new Error(`Invalid JSON input: ${err}`);
   }
 
-  const [renderData, errors] = validateRenderData(styles, data);
+  const [renderData, errors] = validateRenderData(config, data);
 
   if (errors !== undefined) {
     throw new Error(errors.message);
   }
 
-  const style = styles.get(renderData.style);
+  const style = config.getConfig(renderData.style);
 
   if (style === undefined) {
-    throw new Error('Invalid style key provided');
+    throw new Error('Invalid config style key provided');
   }
 
-  const [stream, dispose] = renderSync(style, renderData.series);
+  const [stream, dispose] = renderSync(style, renderData.data);
 
   stream.pipe(process.stdout);
 
   try {
-    await new Promise((resolve, reject) => stream.on('end', resolve).on('error', reject));
+    await new Promise((resolve, reject) => {
+      stream.on('end', resolve);
+      stream.on('error', reject);
+    });
   } finally {
     dispose();
   }

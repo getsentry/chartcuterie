@@ -1,8 +1,9 @@
 import Joi from 'joi';
 
-import {RenderData, StyleConfig} from './types';
+import ConfigService from './config';
+import {RenderConfig, RenderData} from './types';
 
-const styleSchema = Joi.object({
+const configSchema = Joi.object({
   key: Joi.string().description('The lookup key used by render requests').required(),
 
   height: Joi.number()
@@ -18,20 +19,20 @@ const styleSchema = Joi.object({
     .required(),
 });
 
-const styleConfigSchema = Joi.object().pattern(Joi.string(), styleSchema);
+const renderConfigSchema = Joi.object().pattern(Joi.string(), configSchema);
 
 /**
  * Validate a style config object
  */
-export function validateStyleConfig(config: any) {
-  const {error} = styleConfigSchema.validate(config);
-  return [config as StyleConfig, error] as const;
+export function validateRenderConfig(config: any) {
+  const {error} = renderConfigSchema.validate(config);
+  return [config as RenderConfig, error] as const;
 }
 
 /**
  * Validate render data
  */
-export function validateRenderData(styleConfig: StyleConfig, data: any) {
+export function validateRenderData(config: ConfigService, data: any) {
   const renderDataSchema = Joi.object({
     requestId: Joi.string()
       .description('Identifies the rendering request from the client')
@@ -39,11 +40,10 @@ export function validateRenderData(styleConfig: StyleConfig, data: any) {
 
     style: Joi.string()
       .description('Indicates what rendering style to use for the chart')
-      .allow(styleConfig.keys())
+      .allow(config.renderStyles())
       .required(),
 
-    // We don't try too hard to validate series
-    series: Joi.array().items(Joi.object({data: Joi.array()}).unknown(true)),
+    data: Joi.any(),
   });
 
   const {error} = renderDataSchema.validate(data);

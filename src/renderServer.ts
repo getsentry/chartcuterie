@@ -3,20 +3,20 @@ import {performance} from 'perf_hooks';
 import * as Sentry from '@sentry/node';
 import express from 'express';
 
+import ConfigService from './config';
 import {logger} from './logging';
 import {renderSync} from './render';
-import {StyleConfig} from './types';
 import {validateRenderData} from './validate';
 
 type Options = {
-  styles: StyleConfig;
+  config: ConfigService;
   port: number;
 };
 
 /**
  * Start a server that accepts requests to generate charts
  */
-export function renderServer({styles, port}: Options) {
+export function renderServer({config, port}: Options) {
   const app = express();
 
   app.use(express.json());
@@ -26,7 +26,7 @@ export function renderServer({styles, port}: Options) {
     const startMark = performance.now();
     const data = req.body;
 
-    const [renderData, errors] = validateRenderData(styles, data);
+    const [renderData, errors] = validateRenderData(config, data);
 
     if (errors !== undefined) {
       logger.info(`Failed to validate chart request: ${errors.message}`);
@@ -34,22 +34,23 @@ export function renderServer({styles, port}: Options) {
       return;
     }
 
-    const style = styles.get(renderData.style);
+    const style = config.getConfig(renderData.style);
 
     if (style === undefined) {
-      resp.status(400).send('Invalid style key provided');
+      resp.status(400).send('Invalid config style key provided');
       return;
     }
 
-    const [stream, dispose] = renderSync(style, renderData.series);
+    const [stream, dispose] = renderSync(style, renderData.data);
 
     resp.status(200).contentType('png').attachment('chart.png');
     stream.pipe(resp);
 
     try {
-      await new Promise((resolve, reject) =>
-        stream.on('end', resolve).on('error', reject)
-      );
+      await new Promise((resolve, reject) => {
+        stream.on('end', resolve);
+        stream.on('error', reject);
+      });
     } catch {
       resp.status(500);
     }
