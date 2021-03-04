@@ -13,7 +13,10 @@
     "esModuleInterop": true,
     "declaration": true,
     "baseUrl": "./",
-    "outDir": "./lib"
+    "outDir": "./lib",
+    "paths": {
+      "app/*": ["src/*"]
+    }
   },
   "include": ["./src", "./tests"],
   "exclude": ["./node_modules"]

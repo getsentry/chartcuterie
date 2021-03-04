@@ -10,3 +10,9 @@ jobs:
       - uses: volta-cli/action@v1
       - run: yarn install
       - run: yarn lint
+      - run: yarn test
+      - if: ${{ failure() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: snapshot diffs
+          path: tests/__image_snapshots__

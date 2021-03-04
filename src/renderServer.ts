@@ -8,15 +8,10 @@ import {logger} from './logging';
 import {renderSync} from './render';
 import {validateRenderData} from './validate';
 
-type Options = {
-  config: ConfigService;
-  port: number;
-};
-
 /**
  * Start a server that accepts requests to generate charts
  */
-export function renderServer({config, port}: Options) {
+export function renderServer(config: ConfigService) {
   const app = express();
 
   app.use(express.json());
@@ -34,12 +29,8 @@ export function renderServer({config, port}: Options) {
       return;
     }
 
-    const style = config.getConfig(renderData.style);
-
-    if (style === undefined) {
-      resp.status(400).send('Invalid config style key provided');
-      return;
-    }
+    // validateRenderData ensures the config key is valid
+    const style = config.getConfig(renderData.style)!;
 
     const [stream, dispose] = renderSync(style, renderData.data);
 
@@ -72,7 +63,6 @@ export function renderServer({config, port}: Options) {
   app.get('/health-check', (_req, resp) => resp.status(200).send('OK'));
 
   app.use(Sentry.Handlers.errorHandler());
-  app.listen(port);
 
-  logger.info(`Server listening for render requests on port ${port}`);
+  return app;
 }

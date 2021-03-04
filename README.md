@@ -116,6 +116,7 @@ This project uses [`volta`](https://volta.sh/) to manage the node toolchain, be
 sure to have Volta installed and configured.
 
  * `yarn lint` - Check for Typescript and Eslint errors / warnings.
+ * `yarn test` - Run full test suite
  * `yarn build` - Builds the application
  * `yarn watch` - Watches source files for changes and recompiles using `tsc` on changes.
 
