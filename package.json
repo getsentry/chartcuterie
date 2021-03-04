@@ -7,19 +7,12 @@
     "chartcuterie": "./lib/index.js"
   },
   "scripts": {
-    "prepare": "yarn build",
     "lint": "tsc --noEmit && eslint src/**.ts",
     "test": "jest",
     "build": "tsc",
     "watch": "tsc-watch"
   },
-  "files": [
-    "lib/**/*",
-    "fonts/**/*",
-    "package.json",
-    "LICENSE",
-    "README"
-  ],
+  "files": ["lib/**/*", "fonts/**/*", "package.json", "LICENSE", "README"],
   "dependencies": {
     "@sentry/node": "^6.2.0",
     "@types/echarts": "^4.9.3",
