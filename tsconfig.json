@@ -12,12 +12,12 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "declaration": true,
-    "baseUrl": "./",
+    "baseUrl": "./src",
     "outDir": "./lib",
     "paths": {
-      "app/*": ["src/*"]
+      "app/*": ["/*"]
     }
   },
-  "include": ["./src", "./tests"],
+  "include": ["./src"],
   "exclude": ["./node_modules"]
 }
