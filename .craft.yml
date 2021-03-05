@@ -1,0 +1,17 @@
+github:
+  owner: getsentry
+  repo: chartcuterie
+
+changelogPolicy: auto
+
+statusProvider:
+  name: github
+artifactProvider:
+  name: github
+
+targets:
+  - name: docker
+    source: us.gcr.io/sentryio/chartcuterie
+    target: getsentry/chartcuterie
+  - name: npm
+    access: public
