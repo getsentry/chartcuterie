@@ -8,7 +8,7 @@
 
 <p align="center">
 	<img src="https://github.com/getsentry/chartcuterie/workflows/build/badge.svg" alt="build" />
-	<a href="https://www.npmjs.com/package/@sentry/chartcuterie"><img alt="npm" src="https://img.shields.io/npm/v/@sentry/chartcuterie"></a>
+	<a href="https://www.npmjs.com/package/@sentry/chartcuterie"><img alt="npm" src="https://img.shields.io/npm/v/@sentry/chartcuterie" /></a>
 </p>
 
 ---
