@@ -1,5 +1,9 @@
 # Changelong 
 
+## 0.4.0
+
+- No documented changes.
+
 ## 0.3.0
 
 - Actually build before releasing :)
