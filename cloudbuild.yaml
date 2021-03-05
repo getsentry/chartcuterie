@@ -11,5 +11,7 @@ steps:
   # Smoke test
   - name: 'us.gcr.io/$PROJECT_ID/chartcuterie:$COMMIT_SHA'
     args:
+      - node
+      - '/usr/src/app/lib/index.js'
       - '--help'
     timeout: 60s
