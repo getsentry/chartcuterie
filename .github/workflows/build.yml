@@ -16,6 +16,7 @@ jobs:
         with:
           name: snapshot diffs
           path: tests/__image_snapshots__
+      - run: yarn build
       - run: yarn pack
       - uses: actions/upload-artifact@v2
         with:
