@@ -1,6 +1,6 @@
 # Changelong 
 
-## Unreleased
+## 0.3.0
 
 - Actually build before releasing :)
 
