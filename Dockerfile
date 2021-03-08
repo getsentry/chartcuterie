@@ -1,4 +1,6 @@
-FROM node:14
+FROM node:14-slim
+
+ENV NODE_ENV=production
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
         build-essential \
@@ -15,8 +17,5 @@ COPY package.json yarn.lock ./
 RUN yarn install
 
 COPY . .
-RUN NODE_ENV=production yarn build
-
-EXPOSE 8000
 
 CMD ["node", "./lib/index.js", "server"]

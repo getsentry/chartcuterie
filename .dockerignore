@@ -5,5 +5,5 @@
 !/webpack.config.ts
 !/tsconfig.json
 !/yarn.lock
-!/src
+!/lib
 !/fonts
