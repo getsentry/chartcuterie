@@ -10,8 +10,14 @@ artifactProvider:
   name: github
 
 targets:
-  - name: docker
+  - id: release
+    name: docker
     source: us.gcr.io/sentryio/chartcuterie
     target: getsentry/chartcuterie
+  - id: latest
+    name: docker
+    source: us.gcr.io/sentryio/chartcuterie
+    target: getsentry/chartcuterie
+    targetFormat: '{{{target}}}:latest'
   - name: npm
     access: public
