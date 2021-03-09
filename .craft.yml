@@ -21,3 +21,4 @@ targets:
     targetFormat: '{{{target}}}:latest'
   - name: npm
     access: public
+  - name: github
