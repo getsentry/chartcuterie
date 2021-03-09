@@ -13,6 +13,7 @@ steps:
         '--destination=us.gcr.io/$PROJECT_ID/chartcuterie:$COMMIT_SHA',
       ]
     timeout: 900s
+
   # Smoke test
   - name: 'us.gcr.io/$PROJECT_ID/chartcuterie:$COMMIT_SHA'
     args:
@@ -20,3 +21,31 @@ steps:
       - '/usr/src/app/lib/index.js'
       - '--help'
     timeout: 60s
+
+  - name: 'gcr.io/cloud-builders/docker'
+    secretEnv: ['DOCKER_PASSWORD']
+    entrypoint: 'bash'
+    args:
+    - '-e'
+    - '-c'
+    - |
+      # Only push to Docker Hub from master
+      [ "$BRANCH_NAME" != "master" ] && exit 0
+      docker push us.gcr.io/$PROJECT_ID/chartcuterie:nightly
+      echo "$$DOCKER_PASSWORD" | docker login --username=sentrybuilder --password-stdin
+      docker tag us.gcr.io/$PROJECT_ID/chartcuterie:$COMMIT_SHA getsentry/chartcuterie:$SHORT_SHA
+      docker push getsentry/chartcuterie:$SHORT_SHA
+      docker tag us.gcr.io/$PROJECT_ID/chartcuterie:$COMMIT_SHA getsentry/chartcuterie:$COMMIT_SHA
+      docker push getsentry/chartcuterie:$COMMIT_SHA
+      docker tag us.gcr.io/$PROJECT_ID/chartcuterie:$COMMIT_SHA getsentry/chartcuterie:nightly
+      docker push getsentry/chartcuterie:nightly
+
+secrets:
+- kmsKeyName: projects/sentryio/locations/global/keyRings/service-credentials/cryptoKeys/cloudbuild
+  secretEnv:
+    # This is a personal access token for the sentrybuilder account, encrypted using the
+    # short guide at http://bit.ly/2Pg6uw9
+    DOCKER_PASSWORD: |
+      CiQAE8gN7y3OMxn+a1kofmK4Bi8jQZtdRFj2lYYwaZHVeIIBUzMSTQA9tvn8XCv2vqj6u8CHoeSP
+      TVW9pLvSCorKoeNtOp0eb+6V1yNJW/+JC07DNO1KLbTbodbuza6jKJHU5xeAJ4kGQI78UY5Vu1Gp
+      QcMK
