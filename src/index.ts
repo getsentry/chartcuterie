@@ -21,7 +21,7 @@ yargsInit(process.argv.slice(2))
   })
   .option('loglevel', {
     desc: 'Specify the minum log level',
-    choices: ['debug', 'info', 'warning', 'error'],
+    choices: ['debug', 'info', 'warn', 'error'],
     default: 'info',
   })
   .demandOption(
@@ -60,7 +60,9 @@ yargsInit(process.argv.slice(2))
 
       // All logging output needs to happen over stderr, otherwise we'll
       // pollute the image output produced when rendering a chart.
-      logging.registerConsoleLogger({stderrLevels: ['error', 'info', 'debug']});
+      logging.registerConsoleLogger({
+        stderrLevels: ['error', 'info', 'warn', 'debug'],
+      });
 
       const config = new ConfigService(argv.config);
       await config.resolve();
