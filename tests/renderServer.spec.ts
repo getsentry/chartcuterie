@@ -8,7 +8,7 @@ describe('renderServer', () => {
   describe('POST /render', () => {
     const config = new ConfigService('./example');
     config.setVersion('1.0-test');
-    config.setRenderConfig('dayChart', {
+    config.setRenderStyle('dayChart', {
       key: 'dayChart',
       height: 250,
       width: 400,

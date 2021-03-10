@@ -11,7 +11,7 @@ jest.mock('fs');
 describe('renderStream', () => {
   it('can render graphs given a valid config and render data', async () => {
     const config = new ConfigService('./example');
-    config.setRenderConfig('dayChart', {
+    config.setRenderStyle('dayChart', {
       key: 'dayChart',
       height: 250,
       width: 400,

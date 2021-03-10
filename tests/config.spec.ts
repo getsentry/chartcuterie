@@ -27,7 +27,7 @@ describe('config', () => {
     );
 
     const config = new ConfigService('myConfig');
-    await config.resolve();
+    await config.resolveEnsured();
 
     expect(config.getConfig('fileExample')?.height).toEqual(200);
   });
@@ -47,7 +47,7 @@ describe('config', () => {
     fetchMock.mockResponse(configModule);
 
     const config = new ConfigService('https://example.com/myConfig.js');
-    await config.resolve();
+    await config.resolveEnsured();
 
     expect(fetchMock.mock.calls[0][0]).toEqual('https://example.com/myConfig.js');
     expect(config.getConfig('example')?.height).toEqual(100);
