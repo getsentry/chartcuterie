@@ -41,7 +41,7 @@ structure.
 A simple configuration module might look like this:
 
 ```tsx
-const config = {
+const renderConfig = {
   /**
    * Each key in the configuration objects represents a rendering style
    * configurtion. When passing your render data to chartcuterie you'll use
@@ -67,6 +67,15 @@ const config = {
   },
 
   // More rendering styles specified in this object.
+}
+
+const config = {
+  renderConfig,
+  /**
+   * A version should be provided, which may be useful for observability
+   * purposes.
+   */
+  version: '1.0.0-example.0',
 }
 
 module.exports = config;

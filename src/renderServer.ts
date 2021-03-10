@@ -34,7 +34,12 @@ export function renderServer(config: ConfigService) {
 
     const [stream, dispose] = renderSync(style, renderData.data);
 
-    resp.status(200).contentType('png').attachment('chart.png');
+    resp
+      .status(200)
+      .contentType('png')
+      .header('X-Config-Version', config.version.toString())
+      .attachment('chart.png');
+
     stream.pipe(resp);
 
     try {
@@ -60,7 +65,11 @@ export function renderServer(config: ConfigService) {
     });
   });
 
-  app.get('/health-check', (_req, resp) => resp.status(200).send('OK'));
+  app.get('/health-check', (_req, resp) =>
+    config.isLoaded
+      ? resp.status(200).send('OK')
+      : resp.status(503).send('NOT CONFIGURED')
+  );
 
   app.use(Sentry.Handlers.errorHandler());
 

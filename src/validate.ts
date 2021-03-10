@@ -1,9 +1,9 @@
 import Joi from 'joi';
 
 import ConfigService from './config';
-import {RenderConfig, RenderData} from './types';
+import {ChartcuterieConfig, RenderData} from './types';
 
-const configSchema = Joi.object({
+const renderType = Joi.object({
   key: Joi.string().description('The lookup key used by render requests').required(),
 
   height: Joi.number()
@@ -19,14 +19,19 @@ const configSchema = Joi.object({
     .required(),
 });
 
-const renderConfigSchema = Joi.object().pattern(Joi.string(), configSchema);
+const renderConfigSchema = Joi.object().pattern(Joi.string(), renderType);
+
+const configSchema = Joi.object({
+  renderConfig: renderConfigSchema,
+  version: Joi.string().description('Version of the configuration module').required(),
+});
 
 /**
  * Validate a style config object
  */
-export function validateRenderConfig(config: any) {
-  const {error} = renderConfigSchema.validate(config);
-  return [config as RenderConfig, error] as const;
+export function validateConfig(config: any) {
+  const {error} = configSchema.validate(config);
+  return [config as ChartcuterieConfig, error] as const;
 }
 
 /**
@@ -40,7 +45,7 @@ export function validateRenderData(config: ConfigService, data: any) {
 
     style: Joi.string()
       .description('Indicates what rendering style to use for the chart')
-      .valid(...config.renderStyles())
+      .valid(...config.renderStyles)
       .required(),
 
     data: Joi.any(),

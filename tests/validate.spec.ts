@@ -2,38 +2,47 @@ import {ValidationError} from 'joi';
 
 import ConfigService from 'app/config';
 import {RenderDescriptor} from 'app/types';
-import {validateRenderConfig, validateRenderData} from 'app/validate';
+import {validateConfig, validateRenderData} from 'app/validate';
 
 describe('validate', () => {
-  const validRenderConfig = {
-    example: {
-      key: 'example',
-      height: 100,
-      width: 100,
-      getOption: (series: any) => ({series}),
+  const validConfig = {
+    version: 'abc',
+    renderConfig: {
+      example: {
+        key: 'example',
+        height: 100,
+        width: 100,
+        getOption: (series: any) => ({series}),
+      },
     },
   };
 
   it('validates renderer configuration objects', () => {
-    const [config1, error1] = validateRenderConfig(validRenderConfig);
-    expect(config1).toEqual(validRenderConfig);
+    const [config1, error1] = validateConfig(validConfig);
+    expect(config1).toEqual(validConfig);
     expect(error1).toBeUndefined();
 
     const invalid = {
-      example: {
-        height: '100',
-        width: 100,
-        getOption: (series: any) => ({series}),
+      version: 'abc',
+      renderConfig: {
+        example: {
+          height: '100',
+          width: 100,
+          getOption: (series: any) => ({series}),
+        },
       },
     };
 
-    const [, error2] = validateRenderConfig(invalid);
+    const [, error2] = validateConfig(invalid);
     expect(error2).toBeInstanceOf(ValidationError);
   });
 
   it('validates render data', () => {
     const config = new ConfigService('./example.js');
-    config.setConfig('example', validRenderConfig.example as RenderDescriptor);
+    config.setRenderConfig(
+      'example',
+      validConfig.renderConfig.example as RenderDescriptor
+    );
 
     const validData = {
       requestId: 'anything',

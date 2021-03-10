@@ -46,3 +46,16 @@ export type RenderData = {
    */
   data: any;
 };
+
+/**
+ * The configuration object type expected to be provided to the service
+ */
+export type ChartcuterieConfig = {
+  renderConfig: RenderConfig;
+  /**
+   * A string version identifier for the configuration. This may be useful for
+   * validating that a chart is being rendered using a specific known
+   * configuration.
+   */
+  version: string;
+};
