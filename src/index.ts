@@ -19,6 +19,11 @@ yargsInit(process.argv.slice(2))
     desc: 'Chart rendering style configuration module',
     type: 'string',
   })
+  .option('loglevel', {
+    desc: 'Specify the minum log level',
+    choices: ['debug', 'info', 'warning', 'error'],
+    default: 'info',
+  })
   .demandOption(
     'config',
     'You must provided a file/url to load the chart rendering config'
@@ -35,6 +40,7 @@ yargsInit(process.argv.slice(2))
         .coerce('port', Number);
     },
     async argv => {
+      logging.logger.level = argv.loglevel;
       logging.registerConsoleLogger();
 
       const config = new ConfigService(argv.config);
@@ -50,6 +56,8 @@ yargsInit(process.argv.slice(2))
     'renders a chart from a valid JSON input',
     () => {},
     async argv => {
+      logging.logger.level = argv.loglevel;
+
       // All logging output needs to happen over stderr, otherwise we'll
       // pollute the image output produced when rendering a chart.
       logging.registerConsoleLogger({stderrLevels: ['error', 'info', 'debug']});
