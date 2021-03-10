@@ -18,4 +18,5 @@ RUN yarn install
 
 COPY . .
 
-CMD ["node", "./lib/index.js", "server"]
+EXPOSE 9090/tcp
+CMD ["node", "./lib/index.js", "server", "9090"]
