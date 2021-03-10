@@ -13,15 +13,15 @@ describe('config', () => {
     jest.mock(
       'myConfig',
       () => {
-        const config = new Map();
-        config.set('fileExample', {
+        const renderConfig = new Map();
+        renderConfig.set('fileExample', {
           key: 'fileExample',
           height: 200,
           width: 100,
           getOption: (series: any) => ({series}),
         });
 
-        return {default: config};
+        return {default: {renderConfig, version: 'abc'}};
       },
       {virtual: true}
     );
@@ -34,15 +34,15 @@ describe('config', () => {
 
   it('can load config via http', async () => {
     const configModule = `
-    var config = new Map();
-    config.set('example', {
+    var renderConfig = new Map();
+    renderConfig.set('example', {
       key: 'example',
       height: 100,
       width: 100,
       getOption: series => ({series}),
     });
 
-    module.exports = config;`;
+    module.exports = {renderConfig, version: 'abc'};`;
 
     fetchMock.mockResponse(configModule);
 

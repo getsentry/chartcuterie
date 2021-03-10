@@ -4,7 +4,12 @@ import fetch from 'node-fetch';
 
 import {logger} from './logging';
 import {RenderConfig, RenderDescriptor} from './types';
-import {validateRenderConfig} from './validate';
+import {validateConfig} from './validate';
+
+/**
+ * Marker for when we haven't yet loaded a configuration
+ */
+export const NO_VERSION = Symbol('awaiting-configuration');
 
 /**
  * Load chart render configurations via an external javascript file
@@ -38,7 +43,13 @@ export default class ConfigService {
   /**
    * The resolved render configuration
    */
-  #config: RenderConfig = new Map();
+  #renderConfig: RenderConfig = new Map();
+
+  /**
+   * Indicates the version of the last configuration file we've loaded. This
+   * may be null if a configuration file has not been loaded yet.
+   */
+  #currentVersion: string | null = null;
 
   constructor(path: string) {
     this.#uri = path;
@@ -60,32 +71,63 @@ export default class ConfigService {
       ? await loadViaHttp(this.#uri)
       : require(/* webpackIgnore: true */ this.#uri).default;
 
-    const [renderConfig, errors] = validateRenderConfig(config);
+    const [validConfig, errors] = validateConfig(config);
 
     if (errors !== undefined) {
       throw new Error(errors?.message);
     }
 
-    logger.info(`Render config valid. ${renderConfig.size} styles available.`);
+    logger.info(
+      `Render config valid. ${validConfig.renderConfig.size} styles available.`
+    );
 
-    this.#config = renderConfig;
+    this.#currentVersion = validConfig.version;
+    this.#renderConfig = validConfig.renderConfig;
   }
 
-  setConfig(style: string, config: RenderDescriptor) {
-    this.#config.set(style, config);
+  /**
+   * Set a specific configuration for rendering. Primarily used for testing.
+   *
+   * @internal
+   */
+  setRenderConfig(style: string, config: RenderDescriptor) {
+    this.#renderConfig.set(style, config);
+  }
+
+  /**
+   * Set the current config version. Primarily used for testing.
+   *
+   * @internal
+   */
+  setVersion(version: string) {
+    this.#currentVersion = version;
   }
 
   /**
    * Get a render style configuration given the style key
    */
   getConfig(style: string) {
-    return this.#config.get(style);
+    return this.#renderConfig.get(style);
   }
 
   /**
    * Get the list of available render style configurations
    */
-  renderStyles() {
-    return this.#config.keys();
+  get renderStyles() {
+    return this.#renderConfig.keys();
+  }
+
+  /**
+   * Checks that we have loaded a configuration file
+   */
+  get isLoaded() {
+    return this.#currentVersion !== null;
+  }
+
+  /**
+   * Get the current configuration version
+   */
+  get version() {
+    return this.#currentVersion ?? NO_VERSION;
   }
 }
