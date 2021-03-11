@@ -45,11 +45,12 @@ yargsInit(process.argv.slice(2))
     'start the graph rendering web api',
     yargs => {
       yargs
+        .env('CHARTCUTERIE')
         .positional('port', {
           desc: 'Port to run the webserver on',
           default: 8000,
         })
-        .option('configPolling', {
+        .option('config-polling', {
           desc: 'Poll for new configuration updates',
           type: 'boolean',
           default: false,
