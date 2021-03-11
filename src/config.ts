@@ -1,9 +1,11 @@
 import * as vm from 'vm';
 
+import AbortController from 'abort-controller';
 import fetch from 'node-fetch';
 
+import ConfigPoller from './configPolling';
 import {logger} from './logging';
-import {RenderConfig, RenderDescriptor} from './types';
+import {PollingConfig, RenderConfig, RenderDescriptor} from './types';
 import {validateConfig} from './validate';
 
 /**
@@ -14,15 +16,14 @@ export const NO_VERSION = Symbol('awaiting-configuration');
 /**
  * Load chart render configurations via an external javascript file
  */
-async function loadViaHttp(path: string) {
-  const resp = await fetch(path, {
+async function loadViaHttp(url: string, ac?: AbortController) {
+  const resp = await fetch(url, {
     method: 'GET',
     headers: {Accepts: 'application/javascript'},
+    signal: ac?.signal,
   });
 
   const configJavascript = await resp.text();
-
-  logger.info(`Render config fetched from ${path}`);
 
   const exports = {default: null};
   const module = {exports};
@@ -36,9 +37,9 @@ async function loadViaHttp(path: string) {
  */
 export default class ConfigService {
   /**
-   * The path / url to load the render configuration from
+   * The path / uri to load the render configuration from
    */
-  #uri = '';
+  #uri: string;
 
   /**
    * The resolved render configuration
@@ -51,53 +52,83 @@ export default class ConfigService {
    */
   #currentVersion: string | null = null;
 
-  constructor(path: string) {
-    this.#uri = path;
+  constructor(uri: string) {
+    this.#uri = uri;
   }
 
-  async resolve() {
-    let url: URL | null = null;
-
-    try {
-      url = new URL(this.#uri);
-    } catch {
-      // Not a valid URL
+  /**
+   * Fetch and return the configuration module.
+   *
+   * @param deadline When a deadline is provided, fetching the module via HTTP
+   *                 will be aborted if the deadline is exceeded. Specified in
+   *                 milliseconds.
+   */
+  async fetchConfig(deadline: number) {
+    if (!this.configIsViaHttp) {
+      return require(/* webpackIgnore: true */ this.#uri).default;
     }
 
-    const isHttpUrl = url?.protocol?.startsWith('http');
+    let config: any = null;
+
+    // Handle fetch deadline via an AbortController
+    const ac = new AbortController();
+    const deadlineTimeout = setTimeout(() => ac.abort(), deadline);
+
+    config = await loadViaHttp(this.#uri, ac);
+    clearTimeout(deadlineTimeout);
+
+    return config;
+  }
+
+  /**
+   * Resolve the provided configuration URI. If the configuration cannot be
+   * resolved, an error will be thrown.
+   */
+  async resolveEnsured() {
+    const isHttpUrl = this.configIsViaHttp;
     logger.info(`Resolving render config via ${isHttpUrl ? 'HTTP' : 'provided file'}`);
 
-    const config = isHttpUrl
-      ? await loadViaHttp(this.#uri)
-      : require(/* webpackIgnore: true */ this.#uri).default;
-
+    const config = await this.fetchConfig(60);
     const [validConfig, errors] = validateConfig(config);
 
     if (errors !== undefined) {
       throw new Error(errors?.message);
     }
 
-    logger.info(
-      `Render config valid. ${validConfig.renderConfig.size} styles available.`
-    );
+    logger.info(`Resolved config: ${validConfig.renderConfig.size} styles available.`, {
+      version: validConfig.version,
+    });
 
     this.#currentVersion = validConfig.version;
     this.#renderConfig = validConfig.renderConfig;
   }
 
   /**
-   * Set a specific configuration for rendering. Primarily used for testing.
-   *
-   * @internal
+   * Poll to load + update the specified configuration module
    */
-  setRenderConfig(style: string, config: RenderDescriptor) {
+  resolveWithPolling(pollConfig: PollingConfig) {
+    const poller = new ConfigPoller(this, pollConfig);
+
+    logger.info('Using polling strategy to resolve configuration...');
+    poller.startPolling({immediate: true});
+  }
+
+  /**
+   * Sets the render config
+   */
+  setRenderConfig(config: RenderConfig) {
+    this.#renderConfig = config;
+  }
+
+  /**
+   * Set a specific render config style. Primarily used for testing.
+   */
+  setRenderStyle(style: string, config: RenderDescriptor) {
     this.#renderConfig.set(style, config);
   }
 
   /**
-   * Set the current config version. Primarily used for testing.
-   *
-   * @internal
+   * Set the current config version.
    */
   setVersion(version: string) {
     this.#currentVersion = version;
@@ -108,6 +139,21 @@ export default class ConfigService {
    */
   getConfig(style: string) {
     return this.#renderConfig.get(style);
+  }
+
+  /**
+   * Indicates if the specified configuration URI is via HTTP
+   */
+  get configIsViaHttp() {
+    let url: URL | null = null;
+
+    try {
+      url = new URL(this.#uri);
+    } catch {
+      // Not a valid URL
+    }
+
+    return url?.protocol?.startsWith('http') ?? false;
   }
 
   /**

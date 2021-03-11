@@ -18,6 +18,11 @@ export function renderServer(config: ConfigService) {
   app.use(Sentry.Handlers.requestHandler());
 
   app.post('/render', async (req, resp) => {
+    if (!config.isLoaded) {
+      resp.status(503).send();
+      return;
+    }
+
     const startMark = performance.now();
     const data = req.body;
 

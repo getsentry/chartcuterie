@@ -39,7 +39,7 @@ describe('validate', () => {
 
   it('validates render data', () => {
     const config = new ConfigService('./example.js');
-    config.setRenderConfig(
+    config.setRenderStyle(
       'example',
       validConfig.renderConfig.example as RenderDescriptor
     );
