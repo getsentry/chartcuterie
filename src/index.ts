@@ -15,11 +15,11 @@ Sentry.init({dsn: process.env.SENTRY_DSN});
 
 const defaultPollingConfig: PollingConfig = {
   /**
-   * Poll ever 5 seconds on boot
+   * Poll every 5 seconds on boot
    */
   bootInterval: 5 * 1000,
   /**
-   * Poll ever 5min after the first config has been loaded
+   * Poll every 5 minutes after the first config has been loaded
    */
   idleInterval: 300 * 1000,
 };
