@@ -1,6 +1,6 @@
 # Changelong 
 
-## Unreleased
+## 0.5.0
 
 - Adds polling capabilities to reload the configuration periodically in when
   running in server mode.
