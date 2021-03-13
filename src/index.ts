@@ -92,5 +92,16 @@ yargsInit(process.argv.slice(2))
       renderStream(config);
     }
   )
+  .command(
+    'validate',
+    'checks that a configuration can be loaded',
+    () => {},
+    async argv => {
+      logging.registerConsoleLogger();
+
+      const config = new ConfigService(argv.config);
+      await config.resolveEnsured();
+    }
+  )
   .demandCommand(1, '')
   .parse();
