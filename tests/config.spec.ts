@@ -11,7 +11,7 @@ describe('config', () => {
 
   it('can load config via files', async () => {
     jest.mock(
-      'myConfig',
+      '/myConfig',
       () => {
         const renderConfig = new Map();
         renderConfig.set('fileExample', {
@@ -26,7 +26,7 @@ describe('config', () => {
       {virtual: true}
     );
 
-    const config = new ConfigService('myConfig');
+    const config = new ConfigService('/myConfig');
     await config.resolveEnsured();
 
     expect(config.getConfig('fileExample')?.height).toEqual(200);
