@@ -1,3 +1,4 @@
+import path from 'path';
 import * as vm from 'vm';
 
 import AbortController from 'abort-controller';
@@ -65,7 +66,7 @@ export default class ConfigService {
    */
   async fetchConfig(deadline: number) {
     if (!this.configIsViaHttp) {
-      return require(/* webpackIgnore: true */ this.#uri).default;
+      return require(/* webpackIgnore: true */ path.resolve(this.#uri)).default;
     }
 
     let config: any = null;
