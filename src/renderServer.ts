@@ -14,7 +14,7 @@ import {validateRenderData} from './validate';
 export function renderServer(config: ConfigService) {
   const app = express();
 
-  app.use(express.json());
+  app.use(express.json({limit: '20mb'}));
   app.use(Sentry.Handlers.requestHandler());
 
   app.post('/render', async (req, resp) => {
