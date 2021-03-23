@@ -70,6 +70,8 @@ export function renderServer(config: ConfigService) {
     });
   });
 
+  app.get('/live-check', (_req, resp) => resp.status(200).send('OK'));
+
   app.get('/health-check', (_req, resp) =>
     config.isLoaded
       ? resp.status(200).send('OK')
