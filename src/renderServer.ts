@@ -70,7 +70,9 @@ export function renderServer(config: ConfigService) {
     });
   });
 
-  app.get('/api/chartcuterie/healthcheck/live', (_req, resp) => resp.status(200).send('OK'));
+  app.get('/api/chartcuterie/healthcheck/live', (_req, resp) =>
+    resp.status(200).send('OK')
+  );
 
   app.get('/api/chartcuterie/healthcheck/ready', (_req, resp) =>
     config.isLoaded
