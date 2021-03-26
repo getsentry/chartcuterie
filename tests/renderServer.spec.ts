@@ -62,23 +62,23 @@ describe('renderServer', () => {
     });
   });
 
-  describe('GET /health-check', () => {
+  describe('GET /api/chartcuterie/healthcheck/live', () => {
     it('Responds 200 OK when configured', async () => {
       const config = new ConfigService('./example');
       config.setVersion('1.0-test');
 
       const app = renderServer(config);
-      const resp = await supertest(app).get('/health-check').send();
+      const resp = await supertest(app).get('/api/chartcuterie/healthcheck/live').send();
 
       expect(resp.status).toBe(200);
       expect(resp.text).toBe('OK');
     });
 
     it("503's before the config is loaded", async () => {
-      const config = new ConfigService('./example');
+      const config = new ConfigService('/api/chartcuterie/healthcheck/ready');
 
       const app = renderServer(config);
-      const resp = await supertest(app).get('/health-check').send();
+      const resp = await supertest(app).get('/api/chartcuterie/healthcheck/ready').send();
 
       expect(resp.status).toBe(503);
       expect(resp.text).toBe('NOT CONFIGURED');
