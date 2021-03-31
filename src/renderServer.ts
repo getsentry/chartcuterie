@@ -37,26 +37,28 @@ export function renderServer(config: ConfigService) {
     // validateRenderData ensures the config key is valid
     const style = config.getConfig(renderData.style)!;
 
-    const [stream, dispose] = renderSync(style, renderData.data);
-
-    resp
-      .status(200)
-      .contentType('png')
-      .header('X-Config-Version', config.version.toString())
-      .attachment('chart.png');
-
-    stream.pipe(resp);
-
     try {
+      const [stream, dispose] = renderSync(style, renderData.data);
+
+      resp
+        .status(200)
+        .contentType('png')
+        .header('X-Config-Version', config.version.toString())
+        .attachment('chart.png');
+
+      stream.pipe(resp);
+
       await new Promise((resolve, reject) => {
         stream.on('end', resolve);
         stream.on('error', reject);
       });
-    } catch {
+
+      dispose();
+    } catch (error) {
+      Sentry.captureException(error);
       resp.status(500);
     }
 
-    dispose();
     resp.send();
 
     const completeMark = performance.now();
