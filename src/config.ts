@@ -30,7 +30,7 @@ async function loadViaHttp(url: string, ac?: AbortController) {
   const module = {exports};
   vm.runInNewContext(configJavascript, {require, console, module, exports});
 
-  return exports.default ?? module.exports;
+  return exports.default ?? module.exports?.default ?? module.exports;
 }
 
 /**
