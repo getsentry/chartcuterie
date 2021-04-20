@@ -89,7 +89,7 @@ export default class ConfigService {
     const isHttpUrl = this.configIsViaHttp;
     logger.info(`Resolving render config via ${isHttpUrl ? 'HTTP' : 'provided file'}`);
 
-    const config = await this.fetchConfig(60);
+    const config = await this.fetchConfig(60 * 1000);
     const [validConfig, errors] = validateConfig(config);
 
     if (errors !== undefined) {
