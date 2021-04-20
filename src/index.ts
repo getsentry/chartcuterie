@@ -2,7 +2,7 @@
 
 import * as Sentry from '@sentry/node';
 import dotenv from 'dotenv';
-import yargsInit from 'yargs';
+import yargs from 'yargs';
 
 import ConfigService from './config';
 import * as logging from './logging';
@@ -24,7 +24,7 @@ const defaultPollingConfig: PollingConfig = {
   idleInterval: 300 * 1000,
 };
 
-yargsInit(process.argv.slice(2))
+yargs(process.argv.slice(2))
   .env('CHARTCUTERIE')
   .option('config', {
     alias: 'c',
@@ -43,8 +43,8 @@ yargsInit(process.argv.slice(2))
   .command(
     'server [port]',
     'start the graph rendering web api',
-    yargs => {
-      yargs
+    subYargs => {
+      subYargs
         .env('CHARTCUTERIE')
         .positional('port', {
           desc: 'Port to run the webserver on',
@@ -63,10 +63,14 @@ yargsInit(process.argv.slice(2))
 
       const config = new ConfigService(argv.config);
 
-      if (!argv.configPolling) {
-        await config.resolveEnsured();
-      } else {
+      if (argv.configPolling) {
         config.resolveWithPolling(defaultPollingConfig);
+      } else {
+        await config.resolveEnsured();
+      }
+
+      if (!argv.configPolling && !config.isLoaded) {
+        yargs.exit(1, new Error('Unable to start chartcuterie'));
       }
 
       const server = renderServer(config);
