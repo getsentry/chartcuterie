@@ -65,13 +65,13 @@ export type ChartcuterieConfig = {
  */
 export type PollingConfig = {
   /**
-   * The number of seconds between each polling attempt when the application boots
-   * and has yet to load a configuration.
+   * The number of milliseconds between each polling attempt when the
+   * application boots and has yet to load a configuration.
    */
   bootInterval: number;
   /**
-   * The number of seconds between each polling attempt after the application
-   * has already loaded a valid configuration file
+   * The number of milliseconds between each polling attempt after the
+   * application has already loaded a valid configuration file
    */
   idleInterval: number;
 };

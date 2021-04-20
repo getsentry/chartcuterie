@@ -45,8 +45,8 @@ export default class ConfigPoller {
   }
 
   /**
-   * The polling interval is dependant on if we've already successfully loaded a
-   * configuration module or not.
+   * The polling interval (in ms) is dependant on if we've already successfully
+   * loaded a configuration module or not.
    */
   get pollInterval() {
     return this.#config.isLoaded
