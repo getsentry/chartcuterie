@@ -85,7 +85,9 @@ export default class ConfigPoller {
       logger.warn(
         this.#config.isLoaded
           ? 'Resolved NEW but INVALID config. Not updating...'
-          : 'Resolved INVALID config during boot! Trying again in XXXXXXXXX'
+          : `Resolved INVALID config during boot (${errors}). Trying again in ${
+              this.pollInterval / 1000
+            }s`
       );
 
       // TODO(epurkhiser): It's likely we need to yell a little louder here

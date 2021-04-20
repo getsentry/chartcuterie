@@ -93,7 +93,8 @@ export default class ConfigService {
     const [validConfig, errors] = validateConfig(config);
 
     if (errors !== undefined) {
-      throw new Error(errors?.message);
+      logger.error(`Failed to load config with errors: ${errors}`);
+      return;
     }
 
     logger.info(`Resolved config: ${validConfig.renderConfig.size} styles available.`, {
