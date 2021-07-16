@@ -1,0 +1,49 @@
+name: DockerBuild
+on:
+  push:
+    branches:
+      - '*'
+
+jobs:
+  build:
+    name: Build image
+    runs-on: ubuntu-latest
+
+    env:
+      BRANCH: ${GITHUB_REF##*/}
+      SERVICE_NAME: chartcuterie
+      PROJECT_ID: sentryio
+      COMMIT_SHA: ${GITHUB_SHA::6}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      # Setup gcloud CLI
+      - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+        with:
+          service_account_key: ${{ secrets.GCR_SERVICE_ACCOUNT }}
+          project_id: sentryio
+          export_default_credentials: true
+
+      # Build docker image
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - run: |
+          bash -c yarn && yarn build
+      - name: Kaniko build
+        uses: aevea/action-kaniko@master
+        with:
+          registry: us.gcr.io
+          image: aevea/kaniko
+          extra_args: 'SOURCE_COMMIT=$GITHUB_SHA'
+          cache: true
+      # Configure docker to use the gcloud command-line tool as a credential helper
+      - run: |
+          gcloud auth configure-docker -q
+      # Push image to Google Container Registry
+      - name: Build
+        run: |-
+          docker push us.gcr.io/$PROJECT_ID/$SERVICE_NAME:$COMMIT_SHA
