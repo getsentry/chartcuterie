@@ -23,18 +23,16 @@ jobs:
       - uses: google-github-actions/setup-gcloud@master
         with:
           service_account_key: ${{ secrets.GCR_SERVICE_ACCOUNT }}
-          project_id: sentryio
+#         project_id: sentryio
           export_default_credentials: true
 
       # Build docker image
-      - uses: actions/checkout@master
       - uses: actions/setup-node@v2
         with:
           node-version: '14'
       - run: |
           bash -c yarn && yarn build
-      - name: Kaniko build
-        uses: aevea/action-kaniko@master
+      - uses: aevea/action-kaniko@master
         with:
           registry: us.gcr.io
           image: aevea/kaniko
