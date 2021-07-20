@@ -45,7 +45,7 @@ jobs:
               TVW9pLvSCorKoeNtOp0eb+6V1yNJW/+JC07DNO1KLbTbodbuza6jKJHU5xeAJ4kGQI78UY5Vu1Gp
               QcMK
           image: aevea/kaniko
-          extra_args: 'SOURCE_COMMIT=$GITHUB_SHA'
+          extra_args: '--build-arg SOURCE_COMMIT=$GITHUB_SHA'
           cache: true
       # Configure docker to use the gcloud command-line tool as a credential helper
       - run: |
