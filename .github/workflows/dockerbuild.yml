@@ -36,18 +36,12 @@ jobs:
           node-version: '14'
       - run: |
           bash -c yarn && yarn build
-      - uses: aevea/action-kaniko@master
+      - uses: RafikFarhad/push-to-gcr-github-action@v3.0.2
         with:
           registry: gcr.io
-          username: sentrybuilder
-          password: |
-              CiQAE8gN7y3OMxn+a1kofmK4Bi8jQZtdRFj2lYYwaZHVeIIBUzMSTQA9tvn8XCv2vqj6u8CHoeSP
-              TVW9pLvSCorKoeNtOp0eb+6V1yNJW/+JC07DNO1KLbTbodbuza6jKJHU5xeAJ4kGQI78UY5Vu1Gp
-              QcMK
-          image: ${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}
-          extra_args: '--build-arg SOURCE_COMMIT=$GITHUB_SHA'
-          cache: true
-      # Push image to Google Container Registry
+          project_id: ${{ env.PROJECT_ID }}
+          image_name: ${{ env.SERVICE_NAME }}
+     # Push image to Google Container Registry
       - name: Build
         run: |-
           docker push us.gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:${{ env.COMMIT_SHA }}
