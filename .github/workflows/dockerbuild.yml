@@ -38,6 +38,7 @@ jobs:
           bash -c yarn && yarn build
       - uses: RafikFarhad/push-to-gcr-github-action@v3.0.2
         with:
+          gcloud_service_key: ${{ secrets.GCR_SERVICE_ACCOUNT }}
           registry: gcr.io
           project_id: ${{ env.PROJECT_ID }}
           image_name: ${{ env.SERVICE_NAME }}
