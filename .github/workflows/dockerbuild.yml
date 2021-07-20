@@ -23,7 +23,7 @@ jobs:
       - uses: google-github-actions/setup-gcloud@master
         with:
           service_account_key: ${{ secrets.GCR_SERVICE_ACCOUNT }}
-#         project_id: sentryio
+#         project_id: $PROJECT_ID
           export_default_credentials: true
 
       # Configure docker to use the gcloud command-line tool as a credential helper
@@ -44,7 +44,7 @@ jobs:
               CiQAE8gN7y3OMxn+a1kofmK4Bi8jQZtdRFj2lYYwaZHVeIIBUzMSTQA9tvn8XCv2vqj6u8CHoeSP
               TVW9pLvSCorKoeNtOp0eb+6V1yNJW/+JC07DNO1KLbTbodbuza6jKJHU5xeAJ4kGQI78UY5Vu1Gp
               QcMK
-          image: ${{ projectid }}/chartcuterie
+          image: $PROJECT_ID/$SERVICE_NAME
           extra_args: '--build-arg SOURCE_COMMIT=$GITHUB_SHA'
           cache: true
       # Configure docker to use the gcloud command-line tool as a credential helper
