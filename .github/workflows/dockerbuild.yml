@@ -26,6 +26,10 @@ jobs:
 #         project_id: sentryio
           export_default_credentials: true
 
+      # Configure docker to use the gcloud command-line tool as a credential helper
+      - run: |
+          gcloud auth configure-docker -q
+ 
       # Build docker image
       - uses: actions/setup-node@v2
         with:
