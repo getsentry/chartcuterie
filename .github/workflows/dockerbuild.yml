@@ -36,13 +36,9 @@ jobs:
           node-version: '14'
       - run: |
           bash -c yarn && yarn build
-      - uses: RafikFarhad/push-to-gcr-github-action@v3.0.2
-        with:
-          gcloud_service_key: ${{ secrets.GCR_SERVICE_ACCOUNT }}
-          registry: gcr.io
-          project_id: ${{ env.PROJECT_ID }}
-          image_name: ${{ env.SERVICE_NAME }}
-     # Push image to Google Container Registry
-      - name: Build
-        run: |-
-          docker push us.gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:${{ env.COMMIT_SHA }}
+
+      - name: Build and push to gcr
+        run: |
+          gcloud builds submit \
+            --quiet \
+            --tag "us.gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:${{ env.COMMIT_SHA }}"
