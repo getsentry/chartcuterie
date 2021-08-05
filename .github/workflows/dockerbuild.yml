@@ -41,4 +41,5 @@ jobs:
         run: |
           gcloud builds submit \
             --quiet \
+            --project ${{ env.PROJECT_ID }}
             --tag "us.gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:${{ env.COMMIT_SHA }}"
