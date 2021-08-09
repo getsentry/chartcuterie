@@ -46,7 +46,7 @@ jobs:
       #what are we doing?
       - run: |
           ls /home/runner/work/chartcuterie/chartcuterie/
-      - run |
+      - run: |
           cat /home/runner/work/chartcuterie/chartcuterie/*
 
       - name: Build and push to gcr
