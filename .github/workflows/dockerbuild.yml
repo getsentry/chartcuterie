@@ -14,7 +14,7 @@ jobs:
       SERVICE_NAME: chartcuterie
       PROJECT_ID: sentryio
       COMMIT_SHA: ${GITHUB_SHA::6}
-        #      CLOUD_PROJECT: sentryio
+      CLOUD_PROJECT: sentryio
 
     steps:
       - name: Checkout
@@ -28,11 +28,10 @@ jobs:
           export_default_credentials: true
 
       # Configure docker to use the gcloud command-line tool as a credential helper
-      #      - run: |
-      #   gcloud auth -q
+      - run: |
+          gcloud auth -q
       - run: |
           gcloud auth list
-
 
       # Build docker image
       - uses: actions/setup-node@v2
@@ -41,17 +40,9 @@ jobs:
       - run: |
           bash -c yarn && yarn build
 
-      - run: |
-          gcloud auth list
-      #what are we doing?
-      - run: |
-          ls /home/runner/work/chartcuterie/chartcuterie/
-      - run: |
-          cat /home/runner/work/chartcuterie/chartcuterie/*
-
       - name: Build and push to gcr
         run: |
           gcloud builds submit \
-            --quiet \
             --project ${{ env.PROJECT_ID }}
+            --verbosity="debug"
             --tag "us.gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:${{ env.COMMIT_SHA }}"
