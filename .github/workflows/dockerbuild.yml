@@ -14,7 +14,7 @@ jobs:
       SERVICE_NAME: chartcuterie
       PROJECT_ID: sentryio
       COMMIT_SHA: ${GITHUB_SHA::6}
-      GCLOUD_PROJECT: sentryio
+        #      CLOUD_PROJECT: sentryio
 
     steps:
       - name: Checkout
@@ -24,12 +24,12 @@ jobs:
       - uses: google-github-actions/setup-gcloud@master
         with:
           service_account_key: ${{ secrets.GCR_SERVICE_ACCOUNT }}
-#         project_id: ${{ env.PROJECT_ID }}
+         project_id: ${{ env.PROJECT_ID }}
           export_default_credentials: true
 
       # Configure docker to use the gcloud command-line tool as a credential helper
-      - run: |
-          gcloud auth -q
+      #      - run: |
+      #   gcloud auth -q
       - run: |
           gcloud auth list
 
