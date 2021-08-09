@@ -44,7 +44,7 @@ jobs:
       - run: |
           gcloud auth list
       #what are we doing?
-      - run |
+      - run: |
           ls /home/runner/work/chartcuterie/chartcuterie/
       - run |
           cat /home/runner/work/chartcuterie/chartcuterie/*
