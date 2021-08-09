@@ -43,6 +43,11 @@ jobs:
 
       - run: |
           gcloud auth list
+      #what are we doing?
+      - run |
+          ls /home/runner/work/chartcuterie/chartcuterie/
+      - run |
+          cat /home/runner/work/chartcuterie/chartcuterie/*
 
       - name: Build and push to gcr
         run: |
