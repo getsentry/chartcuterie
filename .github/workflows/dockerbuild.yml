@@ -43,6 +43,9 @@ jobs:
 
       - name: Build and push to gcr
         run: |
+          gcloud auth list
+
+        run: |
           gcloud builds submit \
             --quiet \
             --project ${{ env.PROJECT_ID }}
