@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-import * as Sentry from '@sentry/node';
 import dotenv from 'dotenv';
 import yargs from 'yargs';
 
@@ -10,10 +9,7 @@ import {renderServer} from './renderServer';
 import {renderStream} from './renderStream';
 import {PollingConfig} from './types';
 
-require('@sentry/tracing');
-
 dotenv.config();
-Sentry.init({dsn: process.env.SENTRY_DSN});
 
 const defaultPollingConfig: PollingConfig = {
   /**

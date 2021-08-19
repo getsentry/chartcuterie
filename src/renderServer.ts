@@ -2,6 +2,7 @@ import {performance} from 'perf_hooks';
 
 import * as Sentry from '@sentry/node';
 import express from 'express';
+import { Integrations } from "@sentry/tracing";
 
 import ConfigService from './config';
 import {logger} from './logging';
@@ -14,8 +15,19 @@ import {validateRenderData} from './validate';
 export function renderServer(config: ConfigService) {
   const app = express();
 
+
+  Sentry.init({
+    dsn: process.env.SENTRY_DSN,
+    tracesSampleRate: 0,
+    integrations: [
+      new Integrations.Express({app}),
+    ],
+  });
+
+
   app.use(express.json({limit: '20mb'}));
   app.use(Sentry.Handlers.requestHandler());
+  app.use(Sentry.Handlers.tracingHandler());
 
   app.post('/render', async (req, resp) => {
     if (!config.isLoaded) {
