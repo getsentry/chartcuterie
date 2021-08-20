@@ -18,7 +18,10 @@ export function renderServer(config: ConfigService) {
   Sentry.getCurrentHub().bindClient(
     new Sentry.NodeClient({
       dsn: process.env.SENTRY_DSN,
-      integrations: [new Integrations.Express({app})],
+      integrations: [
+        new Integrations.Express({app}),
+        new Sentry.Integrations.Http({ tracing: true }),
+      ],
       tracesSampleRate: 1.0,
     })
   );
