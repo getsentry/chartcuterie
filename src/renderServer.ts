@@ -20,7 +20,7 @@ export function renderServer(config: ConfigService) {
       dsn: process.env.SENTRY_DSN,
       integrations: [
         new Integrations.Express({app}),
-        new Sentry.Integrations.Http({ tracing: true }),
+        new Sentry.Integrations.Http({tracing: true}),
       ],
       tracesSampleRate: 0,
     })
