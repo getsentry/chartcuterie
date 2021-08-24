@@ -21,6 +21,7 @@
   ],
   "dependencies": {
     "@sentry/node": "^6.2.0",
+    "@sentry/tracing": "^6.11.0",
     "@types/echarts": "^4.9.3",
     "@types/express": "^4.17.11",
     "@types/joi": "^17.2.3",
