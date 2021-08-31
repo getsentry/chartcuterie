@@ -2,7 +2,7 @@ steps:
   # Build the app
   - name: 'node:14'
     args: ['bash', '-c', 'yarn && yarn build']
-  # Build runtime image
+  # Build and push runtime image
   - name: 'gcr.io/kaniko-project/executor:v1.5.1'
     args:
       [
@@ -22,7 +22,7 @@ steps:
       - '--help'
     timeout: 60s
 
-  - name: 'gcr.io/cloud-builders/docker'
+  - name: 'us.gcr.io/$PROJECT_ID/chartcuterie:$COMMIT_SHA'
     secretEnv: ['DOCKER_PASSWORD']
     entrypoint: 'bash'
     args:
@@ -31,15 +31,19 @@ steps:
     - |
       # Only push to Docker Hub from master
       [ "$BRANCH_NAME" != "master" ] && exit 0
-      docker tag us.gcr.io/$PROJECT_ID/chartcuterie:$COMMIT_SHA us.gcr.io/$PROJECT_ID/chartcuterie:nightly
-      docker push us.gcr.io/$PROJECT_ID/chartcuterie:nightly
+      docker tag us.gcr.io/$PROJECT_ID/chartcuterie:$COMMIT_SHA us.gcr.io/$PROJECT_ID/chartcuterie:latest
+      docker push us.gcr.io/$PROJECT_ID/chartcuterie:latest
       echo "$$DOCKER_PASSWORD" | docker login --username=sentrybuilder --password-stdin
       docker tag us.gcr.io/$PROJECT_ID/chartcuterie:$COMMIT_SHA getsentry/chartcuterie:$SHORT_SHA
       docker push getsentry/chartcuterie:$SHORT_SHA
       docker tag us.gcr.io/$PROJECT_ID/chartcuterie:$COMMIT_SHA getsentry/chartcuterie:$COMMIT_SHA
       docker push getsentry/chartcuterie:$COMMIT_SHA
-      docker tag us.gcr.io/$PROJECT_ID/chartcuterie:$COMMIT_SHA getsentry/chartcuterie:nightly
-      docker push getsentry/chartcuterie:nightly
+      docker tag us.gcr.io/$PROJECT_ID/chartcuterie:$COMMIT_SHA getsentry/chartcuterie:latest
+      docker push getsentry/chartcuterie:latest
+
+images: [
+  'us.gcr.io/$PROJECT_ID/chartcuterie:$COMMIT_SHA',
+]
 
 secrets:
 - kmsKeyName: projects/sentryio/locations/global/keyRings/service-credentials/cryptoKeys/cloudbuild
