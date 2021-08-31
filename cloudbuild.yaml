@@ -43,7 +43,6 @@ steps:
 
 images: [
   'us.gcr.io/$PROJECT_ID/chartcuterie:$COMMIT_SHA',
-  'getsentry/chartcuterie:$COMMIT_SHA'
 ]
 
 secrets:
