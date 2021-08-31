@@ -22,7 +22,7 @@ steps:
       - '--help'
     timeout: 60s
 
-  - name: 'gcr'
+  - name: 'us.gcr.io/$PROJECT_ID/chartcuterie:$COMMIT_SHA'
     secretEnv: ['DOCKER_PASSWORD']
     entrypoint: 'bash'
     args:
