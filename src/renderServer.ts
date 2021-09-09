@@ -22,7 +22,7 @@ export function renderServer(config: ConfigService) {
         new Integrations.Express({app}),
         new Sentry.Integrations.Http({tracing: true}),
       ],
-      tracesSampleRate: 0,
+      tracesSampleRate: 1,
     })
   );
 
