@@ -31,6 +31,10 @@ export function renderServer(config: ConfigService) {
   app.use(Sentry.Handlers.tracingHandler());
 
   app.post('/render', async (req, resp) => {
+    // Debugging code to check if errors are
+    // sent to Sentry.
+    Sentry.captureMessage('rendering chart');
+
     if (!config.isLoaded) {
       resp.status(503).send();
       return;
