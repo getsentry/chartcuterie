@@ -22,7 +22,7 @@ steps:
       - '--help'
     timeout: 60s
 
-  - name: 'us.gcr.io/$PROJECT_ID/chartcuterie:$COMMIT_SHA'
+  - name: 'gcr.io/cloud-builders/docker'
     secretEnv: ['DOCKER_PASSWORD']
     entrypoint: 'bash'
     args:
