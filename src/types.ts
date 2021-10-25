@@ -58,6 +58,12 @@ export type ChartcuterieConfig = {
    * configuration.
    */
   version: string;
+  /**
+   * Performs any additional initialization steps on the echarts namespace
+   * on service start up. For example, registerMaps can be called here to
+   * register any available maps to ECharts.
+   */
+  init?: (echarts: any) => void;
 };
 
 /**

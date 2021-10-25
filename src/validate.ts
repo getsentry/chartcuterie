@@ -23,6 +23,7 @@ const renderConfigSchema = Joi.object().pattern(Joi.string(), renderType);
 
 const configSchema = Joi.object({
   renderConfig: renderConfigSchema,
+  init: Joi.function(),
   version: Joi.string().description('Version of the configuration module').required(),
 });
 
