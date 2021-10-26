@@ -143,7 +143,7 @@ export default class ConfigService {
     this.#currentVersion = version;
   }
 
-  setInit(init: (echarts: any) => void | undefined) {
+  setInit(init: ((echarts: any) => void) | undefined) {
     if (init) this.#init = init;
   }
 
