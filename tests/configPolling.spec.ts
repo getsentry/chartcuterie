@@ -15,6 +15,8 @@ describe('configPoller', () => {
       fetchConfig: jest.fn(),
       setVersion: jest.fn(),
       setRenderConfig: jest.fn(),
+      setInit: jest.fn(),
+      triggerInit: jest.fn(),
       isLoaded: false,
       version: NO_VERSION as any,
     };
