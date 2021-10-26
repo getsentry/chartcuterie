@@ -3,7 +3,6 @@ import * as echarts from 'echarts';
 
 import {RenderDescriptor} from './types';
 import {disabledOptions, registerCanvasFonts} from './utils';
-import * as worldMap from './world.json';
 
 registerCanvasFonts();
 const initCanvas = createCanvas(0, 0);
@@ -22,9 +21,13 @@ const pngConfig: PngConfig = {
 export function renderSync(style: RenderDescriptor, data: any) {
   const canvas = createCanvas(style.width, style.height);
   const htmlCanvas = (canvas as unknown) as HTMLCanvasElement;
-  echarts.registerMap('sentryWorld', worldMap);
+  let chart: echarts.ECharts;
 
-  const chart = echarts.init(htmlCanvas);
+  if (style.init) {
+    chart = style.init(echarts, htmlCanvas);
+  } else {
+    chart = echarts.init(htmlCanvas);
+  }
   chart.setOption({...style.getOption(data), ...disabledOptions});
 
   return [canvas.createPNGStream(pngConfig), () => chart.dispose()] as const;

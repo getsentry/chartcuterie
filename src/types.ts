@@ -21,6 +21,11 @@ export type RenderDescriptor<D extends string = string> = {
    * it produces a valid ECharts Option config.
    */
   getOption: (data: any) => RenderOption;
+  /**
+   * Initialize an ECharts instance. It is up to the implementation to
+   * register themes, locales or available maps with the instance.
+   */
+  init?: (namespace: any, dom: HTMLCanvasElement) => echarts.ECharts;
 };
 
 /**
