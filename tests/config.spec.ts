@@ -10,6 +10,31 @@ describe('config', () => {
   });
 
   it('can load config via files', async () => {
+    const init = jest.fn();
+    jest.mock(
+      '/myConfig',
+      () => {
+        const renderConfig = new Map();
+        renderConfig.set('fileExample', {
+          key: 'fileExample',
+          height: 200,
+          width: 100,
+          getOption: (series: any) => ({series}),
+        });
+
+        return {default: {renderConfig, init, version: 'abc'}};
+      },
+      {virtual: true}
+    );
+
+    const config = new ConfigService('/myConfig');
+    await config.resolveEnsured();
+
+    expect(config.getConfig('fileExample')?.height).toEqual(200);
+    expect(init).toHaveBeenCalledTimes(1);
+  });
+
+  it('does not require init', async () => {
     jest.mock(
       '/myConfig',
       () => {
@@ -42,7 +67,7 @@ describe('config', () => {
       getOption: series => ({series}),
     });
 
-    module.exports = {renderConfig, version: 'abc'};`;
+    module.exports = {renderConfig, version: 'abc', init: _ => {}};`;
 
     fetchMock.mockResponse(configModule);
 
