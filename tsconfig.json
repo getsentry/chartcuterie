@@ -4,7 +4,6 @@
     "lib": ["esnext"],
     "module": "CommonJS",
     "moduleResolution": "node",
-    "resolveJsonModule": true,
     "sourceMap": true,
     "strict": true,
     "target": "ES2015",
