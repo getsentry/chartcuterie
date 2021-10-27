@@ -48,6 +48,13 @@ export type RenderData = {
 };
 
 /**
+ * Performs any additional initialization steps on Chartcuterie's global
+ * echarts object on service start up. For example, registerMaps can
+ * be called here to register any available maps to ECharts.
+ */
+export type InitFn = (echarts: any) => void;
+
+/**
  * The configuration object type expected to be provided to the service
  */
 export type ChartcuterieConfig = {
@@ -58,6 +65,11 @@ export type ChartcuterieConfig = {
    * configuration.
    */
   version: string;
+  /**
+   * The optional initialization function to run when the service starts
+   * or restarts due to configuration updates.
+   */
+  init?: InitFn;
 };
 
 /**

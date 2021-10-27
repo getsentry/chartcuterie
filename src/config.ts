@@ -2,11 +2,12 @@ import path from 'path';
 import * as vm from 'vm';
 
 import AbortController from 'abort-controller';
+import * as echarts from 'echarts';
 import fetch from 'node-fetch';
 
 import ConfigPoller from './configPolling';
 import {logger} from './logging';
-import {PollingConfig, RenderConfig, RenderDescriptor} from './types';
+import {InitFn, PollingConfig, RenderConfig, RenderDescriptor} from './types';
 import {validateConfig} from './validate';
 
 /**
@@ -52,6 +53,10 @@ export default class ConfigService {
    * may be null if a configuration file has not been loaded yet.
    */
   #currentVersion: string | null = null;
+  /**
+   * The resolved init to run at service startup
+   */
+  #init: InitFn = _echarts => {};
 
   constructor(uri: string) {
     this.#uri = uri;
@@ -103,6 +108,10 @@ export default class ConfigService {
 
     this.#currentVersion = validConfig.version;
     this.#renderConfig = validConfig.renderConfig;
+    if (validConfig.init) {
+      this.#init = validConfig.init;
+    }
+    this.triggerInit();
   }
 
   /**
@@ -134,6 +143,18 @@ export default class ConfigService {
    */
   setVersion(version: string) {
     this.#currentVersion = version;
+  }
+
+  setInit(init: InitFn | undefined) {
+    if (init) {
+      this.#init = init;
+    } else {
+      this.#init = _echarts => {};
+    }
+  }
+
+  triggerInit() {
+    this.#init(echarts);
   }
 
   /**

@@ -41,6 +41,8 @@ structure.
 A simple configuration module might look like this:
 
 ```tsx
+import world from 'echarts/map/json/world.json';
+
 const renderConfig = {
   /**
    * Each key in the configuration objects represents a rendering style
@@ -76,6 +78,9 @@ const config = {
    * purposes.
    */
   version: '1.0.0-example.0',
+  init: echarts => {
+    echarts.registerMap('world', world);
+  },
 }
 
 module.exports = config;

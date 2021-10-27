@@ -111,6 +111,8 @@ export default class ConfigPoller {
     // Successful configuration update!
     this.#config.setVersion(validConfig.version);
     this.#config.setRenderConfig(validConfig.renderConfig);
+    this.#config.setInit(validConfig.init);
+    this.#config.triggerInit();
 
     // Switch to idle polling,
     if (wasBootPolling) {
