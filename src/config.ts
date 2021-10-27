@@ -148,6 +148,8 @@ export default class ConfigService {
   setInit(init: InitFn | undefined) {
     if (init) {
       this.#init = init;
+    } else {
+      this.#init = _echarts => {};
     }
   }
 
