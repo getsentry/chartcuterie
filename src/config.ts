@@ -7,7 +7,7 @@ import fetch from 'node-fetch';
 
 import ConfigPoller from './configPolling';
 import {logger} from './logging';
-import {PollingConfig, RenderConfig, RenderDescriptor} from './types';
+import {InitFn, PollingConfig, RenderConfig, RenderDescriptor} from './types';
 import {validateConfig} from './validate';
 
 /**
@@ -56,7 +56,7 @@ export default class ConfigService {
   /**
    * The resolved init to run at service startup
    */
-  #init: (echarts: any) => void = _ => {};
+  #init: InitFn = _echarts => {};
 
   constructor(uri: string) {
     this.#uri = uri;
@@ -108,7 +108,9 @@ export default class ConfigService {
 
     this.#currentVersion = validConfig.version;
     this.#renderConfig = validConfig.renderConfig;
-    if (validConfig.init) this.#init = validConfig.init;
+    if (validConfig.init) {
+      this.#init = validConfig.init;
+    }
     this.triggerInit();
   }
 
@@ -143,8 +145,10 @@ export default class ConfigService {
     this.#currentVersion = version;
   }
 
-  setInit(init: ((echarts: any) => void) | undefined) {
-    if (init) this.#init = init;
+  setInit(init: InitFn | undefined) {
+    if (init) {
+      this.#init = init;
+    }
   }
 
   triggerInit() {
