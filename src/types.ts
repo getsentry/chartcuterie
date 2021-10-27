@@ -48,9 +48,9 @@ export type RenderData = {
 };
 
 /**
- * Performs any additional initialization steps on the echarts namespace
- * on service start up. For example, registerMaps can be called here to
- * register any available maps to ECharts.
+ * Performs any additional initialization steps on Chartcuterie's global
+ * echarts object on service start up. For example, registerMaps can
+ * be called here to register any available maps to ECharts.
  */
 export type InitFn = (echarts: any) => void;
 
