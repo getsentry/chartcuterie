@@ -41,6 +41,8 @@ structure.
 A simple configuration module might look like this:
 
 ```tsx
+import world from 'echarts/map/json/world.json';
+
 const renderConfig = {
   /**
    * Each key in the configuration objects represents a rendering style
