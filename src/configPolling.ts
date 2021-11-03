@@ -84,7 +84,7 @@ export default class ConfigPoller {
     if (errors !== undefined) {
       logger.warn(
         this.#config.isLoaded
-          ? 'Resolved NEW but INVALID config. Not updating...'
+          ? `Resolved NEW but INVALID config (${errors}). Not updating...`
           : `Resolved INVALID config during boot (${errors}). Trying again in ${
               this.pollInterval / 1000
             }s`
