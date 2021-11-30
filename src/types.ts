@@ -1,6 +1,6 @@
-import type {EChartsOption} from 'echarts';
+import {EChartOption} from 'echarts';
 
-export type RenderOption = Omit<EChartsOption, 'animation' | 'tooltip' | 'toolbox'>;
+export type RenderOption = Omit<EChartOption, 'animation' | 'tooltip' | 'toolbox'>;
 
 /**
  * Describes configuration for a renderable chart style
