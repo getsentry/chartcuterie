@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 
-import type {EChartsOption} from 'echarts';
+import {EChartOption} from 'echarts';
 
 import ConfigService from 'app/config';
 import {renderStream} from 'app/renderStream';
@@ -15,18 +15,19 @@ describe('renderStream', () => {
       key: 'dayChart',
       height: 250,
       width: 400,
-      getOption: (series: any): EChartsOption => ({
-        xAxis: {
-          type: 'category',
-          data: ['Mon', 'Tue', 'Wed'],
-          axisLabel: {fontFamily: 'Verdana'},
-        },
-        yAxis: {
-          type: 'value',
-          axisLabel: {fontFamily: 'Verdana'},
-        },
-        series,
-      }),
+      getOption: (series: any) =>
+        ({
+          xAxis: {
+            type: 'category',
+            data: ['Mon', 'Tue', 'Wed'],
+            axisLabel: {fontFamily: 'Verdana'},
+          },
+          yAxis: {
+            type: 'value',
+            axisLabel: {fontFamily: 'Verdana'},
+          },
+          series,
+        } as EChartOption),
     });
 
     const renderData: RenderData = {
