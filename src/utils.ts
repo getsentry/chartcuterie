@@ -1,6 +1,7 @@
 import * as path from 'path';
 
 import {registerFont} from 'canvas';
+import type {EChartsOption} from 'echarts';
 
 function fontFile(name: string) {
   return path.join(__dirname, '/../fonts/', name);
@@ -17,7 +18,7 @@ export function registerCanvasFonts() {
 /**
  * Globally disabled options for rendering charts
  */
-export const disabledOptions: echarts.EChartOption = {
+export const disabledOptions: EChartsOption = {
   animation: false,
   toolbox: undefined,
   tooltip: undefined,
