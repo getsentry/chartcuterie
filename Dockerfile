@@ -1,4 +1,4 @@
-FROM node:14-slim
+FROM node:16-slim
 
 ENV NODE_ENV=production
 
@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 WORKDIR /usr/src/app
 
 COPY package.json yarn.lock ./
-RUN yarn install
+RUN yarn install --frozen-lockfile
 
 COPY . .
 
