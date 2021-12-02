@@ -20,6 +20,9 @@ valuable context.
 
 `echarts` + `node-canvas` is used internally to produce the charts.
 
+_Looking for information on running Chartcuterie with Sentry? [Check the
+develop docs](https://develop.sentry.dev/services/chartcuterie/)._
+
 ## Documentation
 
 Chartcuterie can be run in two different modes
