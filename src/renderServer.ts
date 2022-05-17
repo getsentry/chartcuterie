@@ -15,16 +15,14 @@ import {validateRenderData} from './validate';
 export function renderServer(config: ConfigService) {
   const app = express();
 
-  Sentry.getCurrentHub().bindClient(
-    new Sentry.NodeClient({
-      dsn: process.env.SENTRY_DSN,
-      integrations: [
-        new Integrations.Express({app}),
-        new Sentry.Integrations.Http({tracing: true}),
-      ],
-      tracesSampleRate: 1,
-    })
-  );
+  Sentry.init({
+    dsn: process.env.SENTRY_DSN,
+    integrations: [
+      new Integrations.Express({app}),
+      new Sentry.Integrations.Http({tracing: true}),
+    ],
+    tracesSampleRate: 1,
+  });
 
   app.use(express.json({limit: '20mb'}));
   app.use(Sentry.Handlers.requestHandler());
