@@ -26,7 +26,10 @@ export type RenderDescriptor<D extends string = string> = {
 /**
  * Maps style keys to style descriptor configuration
  */
-export type RenderConfig<D extends string = string> = Map<D, RenderDescriptor<D>>;
+export type RenderConfig<D extends string = string> = Map<
+  D,
+  Readonly<RenderDescriptor<D>>
+>;
 
 /**
  * The data given to the service to render a chart
@@ -45,6 +48,14 @@ export type RenderData = {
    * into a valid echarts series.
    */
   data: any;
+  /**
+   * Override style's default width
+   */
+  width?: number;
+  /**
+   * Override style's default height
+   */
+  height?: number;
 };
 
 /**

@@ -44,6 +44,26 @@ describe('renderServer', () => {
       expect(resp.headers['x-config-version']).toBe('1.0-test');
     });
 
+    it('allows override of height/width', async () => {
+      const renderData: RenderData = {
+        requestId: 'some-id',
+        style: 'dayChart',
+        height: 200,
+        width: 600,
+        data: {
+          type: 'line',
+          data: [0, 5, 30],
+        },
+      };
+
+      const app = renderServer(config);
+      const resp = await supertest(app).post('/render').send(renderData);
+
+      expect(resp.status).toBe(200);
+      expect(resp.body).toMatchImageSnapshot();
+      expect(resp.headers['x-config-version']).toBe('1.0-test');
+    });
+
     it('Validates chart requests', async () => {
       const renderData: RenderData = {
         requestId: 'some-id',
