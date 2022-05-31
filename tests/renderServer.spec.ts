@@ -61,7 +61,6 @@ describe('renderServer', () => {
 
       expect(resp.status).toBe(200);
       expect(resp.body).toMatchImageSnapshot();
-      expect(resp.headers['x-config-version']).toBe('1.0-test');
     });
 
     it('Validates chart requests', async () => {
