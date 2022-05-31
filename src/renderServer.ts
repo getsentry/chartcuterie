@@ -46,7 +46,12 @@ export function renderServer(config: ConfigService) {
     }
 
     // validateRenderData ensures the config key is valid
-    const style = config.getConfig(renderData.style)!;
+    let style = config.getConfig(renderData.style)!;
+
+    // Override the default width/height from the payload sent to /render
+    if (renderData.width && renderData.height) {
+      style = {...style, width: renderData.width, height: renderData.height};
+    }
 
     try {
       const [stream, dispose] = renderSync(style, renderData.data);

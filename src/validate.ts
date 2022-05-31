@@ -48,6 +48,8 @@ export function validateRenderData(config: ConfigService, data: any) {
       .description('Indicates what rendering style to use for the chart')
       .valid(...config.renderStyles)
       .required(),
+    width: Joi.number().optional(),
+    height: Joi.number().optional(),
 
     data: Joi.any(),
   });
