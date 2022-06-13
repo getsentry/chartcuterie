@@ -20,7 +20,7 @@ const pngConfig: PngConfig = {
  */
 export function renderSync(style: RenderDescriptor, data: any) {
   const canvas = createCanvas(style.width, style.height);
-  const htmlCanvas = (canvas as unknown) as HTMLCanvasElement;
+  const htmlCanvas = canvas as unknown as HTMLCanvasElement;
 
   const chart = echarts.init(htmlCanvas);
   chart.setOption({...style.getOption(data), ...disabledOptions});
