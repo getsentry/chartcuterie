@@ -53,8 +53,9 @@ export function renderServer(config: ConfigService) {
       style = {...style, width: renderData.width, height: renderData.height};
     }
 
+    let render: ReturnType<typeof renderSync> | undefined;
     try {
-      const [stream, dispose] = renderSync(style, renderData.data);
+      render = renderSync(style, renderData.data);
 
       resp
         .status(200)
@@ -62,17 +63,17 @@ export function renderServer(config: ConfigService) {
         .header('X-Config-Version', config.version.toString())
         .attachment('chart.png');
 
-      stream.pipe(resp);
+      render.stream.pipe(resp);
 
       await new Promise((resolve, reject) => {
-        stream.on('end', resolve);
-        stream.on('error', reject);
+        render!.stream.on('end', resolve);
+        render!.stream.on('error', reject);
       });
-
-      dispose();
     } catch (error) {
       Sentry.captureException(error);
       resp.status(500);
+    } finally {
+      render?.dispose();
     }
 
     resp.send();

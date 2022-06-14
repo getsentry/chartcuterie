@@ -32,16 +32,16 @@ export async function renderStream(config: ConfigService) {
     throw new Error('Invalid config style key provided');
   }
 
-  const [stream, dispose] = renderSync(style, renderData.data);
+  const render = renderSync(style, renderData.data);
 
-  stream.pipe(process.stdout);
+  render.stream.pipe(process.stdout);
 
   try {
     await new Promise((resolve, reject) => {
-      stream.on('end', resolve);
-      stream.on('error', reject);
+      render.stream.on('end', resolve);
+      render.stream.on('error', reject);
     });
   } finally {
-    dispose();
+    render.dispose();
   }
 }
