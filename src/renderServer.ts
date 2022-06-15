@@ -14,21 +14,18 @@ import {validateRenderData} from './validate';
  */
 export function renderServer(config: ConfigService) {
   const app = express();
+  const renderRoutes = express.Router();
 
   Sentry.init({
     dsn: process.env.SENTRY_DSN,
-    integrations: [
-      new Integrations.Express({app}),
-      new Sentry.Integrations.Http({tracing: true}),
-    ],
+    integrations: [new Integrations.Express({router: renderRoutes})],
     tracesSampleRate: 1,
   });
 
-  app.use(express.json({limit: '20mb'}));
-  app.use(Sentry.Handlers.requestHandler());
-  app.use(Sentry.Handlers.tracingHandler());
-
-  app.post('/render', async (req, resp) => {
+  renderRoutes.use(express.json({limit: '20mb'}));
+  renderRoutes.use(Sentry.Handlers.requestHandler());
+  renderRoutes.use(Sentry.Handlers.tracingHandler());
+  renderRoutes.use(async (req, resp) => {
     if (!config.isLoaded) {
       resp.status(503).send();
       return;
@@ -88,6 +85,9 @@ export function renderServer(config: ConfigService) {
       time,
     });
   });
+  renderRoutes.use(Sentry.Handlers.errorHandler());
+
+  app.post('/render', renderRoutes);
 
   app.get('/api/chartcuterie/healthcheck/live', (_req, resp) =>
     resp.status(200).send('OK')
@@ -98,8 +98,6 @@ export function renderServer(config: ConfigService) {
       ? resp.status(200).send('OK')
       : resp.status(503).send('NOT CONFIGURED')
   );
-
-  app.use(Sentry.Handlers.errorHandler());
 
   return app;
 }
