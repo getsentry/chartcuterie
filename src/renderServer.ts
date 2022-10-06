@@ -1,7 +1,7 @@
 import {performance} from 'perf_hooks';
 
 import * as Sentry from '@sentry/node';
-import {Integrations} from '@sentry/tracing';
+import * as Tracing from '@sentry/tracing';
 import express from 'express';
 
 import ConfigService from './config';
@@ -18,7 +18,10 @@ export function renderServer(config: ConfigService) {
 
   Sentry.init({
     dsn: process.env.SENTRY_DSN,
-    integrations: [new Integrations.Express({router: renderRoutes})],
+    integrations: [
+      new Sentry.Integrations.Http({tracing: true}),
+      new Tracing.Integrations.Express({router: renderRoutes}),
+    ],
     tracesSampleRate: 1,
   });
 
