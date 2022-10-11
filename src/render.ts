@@ -28,8 +28,8 @@ export function renderSync(style: RenderDescriptor, data: any) {
 
   const opts: ResvgRenderOptions = {
     fitTo: {mode: 'width', value: style.width},
-    shapeRendering: 1, // crispEdges
-    textRendering: 1, // optimizeLegibility
+    shapeRendering: 2, // geometricPrecision
+    textRendering: 2, // geometricPrecision
     imageRendering: 0, // optimizeQuality
     font: {
       fontFiles: [
