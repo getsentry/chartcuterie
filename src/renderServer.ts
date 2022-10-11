@@ -28,7 +28,7 @@ export function renderServer(config: ConfigService) {
   renderRoutes.use(express.json({limit: '20mb'}));
   renderRoutes.use(Sentry.Handlers.requestHandler());
   renderRoutes.use(Sentry.Handlers.tracingHandler());
-  renderRoutes.use(async (req, resp) => {
+  renderRoutes.use((req, resp) => {
     if (!config.isLoaded) {
       resp.status(503).send();
       return;
