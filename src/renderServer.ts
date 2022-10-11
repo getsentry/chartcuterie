@@ -63,12 +63,7 @@ export function renderServer(config: ConfigService) {
         .header('X-Config-Version', config.version.toString())
         .attachment('chart.png');
 
-      render.stream.pipe(resp);
-
-      await new Promise((resolve, reject) => {
-        render!.stream.on('end', resolve);
-        render!.stream.on('error', reject);
-      });
+      resp.send(render.buffer);
     } catch (error) {
       Sentry.captureException(error);
       resp.status(500);

@@ -1,35 +1,50 @@
-import {createCanvas, PngConfig} from 'canvas';
+import * as path from 'path';
+
+import {Resvg, ResvgRenderOptions} from '@resvg/resvg-js';
 import * as echarts from 'echarts';
 
 import {RenderDescriptor} from './types';
-import {disabledOptions, registerCanvasFonts} from './utils';
+import {disabledOptions} from './utils';
 
-registerCanvasFonts();
-const initCanvas = createCanvas(0, 0);
-
-// @ts-ignore setCanvasCreator is not documented in typescript [0]
-// [0]: https://github.com/apache/echarts/issues/9727
-echarts.setCanvasCreator(() => initCanvas);
-
-const pngConfig: PngConfig = {
-  // Configure png rendering here
-};
+function fontFile(name: string) {
+  return path.join(__dirname, '/../fonts/', name);
+}
 
 /**
  * Renders a single chart
  */
 export function renderSync(style: RenderDescriptor, data: any) {
-  const canvas = createCanvas(style.width, style.height);
-  const htmlCanvas = canvas as unknown as HTMLCanvasElement;
-
   // Get options object before echarts.init to ensure options can be created
   const options = style.getOption(data);
 
-  const chart = echarts.init(htmlCanvas);
+  // @ts-expect-error expects a HTMLElement as the first argument
+  const chart = echarts.init(null, null, {
+    renderer: 'svg',
+    ssr: true,
+    width: style.width,
+    height: style.height,
+  });
   chart.setOption({...options, ...disabledOptions});
 
+  const opts: ResvgRenderOptions = {
+    fitTo: {mode: 'width', value: style.width},
+    textRendering: 1, // optimizeLegibility
+    imageRendering: 0, // optimizeQuality
+    font: {
+      fontFiles: [
+        fontFile('/rubik-medium.woff'),
+        fontFile('/rubik-regular.woff'),
+        fontFile('/rubik-mono-regular.woff'),
+      ],
+      loadSystemFonts: true, // Loading system fonts might be slow?
+    },
+  };
+  const resvg = new Resvg(chart.renderToSVGString(), opts);
+  const pngData = resvg.render();
+  const pngBuffer = pngData.asPng();
+
   return {
-    stream: canvas.createPNGStream(pngConfig),
+    buffer: pngBuffer,
     dispose: () => chart.dispose(),
   };
 }
