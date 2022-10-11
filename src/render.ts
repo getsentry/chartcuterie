@@ -5,11 +5,6 @@ import {RenderDescriptor} from './types';
 import {disabledOptions, registerCanvasFonts} from './utils';
 
 registerCanvasFonts();
-const initCanvas = createCanvas(0, 0);
-
-// @ts-ignore setCanvasCreator is not documented in typescript [0]
-// [0]: https://github.com/apache/echarts/issues/9727
-echarts.setCanvasCreator(() => initCanvas);
 
 const pngConfig: PngConfig = {
   // Configure png rendering here
@@ -25,7 +20,11 @@ export function renderSync(style: RenderDescriptor, data: any) {
   // Get options object before echarts.init to ensure options can be created
   const options = style.getOption(data);
 
-  const chart = echarts.init(htmlCanvas);
+  const chart = echarts.init(htmlCanvas, undefined, {
+    renderer: 'canvas',
+    width: style.width,
+    height: style.height,
+  });
   chart.setOption({...options, ...disabledOptions});
 
   return {
