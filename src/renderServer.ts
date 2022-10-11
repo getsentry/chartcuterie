@@ -28,7 +28,7 @@ export function renderServer(config: ConfigService) {
   renderRoutes.use(express.json({limit: '20mb'}));
   renderRoutes.use(Sentry.Handlers.requestHandler());
   renderRoutes.use(Sentry.Handlers.tracingHandler());
-  renderRoutes.use(async (req, resp) => {
+  renderRoutes.use((req, resp) => {
     if (!config.isLoaded) {
       resp.status(503).send();
       return;
@@ -63,12 +63,7 @@ export function renderServer(config: ConfigService) {
         .header('X-Config-Version', config.version.toString())
         .attachment('chart.png');
 
-      render.stream.pipe(resp);
-
-      await new Promise((resolve, reject) => {
-        render!.stream.on('end', resolve);
-        render!.stream.on('error', reject);
-      });
+      resp.send(render.buffer);
     } catch (error) {
       Sentry.captureException(error);
       resp.status(500);

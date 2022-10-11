@@ -1,6 +1,6 @@
 import * as path from 'path';
 
-import {registerFont} from 'canvas';
+import {GlobalFonts} from '@napi-rs/canvas';
 import type {EChartsOption} from 'echarts';
 
 function fontFile(name: string) {
@@ -11,8 +11,9 @@ function fontFile(name: string) {
  * Make our fonts available in node-canvas
  */
 export function registerCanvasFonts() {
-  registerFont(fontFile('/rubik-regular.woff'), {family: 'Rubik', weight: 'normal'});
-  registerFont(fontFile('/rubik-medium.woff'), {family: 'Rubik', weight: 'medium'});
+  GlobalFonts.registerFromPath(fontFile('/rubik-regular.woff'), 'Rubik');
+  GlobalFonts.registerFromPath(fontFile('/rubik-medium.woff'), 'Rubik');
+  GlobalFonts.registerFromPath(fontFile('/roboto-mono-regular.woff'), 'Rubik');
 }
 
 /**
