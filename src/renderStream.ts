@@ -34,14 +34,6 @@ export async function renderStream(config: ConfigService) {
 
   const render = renderSync(style, renderData.data);
 
-  render.stream.pipe(process.stdout);
-
-  try {
-    await new Promise((resolve, reject) => {
-      render.stream.on('end', resolve);
-      render.stream.on('error', reject);
-    });
-  } finally {
-    render.dispose();
-  }
+  process.stdout.write(render.buffer);
+  render.dispose();
 }
