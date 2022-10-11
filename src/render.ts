@@ -1,14 +1,10 @@
-import {createCanvas, PngConfig} from 'canvas';
+import {createCanvas} from 'canvas';
 import * as echarts from 'echarts';
 
 import {RenderDescriptor} from './types';
 import {disabledOptions, registerCanvasFonts} from './utils';
 
 registerCanvasFonts();
-
-const pngConfig: PngConfig = {
-  // Configure png rendering here
-};
 
 /**
  * Renders a single chart
@@ -28,7 +24,7 @@ export function renderSync(style: RenderDescriptor, data: any) {
   chart.setOption({...options, ...disabledOptions});
 
   return {
-    stream: canvas.createPNGStream(pngConfig),
+    buffer: canvas.toBuffer('image/png'),
     dispose: () => chart.dispose(),
   };
 }
