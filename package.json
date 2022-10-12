@@ -20,8 +20,9 @@
     "README"
   ],
   "dependencies": {
-    "@sentry/node": "7.1.1",
-    "@sentry/tracing": "7.1.1",
+    "@sentry/node": "^7.1.1",
+    "@sentry/profiling-node": "^0.0.0-alpha.6",
+    "@sentry/tracing": "^7.1.1",
     "@types/express": "4.17.13",
     "@types/yargs": "^16.0.0",
     "abort-controller": "^3.0.0",
