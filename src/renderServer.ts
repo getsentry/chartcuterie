@@ -26,7 +26,7 @@ export function renderServer(config: ConfigService) {
       new ProfilingIntegration(),
     ],
     // @ts-expect-error this is not part of the node lib yet
-    profilesSampleRate: 1,
+    profilesSampleRate: 0.1,
     tracesSampleRate: 1,
   });
 
