@@ -20,9 +20,8 @@ export function renderSync(style: RenderDescriptor, data: any) {
     renderer: 'canvas',
     width: style.width,
     height: style.height,
-    ...options,
-    ...disabledOptions,
   });
+  chart.setOption({...options, ...disabledOptions});
 
   return {
     buffer: canvas.toBuffer('image/png'),
