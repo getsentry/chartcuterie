@@ -698,17 +698,26 @@
     "@sentry/utils" "7.15.0"
     tslib "^1.9.3"
 
-"@sentry/hub@^7.13.0":
-  version "7.15.0"
-  resolved "https://registry.yarnpkg.com/@sentry/hub/-/hub-7.15.0.tgz#d4da91c15ab0a1ee2d70796bf7b2fda35f06837f"
-  integrity sha512-v15sSoYuKJ9+BmDUX6qxAnCDhlClmw6TY9/rcIYbP2XSxsGrJcPy6VPOw4E21/1zGXnKiW7KvBkPeYEjIx7fWA==
+"@sentry/core@7.17.3":
+  version "7.17.3"
+  resolved "https://registry.yarnpkg.com/@sentry/core/-/core-7.17.3.tgz#2b45c0507f1ef7018335b9bb61ed6b3f16accfad"
+  integrity sha512-PSboa9aOVnvZU+C6/shKlHUA7zjAl6z5BKRHF8mEljEYql6bh0HfJJKXtBHMz1sWnmzMa/qABSKLpnP5ZQlJNw==
   dependencies:
-    "@sentry/core" "7.15.0"
-    "@sentry/types" "7.15.0"
-    "@sentry/utils" "7.15.0"
+    "@sentry/types" "7.17.3"
+    "@sentry/utils" "7.17.3"
     tslib "^1.9.3"
 
-"@sentry/node@^7.13.0", "@sentry/node@^7.15.0":
+"@sentry/hub@^7.16.0":
+  version "7.17.3"
+  resolved "https://registry.yarnpkg.com/@sentry/hub/-/hub-7.17.3.tgz#5c456d8523502957efd30e56e5b7c9c06e06306e"
+  integrity sha512-LxdA7q4Q8mLOHSubhtelURftZ7Ga8j4f3HY+f8yDEf/9fYr4XpEfVZknk1zIs2JhJPH0XCSvhyIIxT6zrudl3A==
+  dependencies:
+    "@sentry/core" "7.17.3"
+    "@sentry/types" "7.17.3"
+    "@sentry/utils" "7.17.3"
+    tslib "^1.9.3"
+
+"@sentry/node@^7.15.0":
   version "7.15.0"
   resolved "https://registry.yarnpkg.com/@sentry/node/-/node-7.15.0.tgz#8784a747d9b933754b29bba954b22f0d54c3b614"
   integrity sha512-gfyo6YTo4Sw5pdKWCzs7trqZpBm5D/ArR4vylQrQayfImiYyNY6yaOK1R7g4rM34MXUu91pfVJLUpXvjk/NsHw==
@@ -721,20 +730,33 @@
     lru_map "^0.3.3"
     tslib "^1.9.3"
 
-"@sentry/profiling-node@^0.0.1":
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/@sentry/profiling-node/-/profiling-node-0.0.1.tgz#093dbaae90c4131137bfc64fdf6e0fe481910686"
-  integrity sha512-BqZib3ZUjJ92Tbbm9VlScnE+JKCab4saqB9pGyKyXPMRAQP+fiWtd5F/CCC9+CucDVm0rczR5VbAOVXJsPlt3A==
+"@sentry/node@^7.16.0":
+  version "7.17.3"
+  resolved "https://registry.yarnpkg.com/@sentry/node/-/node-7.17.3.tgz#d817e9ca53331b3c192d997ce0e570fb51c1eda9"
+  integrity sha512-kBmj5GiE0BWQ1CqnJN3bOOmaNNvS+HKb9nPic+QloPnH6xDFVUcmx774s3qjtnyLOQTzPpy3vXCA15rYflNJBQ==
   dependencies:
-    "@sentry/hub" "^7.13.0"
-    "@sentry/node" "^7.13.0"
-    "@sentry/tracing" "^7.13.0"
-    "@sentry/types" "^7.13.0"
-    "@sentry/utils" "^7.13.0"
-    nan "^2.16.0"
-    node-gyp "^9.1.0"
+    "@sentry/core" "7.17.3"
+    "@sentry/types" "7.17.3"
+    "@sentry/utils" "7.17.3"
+    cookie "^0.4.1"
+    https-proxy-agent "^5.0.0"
+    lru_map "^0.3.3"
+    tslib "^1.9.3"
 
-"@sentry/tracing@^7.13.0", "@sentry/tracing@^7.15.0":
+"@sentry/profiling-node@^0.0.5":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@sentry/profiling-node/-/profiling-node-0.0.5.tgz#5be21294893767242d7f06a6595985c30cf11d43"
+  integrity sha512-ahe9nLI8ZPLTJ13QV0zDSAzrF+IJsUpyVBALGXx2sgKjmBVtisrfeUIglrkBk2YslQn7fEMjgLocDx9tZkv2Pw==
+  dependencies:
+    "@sentry/hub" "^7.16.0"
+    "@sentry/node" "^7.16.0"
+    "@sentry/tracing" "^7.16.0"
+    "@sentry/types" "^7.16.0"
+    "@sentry/utils" "^7.16.0"
+    nan "^2.17.0"
+    node-gyp "^9.3.0"
+
+"@sentry/tracing@^7.15.0":
   version "7.15.0"
   resolved "https://registry.yarnpkg.com/@sentry/tracing/-/tracing-7.15.0.tgz#ea516957b2ed39f389c21132f433b6470d54b465"
   integrity sha512-c0Y3+z6EWsc+EJsfBcRtc58ugkWYa6+6KTu3ceMkx2ZgZTCmRUuzAb7yodMt/gwezBsxzq706fnQivx1lQgzlQ==
@@ -744,17 +766,40 @@
     "@sentry/utils" "7.15.0"
     tslib "^1.9.3"
 
-"@sentry/types@7.15.0", "@sentry/types@^7.13.0":
+"@sentry/tracing@^7.16.0":
+  version "7.17.3"
+  resolved "https://registry.yarnpkg.com/@sentry/tracing/-/tracing-7.17.3.tgz#7680d3e365d1df51943f0c360345e17f59ea784a"
+  integrity sha512-ZBYq1AuE2dadxbuY7j3xpf9BNP/Uu7rjuvLoCmQeFrjJ4W80jqIfdUYmWCN6EaVhhAgh7J+1RQL+c79ONkPFQQ==
+  dependencies:
+    "@sentry/core" "7.17.3"
+    "@sentry/types" "7.17.3"
+    "@sentry/utils" "7.17.3"
+    tslib "^1.9.3"
+
+"@sentry/types@7.15.0":
   version "7.15.0"
   resolved "https://registry.yarnpkg.com/@sentry/types/-/types-7.15.0.tgz#50c57c924993d4dd16b43172d310c66384d17463"
   integrity sha512-MN9haDRh9ZOsTotoDTHu2BT3sT8Vs1F0alhizUpDyjN2YgBCqR6JV+AbAE1XNHwS2+5zbppch1PwJUVeE58URQ==
 
-"@sentry/utils@7.15.0", "@sentry/utils@^7.13.0":
+"@sentry/types@7.17.3", "@sentry/types@^7.16.0":
+  version "7.17.3"
+  resolved "https://registry.yarnpkg.com/@sentry/types/-/types-7.17.3.tgz#ec66ea7b6881ae243255546680722488e7ff23bf"
+  integrity sha512-+buEJo/4TKErjwF8Tq3XXKFZx4Utpvqs52e7i7Sur2qfyBNwRgBILceQvdnzw86JNZT2myeYmrfVbsaxAk7ilA==
+
+"@sentry/utils@7.15.0":
   version "7.15.0"
   resolved "https://registry.yarnpkg.com/@sentry/utils/-/utils-7.15.0.tgz#cda642a353a58fd6631979c1e5986788e6db6c43"
   integrity sha512-akic22/6xa/RG5Mj7UN6pLc23VnX9zQlKM53L/q3yIr0juckSVthJiiFNdgdqrX03S1tHYlBgPeShKFFTHpkjA==
   dependencies:
     "@sentry/types" "7.15.0"
+    tslib "^1.9.3"
+
+"@sentry/utils@7.17.3", "@sentry/utils@^7.16.0":
+  version "7.17.3"
+  resolved "https://registry.yarnpkg.com/@sentry/utils/-/utils-7.17.3.tgz#aafa67ed372f00be2e1bb490fa62d9d2d06a4c2f"
+  integrity sha512-Sd7BwVn6IClvaXbZaj/LnEcrMm8yjQtZkTVSrM2Vlv1lLeaH61JxSAFU6QntF+f/cCfZ7wSdNhWOfW3qZJ7t3Q==
+  dependencies:
+    "@sentry/types" "7.17.3"
     tslib "^1.9.3"
 
 "@sideway/address@^4.1.3":
@@ -3937,7 +3982,7 @@ ms@2.1.3, ms@^2.0.0, ms@^2.1.1:
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.3.tgz#574c8138ce1d2b5861f0b44579dbadd60c6615b2"
   integrity sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==
 
-nan@^2.15.0, nan@^2.16.0:
+nan@^2.15.0, nan@^2.17.0:
   version "2.17.0"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.17.0.tgz#c0150a2368a182f033e9aa5195ec76ea41a199cb"
   integrity sha512-2ZTgtl0nJsO0KQCjEpxcIr5D+Yv90plTitZt9JBfQvVJDS5seMl3FOvsh3+9CoYWXf/1l5OaZzzF6nDm4cagaQ==
@@ -3977,7 +4022,7 @@ node-fetch@v3.0.0-beta.9:
     data-uri-to-buffer "^3.0.1"
     fetch-blob "^2.1.1"
 
-node-gyp@^9.1.0:
+node-gyp@^9.3.0:
   version "9.3.0"
   resolved "https://registry.yarnpkg.com/node-gyp/-/node-gyp-9.3.0.tgz#f8eefe77f0ad8edb3b3b898409b53e697642b319"
   integrity sha512-A6rJWfXFz7TQNjpldJ915WFb1LnhO4lIve3ANPbWreuEoLoKlFT3sxIepPBkLhM27crW8YmN+pjlgbasH6cH/Q==
