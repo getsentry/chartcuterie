@@ -1,3 +1,4 @@
+name: image
 on:
   pull_request:
   push:
