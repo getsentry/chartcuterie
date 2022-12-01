@@ -27,7 +27,6 @@ jobs:
             --build-arg BUILDKIT_INLINE_CACHE=1 \
             --platform linux/${{ matrix.arch }} \
             --tag "$IMG_VERSIONED" \
-            --target application \
             .
         docker tag "$IMG_VERSIONED" "$IMG_CACHE"
     - name: push
