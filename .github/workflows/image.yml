@@ -37,16 +37,3 @@ jobs:
         docker login --username '${{ github.actor }}' --password '${{ secrets.GITHUB_TOKEN }}' ghcr.io
         docker push "$IMG_VERSIONED"
         docker push "$IMG_CACHE"
-
-  multiarch:
-    if: github.event_name != 'pull_request'
-    needs: [build-image]
-    runs-on: ubuntu-latest
-    steps:
-    - run: |
-        set -euxo pipefail
-        docker login --username '${{ github.actor }}' --password '${{ secrets.GITHUB_TOKEN }}' ghcr.io
-        docker manifest create ghcr.io/getsentry/chartcuterie:latest \
-          ghcr.io/getsentry/chartcuterie:arm64-latest \
-          ghcr.io/getsentry/chartcuterie:amd64-latest
-        docker manifest push ghcr.io/getsentry/chartcuterie:latest
