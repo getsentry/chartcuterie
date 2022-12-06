@@ -37,3 +37,7 @@ jobs:
         docker login --username '${{ github.actor }}' --password '${{ secrets.GITHUB_TOKEN }}' ghcr.io
         docker push "$IMG_VERSIONED"
         docker push "$IMG_CACHE"
+
+        # for now arm64 is too slow so just retag this as latest
+        docker tag "$IMG_VERSIONED" ghcr.io/getsentry/chartcuterie:latest
+        docker push ghcr.io/getsentry/chartcuterie:latest
