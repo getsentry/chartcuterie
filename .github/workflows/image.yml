@@ -7,7 +7,7 @@ jobs:
   build-image:
     strategy:
       matrix:
-        arch: [amd64, arm64]
+        arch: [amd64]
     runs-on: ubuntu-latest
     env:
       IMG_CACHE: ghcr.io/getsentry/chartcuterie:${{ matrix.arch }}-latest
@@ -38,15 +38,6 @@ jobs:
         docker push "$IMG_VERSIONED"
         docker push "$IMG_CACHE"
 
-  multiarch:
-    if: github.event_name != 'pull_request'
-    needs: [build-image]
-    runs-on: ubuntu-latest
-    steps:
-    - run: |
-        set -euxo pipefail
-        docker login --username '${{ github.actor }}' --password '${{ secrets.GITHUB_TOKEN }}' ghcr.io
-        docker manifest create ghcr.io/getsentry/chartcuterie:latest \
-          ghcr.io/getsentry/chartcuterie:arm64-latest \
-          ghcr.io/getsentry/chartcuterie:amd64-latest
-        docker manifest push ghcr.io/getsentry/chartcuterie:latest
+        # for now arm64 is too slow so just retag this as latest
+        docker tag "$IMG_VERSIONED" ghcr.io/getsentry/chartcuterie:latest
+        docker push ghcr.io/getsentry/chartcuterie:latest
