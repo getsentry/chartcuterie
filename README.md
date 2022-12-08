@@ -30,7 +30,7 @@ Chartcuterie can be run in two different modes
  * **`chartcuterie render`** - Accepts JSON data on stdin and writes out the
    produced image to stdout.
 
- * **`chartcuterie server`** - Runs the service as an HTTP API.  
+ * **`chartcuterie server`** - Runs the service as an HTTP API.
    It will accept a JSON body at `POST /render` and will respond with the image
    when successful.
 
@@ -130,7 +130,13 @@ To render a chart in any rendering mode, you will need to supply some
 ## Development
 
 This project uses [`volta`](https://volta.sh/) to manage the node toolchain, be
-sure to have Volta installed and configured.
+sure to have Volta installed and configured. The Dockerfile specifies the
+system dependencies. If you want to run locally on macOS you'll need to install
+them yourself:
+
+```bash
+brew install cairo pango
+```
 
  * `yarn lint` - Check for Typescript and Eslint errors / warnings.
  * `yarn test` - Run full test suite
