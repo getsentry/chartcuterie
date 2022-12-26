@@ -10,8 +10,6 @@ pipelines:
             GKE_REGION: us-central1
             GKE_CLUSTER_ZONE: b
             GKE_BASTION_ZONE: b
-            # Read access to private repositories for the GoCD agent.
-            GITHUB_TOKEN: "{{SECRET:[devinfra-github][token]}}"
         group: chartcuterie
         lock_behavior: unlockWhenFinished
         materials:
