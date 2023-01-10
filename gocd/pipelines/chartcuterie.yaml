@@ -27,6 +27,9 @@ pipelines:
                       checks:
                           timeout: 1800
                           elastic_profile_id: chartcuterie
+                          environment_variables:
+                              # Required for checkruns.
+                              GITHUB_TOKEN: "{{SECRET:[devinfra-github][token]}}"
                           tasks:
                               - script: |
                                     /devinfra/scripts/checks/githubactions/checkruns.py \
