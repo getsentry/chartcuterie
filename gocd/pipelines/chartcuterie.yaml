@@ -10,6 +10,8 @@ pipelines:
             GKE_REGION: us-central1
             GKE_CLUSTER_ZONE: b
             GKE_BASTION_ZONE: b
+            # Required for checkruns.
+            GITHUB_TOKEN: "{{SECRET:[devinfra-github][token]}}"
         group: chartcuterie
         lock_behavior: unlockWhenFinished
         materials:
@@ -27,9 +29,6 @@ pipelines:
                       checks:
                           timeout: 1800
                           elastic_profile_id: chartcuterie
-                          environment_variables:
-                              # Required for checkruns.
-                              GITHUB_TOKEN: "{{SECRET:[devinfra-github][token]}}"
                           tasks:
                               - script: |
                                     /devinfra/scripts/checks/githubactions/checkruns.py \
