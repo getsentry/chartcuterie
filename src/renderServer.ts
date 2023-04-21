@@ -2,7 +2,6 @@
 import {performance} from 'perf_hooks';
 
 import * as Sentry from '@sentry/node';
-import * as Tracing from '@sentry/tracing';
 import {ProfilingIntegration} from '@sentry/profiling-node';
 import express from 'express';
 
@@ -22,10 +21,9 @@ export function renderServer(config: ConfigService) {
     dsn: process.env.SENTRY_DSN,
     integrations: [
       new Sentry.Integrations.Http({tracing: true}),
-      new Tracing.Integrations.Express({router: renderRoutes}),
+      new Sentry.Integrations.Express({router: renderRoutes}),
       new ProfilingIntegration(),
     ],
-    // @ts-expect-error this is not part of the node lib yet
     profilesSampleRate: 0.1,
     tracesSampleRate: 1,
   });
