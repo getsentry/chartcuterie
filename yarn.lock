@@ -699,7 +699,7 @@
     "@sentry/utils" "7.49.0"
     tslib "^1.9.3"
 
-"@sentry/core@7.49.0":
+"@sentry/core@7.49.0", "@sentry/core@^7.44.0":
   version "7.49.0"
   resolved "https://registry.yarnpkg.com/@sentry/core/-/core-7.49.0.tgz#340d059f5efeff1a3359fef66d0c8e34e79ac992"
   integrity sha512-AlSnCYgfEbvK8pkNluUkmdW/cD9UpvOVCa+ERQswXNRkAv5aDGCL6Ihv6fnIajE++BYuwZh0+HwZUBVKTFzoZg==
@@ -732,16 +732,19 @@
     lru_map "^0.3.3"
     tslib "^1.9.3"
 
-"@sentry/profiling-node@0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@sentry/profiling-node/-/profiling-node-0.3.0.tgz#5df0b1baf051f6551e86f57670408966f00a455b"
-  integrity sha512-zodtr8JgI3m7GOoELEiE+zokEhyVoP6I4PvfPOTA6Etud4CUZ1B6uM7Ls8VgWAwlrPxJzaP+GJUJevZ0P2jfOQ==
+"@sentry/profiling-node@1.0.0-alpha.5":
+  version "1.0.0-alpha.5"
+  resolved "https://registry.yarnpkg.com/@sentry/profiling-node/-/profiling-node-1.0.0-alpha.5.tgz#dc31c9cafaeecdd75031e5504731e7aadfbaa518"
+  integrity sha512-PPfnkWOJn+oZO0jo7vijy/jkmDbAyyhu0xxQC1U4k+a1xWREMpMJY3/TIu6B819OSv+U4dRG/ssp18cweAJwRQ==
   dependencies:
+    "@sentry/core" "^7.44.0"
     "@sentry/hub" "^7.44.1"
     "@sentry/node" "^7.44.1"
     "@sentry/tracing" "^7.44.1"
     "@sentry/types" "^7.44.1"
     "@sentry/utils" "^7.44.1"
+    app-root-path "^3.1.0"
+    cross-env "^7.0.3"
     detect-libc "^2.0.1"
     nan "^2.17.0"
     node-abi "^3.28.0"
@@ -1238,6 +1241,11 @@ anymatch@^3.0.3:
   dependencies:
     normalize-path "^3.0.0"
     picomatch "^2.0.4"
+
+app-root-path@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/app-root-path/-/app-root-path-3.1.0.tgz#5971a2fc12ba170369a7a1ef018c71e6e47c2e86"
+  integrity sha512-biN3PwB2gUtjaYy/isrU3aNWI5w+fAfvHkSvCKeQGxhmYpwKFUxudR3Yya+KqVRHBmEDYh+/lTozYCFbmzX4nA==
 
 "aproba@^1.0.3 || ^2.0.0":
   version "2.0.0"
@@ -1738,6 +1746,13 @@ cookiejar@^2.1.3:
   resolved "https://registry.yarnpkg.com/cookiejar/-/cookiejar-2.1.3.tgz#fc7a6216e408e74414b90230050842dacda75acc"
   integrity sha512-JxbCBUdrfr6AQjOXrxoTvAMJO4HBTUIlBzslcJPAz+/KT8yk53fXun51u+RenNYvad/+Vc2DIz5o9UxlCDymFQ==
 
+cross-env@^7.0.3:
+  version "7.0.3"
+  resolved "https://registry.yarnpkg.com/cross-env/-/cross-env-7.0.3.tgz#865264b29677dc015ba8418918965dd232fc54cf"
+  integrity sha512-+/HKd6EgcQCJGh2PSjZuUitQBQynKor4wrFbRg4DtAgS1aWO+gU52xpH7M9ScGgXSYmAVS9bIJ8EzuaGw0oNAw==
+  dependencies:
+    cross-spawn "^7.0.1"
+
 cross-fetch@^3.0.4:
   version "3.1.5"
   resolved "https://registry.yarnpkg.com/cross-fetch/-/cross-fetch-3.1.5.tgz#e1389f44d9e7ba767907f7af8454787952ab534f"
@@ -1745,7 +1760,7 @@ cross-fetch@^3.0.4:
   dependencies:
     node-fetch "2.6.7"
 
-cross-spawn@^7.0.2, cross-spawn@^7.0.3:
+cross-spawn@^7.0.1, cross-spawn@^7.0.2, cross-spawn@^7.0.3:
   version "7.0.3"
   resolved "https://registry.yarnpkg.com/cross-spawn/-/cross-spawn-7.0.3.tgz#f73a85b9d5d41d045551c177e2882d4ac85728a6"
   integrity sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w==
