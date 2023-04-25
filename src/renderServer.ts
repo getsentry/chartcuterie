@@ -24,7 +24,7 @@ export function renderServer(config: ConfigService) {
       new Sentry.Integrations.Express({router: renderRoutes}),
       new ProfilingIntegration(),
     ],
-    profilesSampleRate: 0.1,
+    profilesSampleRate: 1,
     tracesSampleRate: 1,
   });
 
