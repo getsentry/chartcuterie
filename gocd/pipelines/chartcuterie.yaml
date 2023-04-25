@@ -52,10 +52,10 @@ pipelines:
                                     --label-selector="service=chartcuterie,env=canary" \
                                     --image="us.gcr.io/sentryio/chartcuterie:${GO_REVISION_CHARTCUTERIE_REPO}" \
                                     --container-name="chartcuterie"
+                              - script: |
+                                    /devinfra/scripts/canary/canarychecks.py \
+                                    --wait-minutes=5
             - deploy-primary:
-                  approval:
-                      type: manual
-                      allow_only_on_success: true
                   jobs:
                       deploy:
                           timeout: 600
