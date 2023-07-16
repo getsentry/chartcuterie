@@ -13,6 +13,9 @@ jobs:
     files-changed:
         name: files-changed
         runs-on: ubuntu-latest
+        # Map a step output to a job output
+        outputs:
+            gocd: ${{ steps.changes.outputs.gocd }}
         steps:
           - name: Check for relevant file changes
             uses: getsentry/paths-filter@4512585405083f25c027a35db413c2b3b9006d50 # v2.11.1
