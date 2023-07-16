@@ -40,7 +40,7 @@ pipelines:
             - deploy-canary:
                   jobs:
                       deploy:
-                          timeout: 600
+                          timeout: 300
                           elastic_profile_id: chartcuterie
                           tasks:
                               - script: |
@@ -56,7 +56,7 @@ pipelines:
             - deploy-primary:
                   jobs:
                       deploy:
-                          timeout: 600
+                          timeout: 300
                           elastic_profile_id: chartcuterie
                           tasks:
                               - script: |
