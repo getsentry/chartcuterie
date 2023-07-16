@@ -10,7 +10,21 @@ concurrency:
     cancel-in-progress: true
 
 jobs:
+    files-changed:
+        name: files-changed
+        runs-on: ubuntu-latest
+        steps:
+          - name: Check for relevant file changes
+            uses: getsentry/paths-filter@4512585405083f25c027a35db413c2b3b9006d50 # v2.11.1
+            id: changes
+            with:
+              filters: |
+                gocd:
+                  - 'gocd/**'
+
     validate:
+        if: needs.files-changed.outputs.gocd == 'true'
+        needs: files-changed
         name: Validate GoCD Pipelines
         runs-on: ubuntu-latest
 
