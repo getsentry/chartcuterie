@@ -50,4 +50,4 @@ jobs:
               with:
                 configrepo: chartcuterie__master
                 gocd_access_token: ${{ secrets.GOCD_ACCESS_TOKEN }}
-                google_oidc_token: ${{ steps.auth.outputs.access_token }}
+                google_oidc_token: ${{ steps.auth.outputs.id_token }}
