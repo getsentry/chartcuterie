@@ -2,6 +2,8 @@ name: Validate Deployment Pipelines
 
 on:
     pull_request:
+        paths:
+          - 'gocd/**'
     push:
         branches: [master, test-me-*]
         paths:
