@@ -24,7 +24,7 @@ pipelines:
             - checks:
                   jobs:
                       checks:
-                          timeout: 1200
+                          timeout: 120
                           elastic_profile_id: chartcuterie
                           tasks:
                               - script: |
