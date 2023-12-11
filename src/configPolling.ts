@@ -1,3 +1,4 @@
+import * as Sentry from '@sentry/node';
 import fetch from 'node-fetch';
 
 import ConfigService from './config';
@@ -75,7 +76,7 @@ export default class ConfigPoller {
       } else {
         logger.warn(`Failed to resolve config while polling with error: ${error}`);
       }
-
+      Sentry.captureException(error);
       return;
     }
 
