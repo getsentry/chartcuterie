@@ -26,6 +26,9 @@ export function renderServer(config: ConfigService) {
     ],
     profilesSampleRate: 1,
     tracesSampleRate: 1,
+    _experiments: {
+      metricsAggregator: true,
+    },
   });
 
   renderRoutes.use(express.json({limit: '20mb'}));
@@ -84,6 +87,9 @@ export function renderServer(config: ConfigService) {
       status: resp.statusCode,
       time,
     });
+
+    Sentry.metrics.increment('render.count');
+    Sentry.metrics.distribution('render.time', time);
   });
   renderRoutes.use(Sentry.Handlers.errorHandler());
 
