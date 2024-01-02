@@ -2,7 +2,7 @@ import fetchMock from 'jest-fetch-mock';
 
 fetchMock.enableMocks();
 
-import ConfigService from 'app/config';
+import {ConfigService} from 'app/config';
 
 describe('config', () => {
   beforeEach(() => {

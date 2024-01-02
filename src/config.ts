@@ -1,9 +1,6 @@
-import path from 'path';
-import * as vm from 'vm';
-
-import AbortController from 'abort-controller';
 import * as echarts from 'echarts';
-import fetch from 'node-fetch';
+import path from 'node:path';
+import vm from 'node:vm';
 
 import ConfigPoller from './configPolling';
 import {logger} from './logging';
@@ -37,7 +34,7 @@ async function loadViaHttp(url: string, ac?: AbortController) {
 /**
  * Service to manage resolving the external chart configuration module.
  */
-export default class ConfigService {
+export class ConfigService {
   /**
    * The path / uri to load the render configuration from
    */
@@ -80,8 +77,11 @@ export default class ConfigService {
     const ac = new AbortController();
     const deadlineTimeout = setTimeout(() => ac.abort(), deadline);
 
-    config = await loadViaHttp(this.#uri, ac);
-    clearTimeout(deadlineTimeout);
+    try {
+      config = await loadViaHttp(this.#uri, ac);
+    } finally {
+      clearTimeout(deadlineTimeout);
+    }
 
     return config;
   }
