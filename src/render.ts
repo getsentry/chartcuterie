@@ -11,11 +11,12 @@ registerCanvasFonts();
  */
 export function renderSync(style: RenderDescriptor, data: any) {
   const canvas = createCanvas(style.width, style.height);
+  const htmlCanvas = canvas as unknown as HTMLCanvasElement;
 
   // Get options object before echarts.init to ensure options can be created
   const options = style.getOption(data);
 
-  const chart = echarts.init(canvas, undefined, {
+  const chart = echarts.init(htmlCanvas, undefined, {
     renderer: 'canvas',
     width: style.width,
     height: style.height,

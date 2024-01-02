@@ -1,9 +1,9 @@
 steps:
   # Build the app
-  - name: 'node:20'
+  - name: 'node:14'
     args: ['bash', '-c', 'yarn && yarn build']
   # Build and push runtime image
-  - name: 'gcr.io/kaniko-project/executor:v1.19.2'
+  - name: 'gcr.io/kaniko-project/executor:v1.5.1'
     args:
       [
         '--cache=true',
