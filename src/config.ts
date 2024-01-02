@@ -1,9 +1,6 @@
-import path from 'path';
-import * as vm from 'vm';
-
-import AbortController from 'abort-controller';
 import * as echarts from 'echarts';
-import fetch from 'node-fetch';
+import path from 'node:path';
+import vm from 'node:vm';
 
 import ConfigPoller from './configPolling';
 import {logger} from './logging';

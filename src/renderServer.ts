@@ -1,5 +1,5 @@
 // eslint-disable-next-line simple-import-sort/imports
-import {performance} from 'perf_hooks';
+import {performance} from 'node:perf_hooks';
 
 import * as Sentry from '@sentry/node';
 import {ProfilingIntegration} from '@sentry/profiling-node';

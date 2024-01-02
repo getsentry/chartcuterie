@@ -1,7 +1,6 @@
-import * as path from 'path';
-
 import {registerFont} from 'canvas';
 import type {EChartsOption} from 'echarts';
+import path from 'node:path';
 
 function fontFile(name: string) {
   return path.join(__dirname, '/../fonts/', name);

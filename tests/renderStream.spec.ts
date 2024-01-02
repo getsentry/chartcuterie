@@ -1,12 +1,11 @@
-import * as fs from 'fs';
-
 import type {EChartsOption} from 'echarts';
+import fs from 'node:fs';
 
 import ConfigService from 'app/config';
 import {renderStream} from 'app/renderStream';
 import {RenderData} from 'app/types';
 
-jest.mock('fs');
+jest.mock('node:fs');
 
 describe('renderStream', () => {
   it('can render graphs given a valid config and render data', async () => {

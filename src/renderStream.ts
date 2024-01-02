@@ -1,5 +1,5 @@
-import * as fs from 'fs';
-import * as util from 'util';
+import fs from 'node:fs';
+import util from 'node:util';
 
 import ConfigService from './config';
 import {renderSync} from './render';

@@ -1,5 +1,4 @@
 import * as Sentry from '@sentry/node';
-import fetch from 'node-fetch';
 
 import ConfigService from './config';
 import {logger} from './logging';
@@ -69,7 +68,7 @@ export default class ConfigPoller {
     try {
       config = await this.#config.fetchConfig(loadDeadline);
     } catch (error) {
-      const didAbort = error instanceof fetch.AbortError;
+      const didAbort = error instanceof Error && error.name === 'AbortError';
 
       if (didAbort) {
         logger.debug('Config resolution aborted for next polling tick');
