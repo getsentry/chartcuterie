@@ -77,8 +77,11 @@ export default class ConfigService {
     const ac = new AbortController();
     const deadlineTimeout = setTimeout(() => ac.abort(), deadline);
 
-    config = await loadViaHttp(this.#uri, ac);
-    clearTimeout(deadlineTimeout);
+    try {
+      config = await loadViaHttp(this.#uri, ac);
+    } finally {
+      clearTimeout(deadlineTimeout);
+    }
 
     return config;
   }
