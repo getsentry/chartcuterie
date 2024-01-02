@@ -5,7 +5,7 @@ import * as Sentry from '@sentry/node';
 import {ProfilingIntegration} from '@sentry/profiling-node';
 import express from 'express';
 
-import ConfigService from './config';
+import {ConfigService} from './config';
 import {logger} from './logging';
 import {renderSync} from './render';
 import {validateRenderData} from './validate';

@@ -1,6 +1,6 @@
 import * as Sentry from '@sentry/node';
 
-import ConfigService from './config';
+import {ConfigService} from './config';
 import {logger} from './logging';
 import {PollingConfig} from './types';
 import {validateConfig} from './validate';

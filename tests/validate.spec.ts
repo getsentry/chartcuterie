@@ -1,6 +1,6 @@
 import {ValidationError} from 'joi';
 
-import ConfigService from 'app/config';
+import {ConfigService} from 'app/config';
 import {RenderDescriptor} from 'app/types';
 import {validateConfig, validateRenderData} from 'app/validate';
 

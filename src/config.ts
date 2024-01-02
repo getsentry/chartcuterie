@@ -34,7 +34,7 @@ async function loadViaHttp(url: string, ac?: AbortController) {
 /**
  * Service to manage resolving the external chart configuration module.
  */
-export default class ConfigService {
+export class ConfigService {
   /**
    * The path / uri to load the render configuration from
    */

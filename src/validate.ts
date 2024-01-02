@@ -1,6 +1,6 @@
 import Joi from 'joi';
 
-import ConfigService from './config';
+import {ConfigService} from './config';
 import {ChartcuterieConfig, RenderData} from './types';
 
 const renderType = Joi.object({

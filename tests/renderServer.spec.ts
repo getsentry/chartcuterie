@@ -1,6 +1,6 @@
 import supertest from 'supertest';
 
-import ConfigService from 'app/config';
+import {ConfigService} from 'app/config';
 import {renderServer} from 'app/renderServer';
 import {RenderData} from 'app/types';
 

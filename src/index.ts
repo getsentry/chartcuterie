@@ -4,7 +4,7 @@ import * as Sentry from '@sentry/node';
 import dotenv from 'dotenv';
 import yargs from 'yargs';
 
-import ConfigService from './config';
+import {ConfigService} from './config';
 import * as logging from './logging';
 import {renderServer} from './renderServer';
 import {renderStream} from './renderStream';

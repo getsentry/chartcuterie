@@ -1,7 +1,7 @@
 import type {EChartsOption} from 'echarts';
 import fs from 'node:fs';
 
-import ConfigService from 'app/config';
+import {ConfigService} from 'app/config';
 import {renderStream} from 'app/renderStream';
 import {RenderData} from 'app/types';
 
