@@ -12,13 +12,13 @@ jobs:
       - run: yarn lint
       - run: yarn test
       - if: ${{ failure() }}
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3.1.1
         with:
           name: snapshot diffs
           path: tests/__image_snapshots__
       - run: yarn build
       - run: yarn pack
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3.1.1
         with:
           name: ${{ github.sha }}
           path: |
