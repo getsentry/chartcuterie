@@ -1,6 +1,18 @@
 #!/usr/bin/env node
 
 import * as Sentry from '@sentry/node';
+import {nodeProfilingIntegration} from '@sentry/profiling-node';
+
+Sentry.init({
+  dsn: process.env.SENTRY_DSN,
+  integrations: [nodeProfilingIntegration()],
+  profilesSampleRate: 1,
+  tracesSampleRate: 1,
+  _experiments: {
+    metricsAggregator: true,
+  },
+});
+
 import dotenv from 'dotenv';
 import yargs from 'yargs';
 
@@ -11,7 +23,6 @@ import {renderStream} from './renderStream';
 import {PollingConfig} from './types';
 
 dotenv.config();
-Sentry.init({dsn: process.env.SENTRY_DSN});
 
 const defaultPollingConfig: PollingConfig = {
   /**
