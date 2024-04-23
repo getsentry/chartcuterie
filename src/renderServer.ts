@@ -2,7 +2,6 @@
 import {performance} from 'node:perf_hooks';
 
 import * as Sentry from '@sentry/node';
-import {nodeProfilingIntegration} from '@sentry/profiling-node';
 import express from 'express';
 
 import {ConfigService} from './config';
@@ -16,16 +15,6 @@ import {validateRenderData} from './validate';
 export function renderServer(config: ConfigService) {
   const app = express();
   const renderRoutes = express.Router();
-
-  Sentry.init({
-    dsn: process.env.SENTRY_DSN,
-    integrations: [nodeProfilingIntegration()],
-    profilesSampleRate: 1,
-    tracesSampleRate: 1,
-    _experiments: {
-      metricsAggregator: true,
-    },
-  });
 
   renderRoutes.use(express.json({limit: '20mb'}));
   renderRoutes.use((req, resp) => {
