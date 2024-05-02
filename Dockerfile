@@ -1,3 +1,12 @@
+FROM node:20 AS builder
+
+COPY package.json yarn.lock .
+RUN yarn install --frozen-lockfile
+
+COPY tsconfig.json .
+COPY src src
+RUN yarn build
+
 FROM node:20-slim
 
 ENV NODE_ENV=production
@@ -16,7 +25,10 @@ WORKDIR /usr/src/app
 COPY package.json yarn.lock ./
 RUN yarn install --frozen-lockfile
 
-COPY . .
+COPY fonts fonts
+COPY --from=builder lib lib
+
+RUN node lib/index.js --help
 
 EXPOSE 9090/tcp
 CMD ["node", "./lib/index.js", "server", "9090"]
