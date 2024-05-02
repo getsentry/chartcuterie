@@ -1,56 +1,35 @@
 steps:
-  # Build the app
-  - name: 'node:20'
-    args: ['bash', '-c', 'yarn && yarn build']
-  # Build and push runtime image
-  - name: 'gcr.io/kaniko-project/executor:v1.19.2'
+  - name: 'gcr.io/cloud-builders/docker'
     args:
       [
-        '--cache=true',
-        '--use-new-run',
+        'build',
+        '-t',
+        'us.gcr.io/$PROJECT_ID/chartcuterie:latest',
+        '-t',
+        'us.gcr.io/$PROJECT_ID/chartcuterie:$COMMIT_SHA',
+        '-t',
+        'us-central1-docker.pkg.dev/$PROJECT_ID/chartcuterie/image:latest',
+        '-t',
+        'us-central1-docker.pkg.dev/$PROJECT_ID/chartcuterie/image:$COMMIT_SHA',
         '--build-arg',
-        'SOURCE_COMMIT=$COMMIT_SHA',
-        '--destination=us.gcr.io/$PROJECT_ID/chartcuterie:$COMMIT_SHA',
+        'BUILDKIT_INLINE_CACHE=1',
+        '--cache-from',
+        'us-central1-docker.pkg.dev/$PROJECT_ID/chartcuterie/image:latest',
+        '.',
       ]
-    timeout: 900s
-
-  # Smoke test
-  - name: 'us.gcr.io/$PROJECT_ID/chartcuterie:$COMMIT_SHA'
-    args:
-      - node
-      - '/usr/src/app/lib/index.js'
-      - '--help'
-    timeout: 60s
+    env: [DOCKER_BUILDKIT=1]
 
   - name: 'gcr.io/cloud-builders/docker'
-    secretEnv: ['DOCKER_PASSWORD']
     entrypoint: 'bash'
     args:
-    - '-e'
-    - '-c'
-    - |
-      # Only push to Docker Hub from master
-      [ "$BRANCH_NAME" != "master" ] && exit 0
-      docker tag us.gcr.io/$PROJECT_ID/chartcuterie:$COMMIT_SHA us.gcr.io/$PROJECT_ID/chartcuterie:latest
-      docker push us.gcr.io/$PROJECT_ID/chartcuterie:latest
-      echo "$$DOCKER_PASSWORD" | docker login --username=sentrybuilder --password-stdin
-      docker tag us.gcr.io/$PROJECT_ID/chartcuterie:$COMMIT_SHA getsentry/chartcuterie:$SHORT_SHA
-      docker push getsentry/chartcuterie:$SHORT_SHA
-      docker tag us.gcr.io/$PROJECT_ID/chartcuterie:$COMMIT_SHA getsentry/chartcuterie:$COMMIT_SHA
-      docker push getsentry/chartcuterie:$COMMIT_SHA
-      docker tag us.gcr.io/$PROJECT_ID/chartcuterie:$COMMIT_SHA getsentry/chartcuterie:latest
-      docker push getsentry/chartcuterie:latest
+      - '-c'
+      - |
+        # Only push "latest" tag when building on "master"
+        [ "$BRANCH_NAME" != "master" ] && exit 0
+        docker push us.gcr.io/$PROJECT_ID/chartcuterie:latest
+        docker push us-central1-docker.pkg.dev/$PROJECT_ID/chartcuterie/image:latest
 
 images: [
   'us.gcr.io/$PROJECT_ID/chartcuterie:$COMMIT_SHA',
+  'us-central1-docker.pkg.dev/$PROJECT_ID/chartcuterie/image:$COMMIT_SHA',
 ]
-
-secrets:
-- kmsKeyName: projects/sentryio/locations/global/keyRings/service-credentials/cryptoKeys/cloudbuild
-  secretEnv:
-    # This is a personal access token for the sentrybuilder account, encrypted using the
-    # short guide at http://bit.ly/2Pg6uw9
-    DOCKER_PASSWORD: |
-      CiQAE8gN7y3OMxn+a1kofmK4Bi8jQZtdRFj2lYYwaZHVeIIBUzMSTQA9tvn8XCv2vqj6u8CHoeSP
-      TVW9pLvSCorKoeNtOp0eb+6V1yNJW/+JC07DNO1KLbTbodbuza6jKJHU5xeAJ4kGQI78UY5Vu1Gp
-      QcMK
