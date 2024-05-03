@@ -4,10 +4,6 @@ steps:
       [
         'build',
         '-t',
-        'us.gcr.io/$PROJECT_ID/chartcuterie:latest',
-        '-t',
-        'us.gcr.io/$PROJECT_ID/chartcuterie:$COMMIT_SHA',
-        '-t',
         'us-central1-docker.pkg.dev/$PROJECT_ID/chartcuterie/image:latest',
         '-t',
         'us-central1-docker.pkg.dev/$PROJECT_ID/chartcuterie/image:$COMMIT_SHA',
@@ -26,10 +22,8 @@ steps:
       - |
         # Only push "latest" tag when building on "master"
         [ "$BRANCH_NAME" != "master" ] && exit 0
-        docker push us.gcr.io/$PROJECT_ID/chartcuterie:latest
         docker push us-central1-docker.pkg.dev/$PROJECT_ID/chartcuterie/image:latest
 
 images: [
-  'us.gcr.io/$PROJECT_ID/chartcuterie:$COMMIT_SHA',
   'us-central1-docker.pkg.dev/$PROJECT_ID/chartcuterie/image:$COMMIT_SHA',
 ]
