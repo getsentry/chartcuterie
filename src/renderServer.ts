@@ -2,7 +2,6 @@
 import {performance} from 'node:perf_hooks';
 
 import * as Sentry from '@sentry/node';
-import {ProfilingIntegration} from '@sentry/profiling-node';
 import express from 'express';
 
 import {ConfigService} from './config';
@@ -17,23 +16,8 @@ export function renderServer(config: ConfigService) {
   const app = express();
   const renderRoutes = express.Router();
 
-  Sentry.init({
-    dsn: process.env.SENTRY_DSN,
-    integrations: [
-      new Sentry.Integrations.Http({tracing: true}),
-      new Sentry.Integrations.Express({router: renderRoutes}),
-      new ProfilingIntegration(),
-    ],
-    profilesSampleRate: 1,
-    tracesSampleRate: 1,
-    _experiments: {
-      metricsAggregator: true,
-    },
-  });
-
   renderRoutes.use(express.json({limit: '20mb'}));
-  renderRoutes.use(Sentry.Handlers.requestHandler());
-  renderRoutes.use(Sentry.Handlers.tracingHandler());
+
   renderRoutes.use((req, resp) => {
     if (!config.isLoaded) {
       resp.status(503).send();
@@ -91,7 +75,6 @@ export function renderServer(config: ConfigService) {
     Sentry.metrics.increment('render.count');
     Sentry.metrics.distribution('render.time', time);
   });
-  renderRoutes.use(Sentry.Handlers.errorHandler());
 
   app.post('/render', renderRoutes);
 
@@ -104,6 +87,8 @@ export function renderServer(config: ConfigService) {
       ? resp.status(200).send('OK')
       : resp.status(503).send('NOT CONFIGURED')
   );
+
+  Sentry.setupExpressErrorHandler(app);
 
   return app;
 }
