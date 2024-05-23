@@ -1,11 +1,18 @@
 import type {EChartsOption} from 'echarts';
-import fs from 'node:fs';
+import fs, {readFile} from 'node:fs';
 
 import {ConfigService} from 'app/config';
 import {renderStream} from 'app/renderStream';
 import {RenderData} from 'app/types';
 
 jest.mock('node:fs');
+
+jest.mock('node:fs', () => {
+  return {
+    ...jest.requireActual('node:fs'),
+    readFile: jest.fn(),
+  };
+});
 
 describe('renderStream', () => {
   it('can render graphs given a valid config and render data', async () => {
