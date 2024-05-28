@@ -3,4 +3,4 @@
 /devinfra/scripts/checks/googlecloud/checkcloudbuild.py \
   "${GO_REVISION_CHARTCUTERIE_REPO}" \
   sentryio \
-  "us.gcr.io/sentryio/chartcuterie"
+  "us-central1-docker.pkg.dev/sentryio/chartcuterie/image"
