@@ -5,7 +5,7 @@ local pipedream = import 'github.com/getsentry/gocd-jsonnet/libs/pipedream.libso
 // configuration options here: https://github.com/getsentry/gocd-jsonnet#readme
 local pipedream_config = {
   name: 'chartcuterie',
-  auto_deploy: false,
+  auto_deploy: true,
   materials: {
     chartcuterie_repo: {
       git: 'git@github.com:getsentry/chartcuterie.git',
@@ -19,6 +19,7 @@ local pipedream_config = {
     stage: 'deploy-primary',
     elastic_profile_id: 'chartcuterie',
   },
+  exclude_regions: ['s4s', 'customer-1', 'customer-2', 'customer-3', 'customer-3', 'customer-4', 'customer-6', 'customer-7'],
 };
 
 pipedream.render(pipedream_config, chartcuterie)
