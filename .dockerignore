@@ -2,8 +2,7 @@
 *
 
 !/package.json
-!/webpack.config.ts
 !/tsconfig.json
 !/yarn.lock
-!/lib
+!/src
 !/fonts

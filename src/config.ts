@@ -1,6 +1,6 @@
 import * as echarts from 'echarts';
 import path from 'node:path';
-import vm from 'node:vm';
+import {runInNewContext} from 'node:vm';
 
 import ConfigPoller from './configPolling';
 import {logger} from './logging';
@@ -26,7 +26,15 @@ async function loadViaHttp(url: string, ac?: AbortController) {
 
   const exports = {default: null};
   const module = {exports};
-  vm.runInNewContext(configJavascript, {require, console, module, exports});
+
+  runInNewContext(configJavascript, {
+    URL,
+    URLSearchParams,
+    require,
+    console,
+    module,
+    exports,
+  });
 
   return exports.default ?? module.exports?.default ?? module.exports;
 }

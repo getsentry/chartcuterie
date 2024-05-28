@@ -1,6 +1,7 @@
 #!/usr/bin/env node
+// Make sure to import the Sentry SDK before importing any other modules
+import './instrument';
 
-import * as Sentry from '@sentry/node';
 import dotenv from 'dotenv';
 import yargs from 'yargs';
 
@@ -11,7 +12,6 @@ import {renderStream} from './renderStream';
 import {PollingConfig} from './types';
 
 dotenv.config();
-Sentry.init({dsn: process.env.SENTRY_DSN});
 
 const defaultPollingConfig: PollingConfig = {
   /**
