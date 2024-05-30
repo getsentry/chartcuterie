@@ -19,7 +19,7 @@ local pipedream_config = {
     stage: 'deploy-primary',
     elastic_profile_id: 'chartcuterie',
   },
-  exclude_regions: ['customer-1', 'customer-2', 'customer-3', 'customer-4', 'customer-5', 'customer-6', 'customer-7', 's4s'],
+  exclude_regions: ['s4s', 'customer-1', 'customer-2', 'customer-3', 'customer-4', 'customer-6', 'customer-7'],
 };
 
 pipedream.render(pipedream_config, chartcuterie)
