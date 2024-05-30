@@ -1,2 +1,5 @@
 node_modules
 lib
+
+/gocd/generated-pipelines
+/gocd/templates/vendor
