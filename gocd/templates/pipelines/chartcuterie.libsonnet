@@ -21,6 +21,7 @@ function(region) {
         jobs: {
           checks: {
             timeout: 1200,
+            elastic_profile_id: 'chartcuterie',
             environment_variables: {
               GITHUB_TOKEN: '{{SECRET:[devinfra-github][token]}}',
             },
