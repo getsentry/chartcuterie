@@ -9,7 +9,7 @@ Sentry.init({
 
 const client = Sentry.getClient();
 
-if(client) {
+if (client) {
   const profilingIntegration = client.getIntegrationByName("ProfilingIntegration");
 
   if(profilingIntegration) {
