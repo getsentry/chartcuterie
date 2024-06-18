@@ -12,7 +12,7 @@ const client = Sentry.getClient();
 if (client) {
   const profilingIntegration = client.getIntegrationByName("ProfilingIntegration");
 
-  if(profilingIntegration) {
+  if (profilingIntegration) {
     // @ts-expect-error this is purposefuly not exposed by the SDK for now
     profilingIntegration._profiler.start();
   }
