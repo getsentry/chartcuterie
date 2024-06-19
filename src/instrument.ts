@@ -1,4 +1,5 @@
 import * as Sentry from '@sentry/node';
+// @ts-expect-error this seems like a regression in the types
 import {nodeProfilingIntegration} from '@sentry/profiling-node';
 
 Sentry.init({
