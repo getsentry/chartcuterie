@@ -20,8 +20,8 @@
     "README"
   ],
   "dependencies": {
-    "@sentry/node": "^8.10.0",
-    "@sentry/profiling-node": "^8.10.0",
+    "@sentry/node": "^8.11.0",
+    "@sentry/profiling-node": "^8.11.0",
     "canvas": "^2.11.2",
     "dotenv": "^8.2.0",
     "echarts": "5.4.0",
