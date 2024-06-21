@@ -1,5 +1,4 @@
 import * as Sentry from '@sentry/node';
-// @ts-expect-error this seems like a regression in the types
 import {nodeProfilingIntegration} from '@sentry/profiling-node';
 
 Sentry.init({
@@ -11,7 +10,7 @@ Sentry.init({
 const client = Sentry.getClient();
 
 if (client) {
-  const profilingIntegration = client.getIntegrationByName("ProfilingIntegration");
+  const profilingIntegration = client.getIntegrationByName('ProfilingIntegration');
 
   if (profilingIntegration) {
     // @ts-expect-error this is purposefuly not exposed by the SDK for now
