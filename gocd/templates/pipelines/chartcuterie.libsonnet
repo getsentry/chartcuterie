@@ -1,5 +1,30 @@
 local gocdtasks = import 'github.com/getsentry/gocd-jsonnet/libs/gocd-tasks.libsonnet';
 
+local deploy_canary(region) =
+  if region == 'us' || region == 'de' then
+    [
+      {
+        'deploy-canary': {
+          fetch_materials: true,
+          jobs: {
+            deploy: {
+              timeout: 600,
+              elastic_profile_id: 'chartcuterie',
+              environment_variables: {
+                LABEL_SELECTOR: 'service=chartcuterie,env=canary',
+              },
+              tasks: [
+                gocdtasks.script(importstr '../bash/deploy.sh'),
+                gocdtasks.script(importstr '../bash/wait-canary.sh'),
+              ],
+            },
+          },
+        },
+      },
+    ]
+  else
+    [];
+
 function(region) {
   environment_variables: {
     // SENTRY_REGION is used by the dev-infra scripts to connect to GKE
@@ -33,24 +58,7 @@ function(region) {
         },
       },
     },
-    {
-      'deploy-canary': {
-        fetch_materials: true,
-        jobs: {
-          deploy: {
-            timeout: 600,
-            elastic_profile_id: 'chartcuterie',
-            environment_variables: {
-              LABEL_SELECTOR: 'service=chartcuterie,env=canary',
-            },
-            tasks: [
-              gocdtasks.script(importstr '../bash/deploy.sh'),
-              gocdtasks.script(importstr '../bash/wait-canary.sh'),
-            ],
-          },
-        },
-      },
-    },
+  ] + deploy_canary(region) + [
     {
       'deploy-primary': {
         fetch_materials: true,
