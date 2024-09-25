@@ -30,6 +30,7 @@ async function loadViaHttp(url: string, ac?: AbortController) {
   runInNewContext(configJavascript, {
     URL,
     URLSearchParams,
+    queueMicrotask,
     require,
     console,
     module,
