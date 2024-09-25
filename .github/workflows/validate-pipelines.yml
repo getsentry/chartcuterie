@@ -17,9 +17,9 @@ jobs:
         outputs:
             gocd: ${{ steps.changes.outputs.gocd }}
         steps:
-          - uses: actions/checkout@v3
+          - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
           - name: Check for relevant file changes
-            uses: getsentry/paths-filter@4512585405083f25c027a35db413c2b3b9006d50 # v2.11.1
+            uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36 # v3.0.2
             id: changes
             with:
               filters: |
@@ -39,21 +39,21 @@ jobs:
             id-token: "write"
 
         steps:
-            - uses: actions/checkout@v3
+            - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
             - id: 'auth'
-              uses: google-github-actions/auth@v1
+              uses: google-github-actions/auth@62cf5bd3e4211a0a0b51f2c6d6a37129d828611d # v2.1.5
               with:
                 workload_identity_provider: 'projects/868781662168/locations/global/workloadIdentityPools/prod-github/providers/github-oidc-pool'
                 service_account: 'gha-gocd-api@sac-prod-sa.iam.gserviceaccount.com'
                 token_format: 'id_token'
                 id_token_audience: '610575311308-9bsjtgqg4jm01mt058rncpopujgk3627.apps.googleusercontent.com'
                 id_token_include_email: true
-            - uses: getsentry/action-gocd-jsonnet@v1
+            - uses: getsentry/action-gocd-jsonnet@3aec6fd54ac8d2fecfe700360f5d020e6902ba2d # v1.1.0
               with:
                 jb-install: true
                 jsonnet-dir: gocd/templates
                 generated-dir: gocd/generated-pipelines
-            - uses: getsentry/action-validate-gocd-pipelines@v1
+            - uses: getsentry/action-validate-gocd-pipelines@5662a2b631d4e2aa1bfc21e878f9e131c31c40c1 # v1.0.0
               with:
                 configrepo: chartcuterie__master
                 gocd_access_token: ${{ secrets.GOCD_ACCESS_TOKEN }}
