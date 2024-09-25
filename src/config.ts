@@ -1,4 +1,5 @@
 import * as echarts from 'echarts';
+import {promises as fsPromises} from 'node:fs';
 import path from 'node:path';
 import {runInNewContext} from 'node:vm';
 
@@ -24,6 +25,14 @@ async function loadViaHttp(url: string, ac?: AbortController) {
 
   const configJavascript = await resp.text();
 
+  return evalConfigFile(configJavascript);
+}
+
+/**
+ * Loads a config file by using the vm module to execute the file cotnents as a
+ * string.
+ */
+function evalConfigFile(configJavascript: string) {
   const exports = {default: null};
   const module = {exports};
 
@@ -77,7 +86,7 @@ export class ConfigService {
    */
   async fetchConfig(deadline: number) {
     if (!this.configIsViaHttp) {
-      return require(/* webpackIgnore: true */ path.resolve(this.#uri)).default;
+      return evalConfigFile(await fsPromises.readFile(path.resolve(this.#uri), 'utf8'));
     }
 
     let config: any = null;
