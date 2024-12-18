@@ -23,7 +23,7 @@ services:
     extra_hosts:
       host.docker.internal: host-gateway
     labels:
-      - 'orchestrator=devservices'
+      - orchestrator=devservices
     healthcheck:
       test:
         [
