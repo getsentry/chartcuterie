@@ -25,11 +25,7 @@ services:
     labels:
       - orchestrator=devservices
     healthcheck:
-      test:
-        [
-          'CMD-SHELL',
-          'docker exec sentry_chartcuterie python3 -c "import urllib.request; urllib.request.urlopen(\"http://127.0.0.1:9090/api/chartcuterie/healthcheck/live\", timeout=5)"',
-        ]
+      test: python3 -c "import urllib.request; urllib.request.urlopen(\"http://127.0.0.1:9090/api/chartcuterie/healthcheck/live\", timeout=5)"
       interval: 5s
       timeout: 5s
       retries: 3
