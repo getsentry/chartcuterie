@@ -10,7 +10,7 @@ x-sentry-service-config:
 
 services:
   chartcuterie:
-    image: 'us-central1-docker.pkg.dev/sentryio/chartcuterie/image:latest'
+    image: us-central1-docker.pkg.dev/sentryio/chartcuterie/image:latest
     environment:
       CHARTCUTERIE_CONFIG: /etc/chartcuterie/config.js
       CHARTCUTERIE_CONFIG_POLLING: true
