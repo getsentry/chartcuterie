@@ -71,9 +71,6 @@ export function renderServer(config: ConfigService) {
       status: resp.statusCode,
       time,
     });
-
-    Sentry.metrics.increment('render.count');
-    Sentry.metrics.distribution('render.time', time);
   });
 
   app.post('/render', renderRoutes);
