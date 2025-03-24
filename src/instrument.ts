@@ -5,6 +5,6 @@ Sentry.init({
   dsn: process.env.SENTRY_DSN,
   integrations: [nodeProfilingIntegration()],
   tracesSampleRate: 1,
+  profileLifecycle: 'trace',
+  profileSessionSampleRate: 1,
 });
-
-Sentry.profiler.startProfiler();
