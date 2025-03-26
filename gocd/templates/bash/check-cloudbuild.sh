@@ -1,6 +1,8 @@
 #!/bin/bash
 
-/devinfra/scripts/checks/googlecloud/checkcloudbuild.py \
+/devinfra/scripts/checks/googlecloud/check_cloudbuild.py \
+  sentryio \
+  chartcuterie \
+  chartcuterie-branch-builder \
   "${GO_REVISION_CHARTCUTERIE_REPO}" \
-  "sentryio" \
-  "us-central1-docker.pkg.dev/sentryio/chartcuterie/image"
+  master
