@@ -7,4 +7,7 @@ Sentry.init({
   tracesSampleRate: 1,
   profileLifecycle: 'trace',
   profileSessionSampleRate: 1,
+  _experiments: {
+    enableLogs: true,
+  },
 });

@@ -1,10 +1,14 @@
+import * as Sentry from '@sentry/node';
 import {createLogger, format, transports} from 'winston';
+import Transport from 'winston-transport';
+
+const SentryWinstonTransport = Sentry.createSentryWinstonTransport(Transport);
 
 export const logger = createLogger({
   level: 'info',
   format: format.json(),
   transports: [
-    // TODO: What transports need to go into here in production?
+    new SentryWinstonTransport(),
   ],
 });
 
