@@ -1,5 +1,7 @@
 FROM node:20 AS builder
 
+RUN addgroup -S chartcuterie --gid 1000 && adduser -S -G chartcuterie --uid 1000 chartcuterie
+
 COPY package.json yarn.lock .
 RUN yarn install --frozen-lockfile
 
@@ -31,4 +33,5 @@ COPY --from=builder lib lib
 RUN node lib/index.js --help
 
 EXPOSE 9090/tcp
+USER chartcuterie
 CMD ["node", "./lib/index.js", "server", "9090"]
