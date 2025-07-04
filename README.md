@@ -27,12 +27,12 @@ develop docs](https://develop.sentry.dev/services/chartcuterie/)._
 
 Chartcuterie can be run in two different modes
 
- * **`chartcuterie render`** - Accepts JSON data on stdin and writes out the
-   produced image to stdout.
+- **`chartcuterie render`** - Accepts JSON data on stdin and writes out the
+  produced image to stdout.
 
- * **`chartcuterie server`** - Runs the service as an HTTP API.
-   It will accept a JSON body at `POST /render` and will respond with the image
-   when successful.
+- **`chartcuterie server`** - Runs the service as an HTTP API.
+  It will accept a JSON body at `POST /render` and will respond with the image
+  when successful.
 
 ### Configuration
 
@@ -72,7 +72,7 @@ const renderConfig = {
   },
 
   // More rendering styles specified in this object.
-}
+};
 
 const config = {
   renderConfig,
@@ -84,7 +84,7 @@ const config = {
   init: echarts => {
     echarts.registerMap('world', world);
   },
-}
+};
 
 module.exports = config;
 ```
@@ -135,13 +135,13 @@ system dependencies. If you want to run locally on macOS you'll need to install
 them yourself:
 
 ```bash
-brew install cairo pango
+brew install cairo pango pkg-config
 ```
 
- * `yarn lint` - Check for Typescript and Eslint errors / warnings.
- * `yarn test` - Run full test suite
- * `yarn build` - Builds the application
- * `yarn watch` - Watches source files for changes and recompiles using `tsc` on changes.
+- `yarn lint` - Check for Typescript and Eslint errors / warnings.
+- `yarn test` - Run full test suite
+- `yarn build` - Builds the application
+- `yarn watch` - Watches source files for changes and recompiles using `tsc` on changes.
 
 To start the service you will need to specify a `config` file. See the
 documentation above for examples of simple configuration you can use for
