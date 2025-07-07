@@ -960,10 +960,10 @@
   dependencies:
     "@opentelemetry/core" "^1.1.0"
 
-"@prisma/instrumentation@6.8.2":
-  version "6.8.2"
-  resolved "https://registry.yarnpkg.com/@prisma/instrumentation/-/instrumentation-6.8.2.tgz#77a87a37f67ab35eaaf8ff629f889e9e11a465ac"
-  integrity sha512-5NCTbZjw7a+WIZ/ey6G8SY+YKcyM2zBF0hOT1muvqC9TbVtTCr5Qv3RL/2iNDOzLUHEvo4I1uEfioyfuNOGK8Q==
+"@prisma/instrumentation@6.10.1":
+  version "6.10.1"
+  resolved "https://registry.yarnpkg.com/@prisma/instrumentation/-/instrumentation-6.10.1.tgz#805f0dcdc29638009f0da709828396894815c893"
+  integrity sha512-JC8qzgEDuFKjuBsqrZvXHINUb12psnE6Qy3q5p2MBhalC1KW1MBBUwuonx6iS5TCfCdtNslHft8uc2r+EdLWWg==
   dependencies:
     "@opentelemetry/instrumentation" "^0.52.0 || ^0.53.0 || ^0.54.0 || ^0.55.0 || ^0.56.0 || ^0.57.0"
 
@@ -975,15 +975,24 @@
     detect-libc "^2.0.3"
     node-abi "^3.73.0"
 
-"@sentry/core@9.30.0":
-  version "9.30.0"
-  resolved "https://registry.yarnpkg.com/@sentry/core/-/core-9.30.0.tgz#0653ac8cc01476567564760002f7407fc3e937a8"
-  integrity sha512-JfEpeQ8a1qVJEb9DxpFTFy1J1gkNdlgKAPiqYGNnm4yQbnfl2Kb/iEo1if70FkiHc52H8fJwISEF90pzMm6lPg==
+"@sentry/core@9.36.0-alpha.2":
+  version "9.36.0-alpha.2"
+  resolved "https://registry.yarnpkg.com/@sentry/core/-/core-9.36.0-alpha.2.tgz#12f0b7ae8c3e569b009d2621938e9cab3bcd6d87"
+  integrity sha512-jUekSm+TZ1OhlzmK32oq2HxR90neEyIjNsCNlImKAhHkpUbjW0hHdup4G9aKhzipq08CKyHgD3H7z0JqRztBew==
 
-"@sentry/node@9.30.0", "@sentry/node@^9.30.0":
-  version "9.30.0"
-  resolved "https://registry.yarnpkg.com/@sentry/node/-/node-9.30.0.tgz#8ba79c7743a18994addd563af944ec252086ca3a"
-  integrity sha512-jHuSSKro2DUaccGcYSBbB8Rj0sG+LRh1iSWrJ+4c4Pj7tJFN9MbeMybC1buMSzAp+rwHUMZ3+ws0kgNVtsRJJg==
+"@sentry/node-core@9.36.0-alpha.2":
+  version "9.36.0-alpha.2"
+  resolved "https://registry.yarnpkg.com/@sentry/node-core/-/node-core-9.36.0-alpha.2.tgz#f250f61da8bc8de5731b828b214867cc563afbc1"
+  integrity sha512-e4uWOW3DvJ1y1K7Huh9zs7DRTe0eWxvtobewE2cBzAq17dqN4JYzMqNir5zI+Cdx7q5X01i3wtUXbfqrqC7Drg==
+  dependencies:
+    "@sentry/core" "9.36.0-alpha.2"
+    "@sentry/opentelemetry" "9.36.0-alpha.2"
+    import-in-the-middle "^1.14.2"
+
+"@sentry/node@9.36.0-alpha.2", "@sentry/node@^9.36.0-alpha.2":
+  version "9.36.0-alpha.2"
+  resolved "https://registry.yarnpkg.com/@sentry/node/-/node-9.36.0-alpha.2.tgz#b228679ec13f2b40248204ffdaf8220dc360395e"
+  integrity sha512-cW0d8xlpg+gF61PUMh5Vb7K8JpG7Nfff6RggqYfn1KTDaCGZZ+PjwwLqUs+2pqu3eelSVoZ/Y89pupfsddLgYA==
   dependencies:
     "@opentelemetry/api" "^1.9.0"
     "@opentelemetry/context-async-hooks" "^1.30.1"
@@ -1014,27 +1023,28 @@
     "@opentelemetry/resources" "^1.30.1"
     "@opentelemetry/sdk-trace-base" "^1.30.1"
     "@opentelemetry/semantic-conventions" "^1.34.0"
-    "@prisma/instrumentation" "6.8.2"
-    "@sentry/core" "9.30.0"
-    "@sentry/opentelemetry" "9.30.0"
-    import-in-the-middle "^1.13.1"
+    "@prisma/instrumentation" "6.10.1"
+    "@sentry/core" "9.36.0-alpha.2"
+    "@sentry/node-core" "9.36.0-alpha.2"
+    "@sentry/opentelemetry" "9.36.0-alpha.2"
+    import-in-the-middle "^1.14.2"
     minimatch "^9.0.0"
 
-"@sentry/opentelemetry@9.30.0":
-  version "9.30.0"
-  resolved "https://registry.yarnpkg.com/@sentry/opentelemetry/-/opentelemetry-9.30.0.tgz#cc632101fe30d001c7aa99c8b6688c7cdefe9328"
-  integrity sha512-LhTmyGGLAP/LAxs/oXuPs0LC5Z80QSLL1oUoBRB5/+MitK7Huug6n8ZFjPTP3/6bT67XOVqILCdj8BwMlBeXhA==
+"@sentry/opentelemetry@9.36.0-alpha.2":
+  version "9.36.0-alpha.2"
+  resolved "https://registry.yarnpkg.com/@sentry/opentelemetry/-/opentelemetry-9.36.0-alpha.2.tgz#f958965001063165ed358d6f2a639d1ea4d2fcce"
+  integrity sha512-XWaX97Yv0mTdKFJhrtpbqpHex8TMhWeIaa2fqG/EPDAw3TbQVkSREbYQm9u6/a/B5w/RUxZZLr621b/W/N1qeA==
   dependencies:
-    "@sentry/core" "9.30.0"
+    "@sentry/core" "9.36.0-alpha.2"
 
-"@sentry/profiling-node@^9.30.0":
-  version "9.30.0"
-  resolved "https://registry.yarnpkg.com/@sentry/profiling-node/-/profiling-node-9.30.0.tgz#b63d4a0f11c8855217d78b15873c16d92b407f0b"
-  integrity sha512-lOUbcJd8quAcQy6V50ehsdBQ25LvMqeDF+rpnUYf4tMc6F7WvtiGHoRJF+mMFraOH1vOmkEXvihM2QAJhRyxAw==
+"@sentry/profiling-node@^9.36.0-alpha.2":
+  version "9.36.0-alpha.2"
+  resolved "https://registry.yarnpkg.com/@sentry/profiling-node/-/profiling-node-9.36.0-alpha.2.tgz#50ce1ef7e1e5876a37070793518f0d00eebbd6d4"
+  integrity sha512-aXU+GYIwJv+6+C4o5Yw9eWE7aulqOl194BEZzLNvAgK02sympoe+32o+L9YRQ4SiJ3SWzGDe/AHwUD5MkuyLPQ==
   dependencies:
     "@sentry-internal/node-cpu-profiler" "^2.2.0"
-    "@sentry/core" "9.30.0"
-    "@sentry/node" "9.30.0"
+    "@sentry/core" "9.36.0-alpha.2"
+    "@sentry/node" "9.36.0-alpha.2"
 
 "@sideway/address@^4.1.3":
   version "4.1.4"
@@ -3335,7 +3345,7 @@ import-fresh@^3.2.1:
     parent-module "^1.0.0"
     resolve-from "^4.0.0"
 
-import-in-the-middle@^1.13.1, import-in-the-middle@^1.8.1:
+import-in-the-middle@^1.14.2, import-in-the-middle@^1.8.1:
   version "1.14.2"
   resolved "https://registry.yarnpkg.com/import-in-the-middle/-/import-in-the-middle-1.14.2.tgz#283661625a88ff7c0462bd2984f77715c3bc967c"
   integrity sha512-5tCuY9BV8ujfOpwtAGgsTx9CGUapcFMEEyByLv1B+v2+6DhAcw+Zr0nhQT7uwaZ7DiourxFEscghOR8e1aPLQw==
