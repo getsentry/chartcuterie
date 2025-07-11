@@ -1,5 +1,11 @@
 # Changelong 
 
+## 0.7.0
+
+### Various fixes & improvements
+
+- chore: Swap back to stable `@sentry/node` SDK (#189) by @andreiborza
+
 ## 0.6.0
 
 ### Various fixes & improvements
