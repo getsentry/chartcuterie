@@ -1,6 +1,6 @@
 #!/bin/bash
 
-/devinfra/scripts/checks/githubactions/checkruns.py \
+checks-githubactions-checkruns \
   "getsentry/chartcuterie" \
   "${GO_REVISION_CHARTCUTERIE_REPO}" \
   "build"

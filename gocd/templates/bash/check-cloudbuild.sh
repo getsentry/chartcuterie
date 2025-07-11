@@ -1,6 +1,6 @@
 #!/bin/bash
 
-/devinfra/scripts/checks/googlecloud/check_cloudbuild.py \
+checks-googlecloud-check-cloudbuild \
   sentryio \
   chartcuterie \
   chartcuterie-branch-builder \
