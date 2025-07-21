@@ -1,5 +1,12 @@
 # Changelong 
 
+## 0.8.0
+
+### Various fixes & improvements
+
+- chore: Use `10.0.0-alpha.1` of `@sentry/node` for dogfooding (#190) by @andreiborza
+- ref(gocd): use console script entry points (#188) by @mchen-sentry
+
 ## 0.7.0
 
 ### Various fixes & improvements
