@@ -1,5 +1,11 @@
 # Changelong 
 
+## 0.10.0
+
+### Various fixes & improvements
+
+- chore: Use `10.0.0-beta.0` of `@sentry/node` for dogfooding (#193) by @andreiborza
+
 ## 0.9.0
 
 ### Various fixes & improvements
