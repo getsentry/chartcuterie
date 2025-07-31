@@ -1,5 +1,11 @@
 # Changelong 
 
+## 0.11.0
+
+### Various fixes & improvements
+
+- chore: Bump @sentry/node to 10.0.0 (#194) by @andreiborza
+
 ## 0.10.0
 
 ### Various fixes & improvements
