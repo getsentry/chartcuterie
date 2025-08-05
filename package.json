@@ -24,7 +24,7 @@
     "@sentry/profiling-node": "10.0.0",
     "canvas": "^2.11.2",
     "dotenv": "^8.2.0",
-    "echarts": "5.4.0",
+    "echarts": "6.0.0",
     "express": "4.21.2",
     "joi": "17.6.0",
     "winston": "3.7.2",
