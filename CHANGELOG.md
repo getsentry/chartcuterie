@@ -1,5 +1,11 @@
 # Changelong 
 
+## 0.12.0
+
+### Various fixes & improvements
+
+- feat: upgrade to echarts v6 (#195) by @scttcper
+
 ## 0.11.0
 
 ### Various fixes & improvements
