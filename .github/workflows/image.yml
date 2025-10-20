@@ -1,0 +1,60 @@
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+      - release/**
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-24.04
+            platform: amd64
+          - os: ubuntu-24.04-arm
+            platform: arm64
+    name: build-${{ matrix.platform }}
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+
+      - name: Build and push chartcuterie image
+        uses: getsentry/action-build-and-push-images@b172ab61a5f7eabd58bd42ce231b517e79947c01
+        with:
+          image_name: 'chartcuterie'
+          platforms: linux/${{ matrix.platform }}
+          dockerfile_path: './Dockerfile'
+          ghcr: true
+          tag_suffix: -${{ matrix.platform }}
+          publish_on_pr: true
+          google_ar: false
+          tag_nightly: false
+          tag_latest: false
+
+  assemble-chartcuterie-image:
+    runs-on: ubuntu-latest
+    needs: [build]
+    if: ${{ (github.ref_name == 'master' || startsWith(github.ref_name, 'releases/')) && github.event_name != 'pull_request' }}
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+
+      - run: docker login --username '${{ github.actor }}' --password-stdin ghcr.io <<< "$GHCR_TOKEN"
+        env:
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@e468171a9de216ec08956ac3ada2f0791b6bd435 # v3.11.1
+
+      - name: Create multiplatform manifests
+        run: |
+          docker buildx imagetools create \
+            --tag ghcr.io/getsentry/chartcuterie:${{ github.event.pull_request.head.sha || github.sha }} \
+            --tag ghcr.io/getsentry/chartcuterie:nightly \
+            ghcr.io/getsentry/chartcuterie:${{ github.event.pull_request.head.sha || github.sha }}-amd64 \
+            ghcr.io/getsentry/chartcuterie:${{ github.event.pull_request.head.sha || github.sha }}-arm64
