@@ -1,5 +1,13 @@
 # Changelong 
 
+## 0.11.2
+
+### Various fixes & improvements
+
+- PRODENG-519: publish to MR registry in cloud build, pull from MR registry in craft (#198) by @mwarkentin
+- PRODENG-519: push chartcuterie images to both SR and MR registries (#197) by @mwarkentin
+- feat: upgrade to echarts v6 (#195) by @scttcper
+
 ## 0.11.0
 
 ### Various fixes & improvements
