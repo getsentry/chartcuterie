@@ -1,3 +1,5 @@
+name: Docker Image
+
 on:
   pull_request:
   push:
@@ -27,7 +29,7 @@ jobs:
           image_name: 'chartcuterie'
           platforms: linux/${{ matrix.platform }}
           dockerfile_path: './Dockerfile'
-          ghcr: true
+          ghcr: ${{ github.event_name != 'pull_request' }}
           tag_suffix: -${{ matrix.platform }}
           publish_on_pr: true
           google_ar: false
