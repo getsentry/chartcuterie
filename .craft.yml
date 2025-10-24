@@ -18,7 +18,16 @@ targets:
     name: docker
     source: us-central1-docker.pkg.dev/sentryio/chartcuterie/image
     target: getsentry/chartcuterie
-    targetFormat: '{{{target}}}:latest'
+    targetFormat: "{{{target}}}:latest"
+  - id: release-mr
+    name: docker
+    source: us-docker.pkg.dev/sentryio/chartcuterie-mr/image
+    target: getsentry/chartcuterie
+  - id: latest-mr
+    name: docker
+    source: us-docker.pkg.dev/sentryio/chartcuterie-mr/image
+    target: getsentry/chartcuterie
+    targetFormat: "{{{target}}}:latest"
   - name: npm
     access: public
   - name: github
