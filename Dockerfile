@@ -1,4 +1,4 @@
-FROM node:20 AS builder
+FROM node:20.19.5-bullseye AS builder
 
 COPY package.json yarn.lock .
 RUN yarn install --frozen-lockfile
@@ -7,7 +7,7 @@ COPY tsconfig.json .
 COPY src src
 RUN yarn build
 
-FROM node:20-slim
+FROM node:20.19.5-bullseye-slim
 
 ENV NODE_ENV=production
 
