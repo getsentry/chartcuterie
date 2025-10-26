@@ -6,6 +6,7 @@ on:
     branches:
       - master
       - release/**
+      - ci/**
 jobs:
   build:
     runs-on: ${{ matrix.os }}
@@ -29,7 +30,7 @@ jobs:
           image_name: 'chartcuterie'
           platforms: linux/${{ matrix.platform }}
           dockerfile_path: './Dockerfile'
-          ghcr: ${{ github.event_name != 'pull_request' }}
+          ghcr: ${{ github.repository_owner == 'getsentry' && github.event_name != 'pull_request' }}
           tag_suffix: -${{ matrix.platform }}
           publish_on_pr: true
           google_ar: false
