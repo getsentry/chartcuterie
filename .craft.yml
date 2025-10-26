@@ -12,13 +12,13 @@ artifactProvider:
 targets:
   - id: release
     name: docker
-    source: us-central1-docker.pkg.dev/sentryio/chartcuterie/image
+    source: us-docker.pkg.dev/sentryio/chartcuterie-mr/image
     target: getsentry/chartcuterie
   - id: latest
     name: docker
-    source: us-central1-docker.pkg.dev/sentryio/chartcuterie/image
+    source: us-docker.pkg.dev/sentryio/chartcuterie-mr/image
     target: getsentry/chartcuterie
-    targetFormat: '{{{target}}}:latest'
+    targetFormat: "{{{target}}}:latest"
   - name: npm
     access: public
   - name: github

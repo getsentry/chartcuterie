@@ -7,6 +7,10 @@ steps:
         'us-central1-docker.pkg.dev/$PROJECT_ID/chartcuterie/image:latest',
         '-t',
         'us-central1-docker.pkg.dev/$PROJECT_ID/chartcuterie/image:$COMMIT_SHA',
+        '-t',
+        'us-docker.pkg.dev/$PROJECT_ID/chartcuterie-mr/image:latest',
+        '-t',
+        'us-docker.pkg.dev/$PROJECT_ID/chartcuterie-mr/image:$COMMIT_SHA',
         '--build-arg',
         'BUILDKIT_INLINE_CACHE=1',
         '--cache-from',
@@ -26,4 +30,5 @@ steps:
 
 images: [
   'us-central1-docker.pkg.dev/$PROJECT_ID/chartcuterie/image:$COMMIT_SHA',
+  'us-docker.pkg.dev/$PROJECT_ID/chartcuterie-mr/image:$COMMIT_SHA',
 ]
