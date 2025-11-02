@@ -7,7 +7,7 @@ on:
       - master
       - release/**
 jobs:
-  build:
+  build-docker-image:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -16,7 +16,7 @@ jobs:
             platform: amd64
           - os: ubuntu-24.04-arm
             platform: arm64
-    name: build-${{ matrix.platform }}
+    name: build-docker-image-${{ matrix.platform }}
     permissions:
       contents: read
       packages: write
@@ -38,7 +38,7 @@ jobs:
 
   assemble-chartcuterie-image:
     runs-on: ubuntu-latest
-    needs: [build]
+    needs: [build-docker-image]
     if: ${{ (github.ref_name == 'master' || startsWith(github.ref_name, 'release/')) && github.event_name != 'pull_request' }}
     permissions:
       contents: read
