@@ -47,6 +47,9 @@
     "tsc-watch": "5.0.3",
     "typescript": "^5.3.3"
   },
+  "resolutions": {
+    "json5": "^2.2.3"
+  },
   "volta": {
     "node": "20.20.0",
     "yarn": "1.22.5"
