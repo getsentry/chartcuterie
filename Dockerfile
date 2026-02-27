@@ -1,18 +1,4 @@
-FROM node:24.14.0 AS builder
-
-COPY package.json yarn.lock .
-RUN yarn install --frozen-lockfile
-
-COPY tsconfig.json .
-COPY src src
-RUN yarn build
-
-FROM node:24.14.0-slim
-
-ENV NODE_ENV=production
-
-RUN npm install -g npm@latest \
-    && npm cache clean --force
+FROM us-docker.pkg.dev/sentryio/dhi/node:24-debian13-dev AS builder
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
         build-essential \
@@ -23,14 +9,33 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         librsvg2-dev \
     && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /usr/src/app
+WORKDIR /build
 
 COPY package.json yarn.lock ./
-RUN yarn install --frozen-lockfile \
-    && yarn cache clean
+RUN yarn install --frozen-lockfile
 
+COPY tsconfig.json .
+COPY src src
+RUN yarn build
+
+FROM us-docker.pkg.dev/sentryio/dhi/node:24-debian13
+
+ENV NODE_ENV=production
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        libcairo2 \
+        libpango-1.0-0 \
+        libjpeg62-turbo \
+        libgif7 \
+        librsvg2-2 \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /usr/src/app
+
+COPY package.json ./
 COPY fonts fonts
-COPY --from=builder lib lib
+COPY --from=builder /build/node_modules node_modules
+COPY --from=builder /build/lib lib
 
 RUN node lib/index.js --help
 
