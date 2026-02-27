@@ -21,19 +21,14 @@ COPY tsconfig.json .
 COPY src src
 RUN yarn build
 
+# canvas 3.x bundles its own libcairo, libpango, libgif, librsvg, etc. in
+# node_modules/canvas/build/Release/, so no system canvas libraries are needed.
+# The -dev variant is used because the minimal node:24-debian13 image lacks
+# base system libs that canvas's bundled dependencies require (libz, libexpat,
+# libuuid, liblzma).
 FROM --platform=linux/amd64/v8 us-docker.pkg.dev/sentryio/dhi/node:24-debian13-dev
 
 ENV NODE_ENV=production
-
-# canvas requires these shared libraries at runtime; the minimal node:24-debian13
-# image has no package manager, so we use the -dev variant.
-RUN apt-get update && apt-get install -y --no-install-recommends \
-        libcairo2 \
-        libpango-1.0-0 \
-        libjpeg62-turbo \
-        libgif7 \
-        librsvg2-2 \
-    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /usr/src/app
 
