@@ -11,6 +11,9 @@ FROM node:20.20.0-slim
 
 ENV NODE_ENV=production
 
+RUN npm install -g npm@latest \
+    && npm cache clean --force
+
 RUN apt-get update && apt-get install -y --no-install-recommends \
         build-essential \
         libcairo2-dev \
@@ -23,7 +26,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 WORKDIR /usr/src/app
 
 COPY package.json yarn.lock ./
-RUN yarn install --frozen-lockfile
+RUN yarn install --frozen-lockfile \
+    && yarn cache clean
 
 COPY fonts fonts
 COPY --from=builder lib lib
