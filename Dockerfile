@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 us-docker.pkg.dev/sentryio/dhi/node:24-debian13-dev AS builder
+FROM --platform=linux/amd64/v8 us-docker.pkg.dev/sentryio/dhi/node:24-debian13-dev AS builder
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
         build-essential \
@@ -18,7 +18,7 @@ COPY tsconfig.json .
 COPY src src
 RUN yarn build
 
-FROM --platform=linux/amd64 us-docker.pkg.dev/sentryio/dhi/node:24-debian13
+FROM --platform=linux/amd64/v8 us-docker.pkg.dev/sentryio/dhi/node:24-debian13
 
 ENV NODE_ENV=production
 
