@@ -20,8 +20,8 @@
     "README"
   ],
   "dependencies": {
-    "@sentry/node": "10.0.0",
-    "@sentry/profiling-node": "10.0.0",
+    "@sentry/node": "10.40.0",
+    "@sentry/profiling-node": "10.40.0",
     "canvas": "^3.2.0",
     "dotenv": "^8.2.0",
     "echarts": "6.0.0",
@@ -48,7 +48,8 @@
     "typescript": "^5.3.3"
   },
   "resolutions": {
-    "json5": "^2.2.3"
+    "json5": "^2.2.3",
+    "minimatch": "9.0.6"
   },
   "volta": {
     "node": "20.20.0",
