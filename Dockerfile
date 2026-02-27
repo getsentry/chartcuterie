@@ -1,4 +1,7 @@
-FROM --platform=linux/amd64/v8 us-docker.pkg.dev/sentryio/dhi/node:24-debian13-dev AS builder
+# canvas native module requires system libraries that conflict with DHI's
+# pre-installed package versions (libexpat1 2.7.4 arch:all vs Debian's
+# arch-specific build deps). Use standard node image for the build stage.
+FROM node:24.14.0 AS builder
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
         build-essential \
@@ -18,10 +21,12 @@ COPY tsconfig.json .
 COPY src src
 RUN yarn build
 
-FROM --platform=linux/amd64/v8 us-docker.pkg.dev/sentryio/dhi/node:24-debian13
+FROM --platform=linux/amd64/v8 us-docker.pkg.dev/sentryio/dhi/node:24-debian13-dev
 
 ENV NODE_ENV=production
 
+# canvas requires these shared libraries at runtime; the minimal node:24-debian13
+# image has no package manager, so we use the -dev variant.
 RUN apt-get update && apt-get install -y --no-install-recommends \
         libcairo2 \
         libpango-1.0-0 \
