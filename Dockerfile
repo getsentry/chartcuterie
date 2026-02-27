@@ -12,6 +12,7 @@ FROM node:24.14.0-slim
 ENV NODE_ENV=production
 
 RUN npm install -g npm@latest \
+    && npm install --prefix /usr/local/lib/node_modules/npm minimatch@">=10.2.3" \
     && npm cache clean --force
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
