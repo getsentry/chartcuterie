@@ -1,9 +1,15 @@
-FROM us-docker.pkg.dev/sentryio/dhi/node:24-debian13-dev AS deps
+FROM us-docker.pkg.dev/sentryio/dhi/node:24-debian13-dev AS builder
 
 WORKDIR /build
 
 COPY package.json yarn.lock ./
-# Production-only install: omits devDependencies (jest, typescript, eslint, etc.)
+RUN yarn install --frozen-lockfile
+
+COPY tsconfig.json .
+COPY src src
+RUN yarn build
+
+# Drop devDependencies from node_modules for the runtime image
 RUN yarn install --frozen-lockfile --production
 
 # canvas 3.x bundles its graphics libs (libcairo, libpango, etc.) but its
@@ -19,18 +25,6 @@ RUN mkdir -p /canvas-sys-libs && \
     \) -exec cp -P --parents {} /canvas-sys-libs/ \;
 
 
-FROM us-docker.pkg.dev/sentryio/dhi/node:24-debian13-dev AS builder
-
-WORKDIR /build
-
-COPY package.json yarn.lock ./
-RUN yarn install --frozen-lockfile
-
-COPY tsconfig.json .
-COPY src src
-RUN yarn build
-
-
 FROM us-docker.pkg.dev/sentryio/dhi/node:24-debian13
 
 ENV NODE_ENV=production
@@ -39,9 +33,9 @@ WORKDIR /usr/src/app
 
 COPY package.json ./
 COPY fonts fonts
-COPY --from=deps /build/node_modules node_modules
+COPY --from=builder /build/node_modules node_modules
 COPY --from=builder /build/lib lib
-COPY --from=deps /canvas-sys-libs/ /
+COPY --from=builder /canvas-sys-libs/ /
 
 RUN ["node", "lib/index.js", "--help"]
 
