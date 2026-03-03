@@ -24,6 +24,12 @@ RUN mkdir -p /canvas-sys-libs && \
         -name "liblzma.so.5*" \
     \) -exec cp -P --parents {} /canvas-sys-libs/ \;
 
+# canvas bundles libfontconfig but needs /etc/fonts/fonts.conf to initialise.
+# Without it fontconfig silently fails and all text renders as box glyphs.
+RUN apt-get update -qq && \
+    apt-get install -qq -y --no-install-recommends fontconfig && \
+    rm -rf /var/lib/apt/lists/*
+
 
 FROM us-docker.pkg.dev/sentryio/dhi/node:24-debian13
 
@@ -36,6 +42,8 @@ COPY fonts fonts
 COPY --from=builder /build/node_modules node_modules
 COPY --from=builder /build/lib lib
 COPY --from=builder /canvas-sys-libs/ /
+COPY --from=builder /etc/fonts/ /etc/fonts/
+COPY --from=builder /usr/share/fonts/ /usr/share/fonts/
 
 RUN ["node", "lib/index.js", "--help"]
 
