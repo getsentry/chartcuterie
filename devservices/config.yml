@@ -25,7 +25,7 @@ services:
     labels:
       - orchestrator=devservices
     healthcheck:
-      test: python3 -c "import urllib.request; urllib.request.urlopen(\"http://127.0.0.1:9090/api/chartcuterie/healthcheck/live\", timeout=5)"
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:9090/api/chartcuterie/healthcheck/live').then(r=>r.ok?0:1,()=>1).then(process.exit)"]
       interval: 5s
       timeout: 5s
       retries: 3
