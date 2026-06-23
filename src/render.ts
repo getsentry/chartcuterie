@@ -6,6 +6,16 @@ import {disabledOptions, registerCanvasFonts} from './utils';
 
 registerCanvasFonts();
 
+// ECharts renders some series (e.g., heatmaps) on a separate canvas layer. In a
+// browser it creates those layers via `document.createElement`, but in Node it
+// has no way to do so and `createCanvas` returns `false`, blowing up when it
+// tries to size the layer. Add the API for `canvas` creation.
+echarts.setPlatformAPI({
+  // ECharts always resizes the canvas after creating it, so these dimensions
+  // are just placeholders.
+  createCanvas: () => createCanvas(1, 1) as any,
+});
+
 /**
  * Renders a single chart
  */

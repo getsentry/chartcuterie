@@ -31,7 +31,7 @@ const result = renderSync({
 const {buffer} = result;
 result.dispose();
 
-const EXPECTED_SHA256 = '2616947b26199985b53250044725868a530ee2e2328ed2380825a2cbd71c37f9';
+const EXPECTED_SHA256 = '7f9c9aac774389a04548e6c3a98afbf6b31be4f03fdc703933ae4da669180371';
 const actual = crypto.createHash('sha256').update(buffer).digest('hex');
 if (actual !== EXPECTED_SHA256) {
   throw new Error(`smoke test failed: output hash ${actual} !== expected ${EXPECTED_SHA256}`);
