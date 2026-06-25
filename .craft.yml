@@ -1,24 +1,28 @@
-github:
-  owner: getsentry
-  repo: chartcuterie
-
-changelogPolicy: auto
-
+minVersion: "2.19.0"
+changelog:
+  policy: auto
+artifactProvider:
+  name: none
 statusProvider:
   name: github
-artifactProvider:
-  name: github
-
+  config:
+    contexts:
+      - 'build-docker-image-arm64'
+      - 'build-docker-image-amd64'
+      - 'assemble-chartcuterie-image'
 targets:
   - id: release
     name: docker
-    source: us-docker.pkg.dev/sentryio/chartcuterie-mr/image
-    target: getsentry/chartcuterie
+    source: ghcr.io/getsentry/chartcuterie
+    target: ghcr.io/getsentry/chartcuterie
   - id: latest
     name: docker
-    source: us-docker.pkg.dev/sentryio/chartcuterie-mr/image
-    target: getsentry/chartcuterie
+    source: ghcr.io/getsentry/chartcuterie
+    target: ghcr.io/getsentry/chartcuterie
     targetFormat: "{{{target}}}:latest"
   - name: npm
     access: public
   - name: github
+
+versioning:
+  policy: calver
