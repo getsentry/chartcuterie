@@ -21,4 +21,5 @@ export const disabledOptions: EChartsOption = {
   animation: false,
   toolbox: undefined,
   tooltip: undefined,
+  progressive: false,
 };
