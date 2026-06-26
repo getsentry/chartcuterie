@@ -43,6 +43,11 @@ export function renderServer(config: ConfigService) {
       style = {...style, width: renderData.width, height: renderData.height};
     }
 
+    Sentry.getActiveSpan()?.setAttributes({
+      'chart.style': renderData.style,
+      'chart.config_version': config.version.toString(),
+    });
+
     let render: ReturnType<typeof renderSync> | undefined;
     try {
       render = renderSync(style, renderData.data);
