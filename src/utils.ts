@@ -21,4 +21,8 @@ export const disabledOptions: EChartsOption = {
   animation: false,
   toolbox: undefined,
   tooltip: undefined,
+  // Disable progressive rendering, it never makes sense in a server rendered
+  // context.
+  // https://echarts.apache.org/en/option.html#series-heatmap.progressive
+  progressive: 0,
 };
