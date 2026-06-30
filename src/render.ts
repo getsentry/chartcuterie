@@ -52,7 +52,10 @@ export function renderSync(style: RenderDescriptor, data: any) {
 // equivalent, so it must be set on each series. Progressive rendering splits a
 // series across multiple frames, which means `canvas.toBuffer` can snapshot a
 // partially-drawn chart. It never makes sense in a server-rendered context.
+// `progressiveThreshold` is the maximum number of data points before progressive rendering
+// is enabled. We don't want to enable progressive rendering AT ALL so we'll need to set
+// this to Infinity to disable it entirely.
 // https://echarts.apache.org/en/option.html#series-heatmap.progressive
 function disableProgressive(series: SeriesOption): SeriesOption {
-  return {...series, progressive: 0};
+  return {...series, progressive: 0, progressiveThreshold: Infinity};
 }
