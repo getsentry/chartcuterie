@@ -1,6 +1,6 @@
 import {createCanvas} from 'canvas';
 import * as echarts from 'echarts';
-import type {EChartsOption} from 'echarts';
+import type {SeriesOption} from 'echarts';
 
 import {RenderDescriptor} from './types';
 import {disabledOptions, registerCanvasFonts} from './utils';
@@ -31,11 +31,16 @@ export function renderSync(style: RenderDescriptor, data: any) {
     width: style.width,
     height: style.height,
   });
-  chart.setOption({
-    ...options,
-    series: disableProgressive(options.series as EChartsOption['series']),
-    ...disabledOptions,
-  });
+
+  // `series` may be a single series or an array of them.
+  let series = options.series as SeriesOption | SeriesOption[] | undefined;
+  if (Array.isArray(series)) {
+    series = series.map(disableProgressive);
+  } else if (series) {
+    series = disableProgressive(series);
+  }
+
+  chart.setOption({...options, series, ...disabledOptions});
 
   return {
     buffer: canvas.toBuffer('image/png'),
@@ -48,12 +53,6 @@ export function renderSync(style: RenderDescriptor, data: any) {
 // series across multiple frames, which means `canvas.toBuffer` can snapshot a
 // partially-drawn chart. It never makes sense in a server-rendered context.
 // https://echarts.apache.org/en/option.html#series-heatmap.progressive
-function disableProgressive(series: EChartsOption['series']): EChartsOption['series'] {
-  if (Array.isArray(series)) {
-    return series.map(s => ({...s, progressive: 0}));
-  }
-  if (series) {
-    return {...series, progressive: 0};
-  }
-  return series;
+function disableProgressive(series: SeriesOption): SeriesOption {
+  return {...series, progressive: 0};
 }
