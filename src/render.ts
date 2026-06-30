@@ -1,4 +1,5 @@
 import {createCanvas} from 'canvas';
+import type {SeriesOption} from 'echarts';
 import * as echarts from 'echarts';
 
 import {RenderDescriptor} from './types';
@@ -30,10 +31,28 @@ export function renderSync(style: RenderDescriptor, data: any) {
     width: style.width,
     height: style.height,
   });
-  chart.setOption({...options, ...disabledOptions});
+
+  // `series` may be a single series or an array of them.
+  let series = options.series as SeriesOption | SeriesOption[] | undefined;
+  if (Array.isArray(series)) {
+    series = series.map(disableProgressive);
+  } else if (series) {
+    series = disableProgressive(series);
+  }
+
+  chart.setOption({...options, series, ...disabledOptions});
 
   return {
     buffer: canvas.toBuffer('image/png'),
     dispose: () => chart.dispose(),
   };
+}
+
+// `progressive` is a per-series option in ECharts; there is no top-level
+// equivalent, so it must be set on each series. Progressive rendering splits a
+// series across multiple frames, which means `canvas.toBuffer` can snapshot a
+// partially-drawn chart. It never makes sense in a server-rendered context.
+// https://echarts.apache.org/en/option.html#series-heatmap.progressive
+function disableProgressive(series: SeriesOption): SeriesOption {
+  return {...series, progressive: 0};
 }
