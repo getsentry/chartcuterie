@@ -1,6 +1,6 @@
 import {createCanvas} from 'canvas';
-import * as echarts from 'echarts';
 import type {SeriesOption} from 'echarts';
+import * as echarts from 'echarts';
 
 import {RenderDescriptor} from './types';
 import {disabledOptions, registerCanvasFonts} from './utils';
