@@ -15,6 +15,16 @@ echarts.setPlatformAPI({
   // ECharts always resizes the canvas after creating it, so these dimensions
   // are just placeholders.
   createCanvas: () => createCanvas(1, 1) as any,
+  // WARNING: SUPER HACKS 😭
+  // Code for context: https://github.com/apache/echarts/blob/master/src/core/echarts.ts#L662-L703
+  // Commit where this feature was added: https://github.com/apache/echarts-website/commit/8e897fa1e58b30db1dae85a1e9060bdbc0f61b0c#diff-8f31957f9bb06adae78b3a13c71455fa2dac55acba01411459aeffa427da8bb5
+  // PLZ NOTE: this is not documented in ECharts docs so please check the code links above for more details!
+  // Echarts defaults to waiting 15ms per layer to paint but obviously
+  // charts with many data points (e.g. heatmaps) will take longer than that.
+  // Setting this to 0 makes ECharts ignore that 15ms budget and paint the
+  // chart fully; this means the code solely relies on the canvas paint to be finished
+  // before returning the rendered chart. This fixes the issue of the chart rendering partially.
+  getTime: () => 0,
 });
 
 /**
@@ -57,5 +67,5 @@ export function renderSync(style: RenderDescriptor, data: any) {
 // this to Infinity to disable it entirely.
 // https://echarts.apache.org/en/option.html#series-heatmap.progressive
 function disableProgressive(series: SeriesOption): SeriesOption {
-  return {...series, progressive: 0, progressiveThreshold: Infinity};
+  return {...series, progressive: 0, animation: false};
 }
