@@ -17,6 +17,7 @@ echarts.setPlatformAPI({
   createCanvas: () => createCanvas(1, 1) as any,
   // WARNING: SUPER HACKS 😭
   // Code for context: https://github.com/apache/echarts/blob/5b0f1fd21bc25bcfdb5845029a6ba3a77a4355af/src/core/echarts.ts#L662-L703
+  // PLZ NOTE: this hack is not documented in ECharts docs so please check the code link above for more details!
   // Echarts defaults to waiting 15ms per layer to paint but obviously
   // charts with many data points (e.g. heatmaps) will take longer than that.
   // Setting this to 0 makes ECharts ignore that 15ms budget and paint the
