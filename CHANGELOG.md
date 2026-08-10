@@ -1,5 +1,64 @@
 # Changelong 
 
+## 0.12.0
+
+### New Features ✨
+
+- (telemetry) Add chart style and config version span attributes by @DominikB2014 in [#233](https://github.com/getsentry/chartcuterie/pull/233)
+- Publish Docker image to GHCR by @aldy505 in [#218](https://github.com/getsentry/chartcuterie/pull/218)
+
+### Bug Fixes 🐛
+
+#### Render
+
+- Disable return before full canvas paint by @nikkikapadia in [#237](https://github.com/getsentry/chartcuterie/pull/237)
+- Disable ECharts progressive rendering with threshold by @nikkikapadia in [#236](https://github.com/getsentry/chartcuterie/pull/236)
+- Disable ECharts progressive rendering by @gggritso in [#235](https://github.com/getsentry/chartcuterie/pull/235)
+
+#### Other
+
+- (explore) Allow ECharts to create more `canvas` elements by @gggritso in [#231](https://github.com/getsentry/chartcuterie/pull/231)
+- Disable ECharts progressive rendering by @gggritso in [#234](https://github.com/getsentry/chartcuterie/pull/234)
+- Revert "build(docker): Switch to Docker Hardened Images (DHI) (#214)" by @malwilley in [#215](https://github.com/getsentry/chartcuterie/pull/215)
+
+### Internal Changes 🔧
+
+#### Deps
+
+- Bump echarts from 6.0.0 to 6.1.0 by @gggritso in [#228](https://github.com/getsentry/chartcuterie/pull/228)
+- Bump brace-expansion from 2.0.2 to 2.0.3 by @dependabot in [#222](https://github.com/getsentry/chartcuterie/pull/222)
+- Bump flatted from 3.2.7 to 3.4.2 by @dependabot in [#219](https://github.com/getsentry/chartcuterie/pull/219)
+- Upgrade Node.js to 24 LTS and harden Docker image by @oioki in [#211](https://github.com/getsentry/chartcuterie/pull/211)
+- Fix npm audit vulnerabilities via eslint-config-sentry-app upgrade by @oioki in [#210](https://github.com/getsentry/chartcuterie/pull/210)
+- Upgrade js-yaml 4.x to 4.1.1 to fix GHSA-mh29-5h37-fv8m by @oioki in [#209](https://github.com/getsentry/chartcuterie/pull/209)
+- Upgrade js-yaml 3.x to 3.14.2 to fix GHSA-mh29-5h37-fv8m by @oioki in [#208](https://github.com/getsentry/chartcuterie/pull/208)
+- Bump @sentry/node and force minimatch to fix GHSA-3ppc-4f35-3m26 by @oioki in [#207](https://github.com/getsentry/chartcuterie/pull/207)
+- Bump express and supertest to fix qs prototype pollution by @oioki in [#206](https://github.com/getsentry/chartcuterie/pull/206)
+- Force json5 to >=2.2.3 via yarn resolutions by @oioki in [#205](https://github.com/getsentry/chartcuterie/pull/205)
+- Bump canvas by @aldy505 in [#200](https://github.com/getsentry/chartcuterie/pull/200)
+- Bump form-data from 4.0.0 to 4.0.4 by @dependabot in [#191](https://github.com/getsentry/chartcuterie/pull/191)
+- Bump @babel/traverse from 7.20.1 to 7.25.7 by @dependabot in [#175](https://github.com/getsentry/chartcuterie/pull/175)
+- Bump lodash from 4.17.21 to 4.17.23 by @dependabot in [#203](https://github.com/getsentry/chartcuterie/pull/203)
+
+#### Docker
+
+- Switch to Docker Hardened Images (DHI) by @oioki in [#214](https://github.com/getsentry/chartcuterie/pull/214)
+- Switch to Docker Hardened Images (DHI) by @oioki in [#212](https://github.com/getsentry/chartcuterie/pull/212)
+
+#### Gocd
+
+- Bump gocd-jsonnet to v3.0.7 by @dmajere in [#239](https://github.com/getsentry/chartcuterie/pull/239)
+- Gocd-jsonnet 3.0.4 by @dmajere in [#227](https://github.com/getsentry/chartcuterie/pull/227)
+- Gocd-jsonnet 3.0.1 by @dmajere in [#224](https://github.com/getsentry/chartcuterie/pull/224)
+- Bump gocd lib version to v2.18.0 by @dmajere in [#201](https://github.com/getsentry/chartcuterie/pull/201)
+
+#### Other
+
+- (release) Switch from action-prepare-release to Craft by @BYK in [#202](https://github.com/getsentry/chartcuterie/pull/202)
+- Update @sentry/node to 11.0.0-alpha.0 by @andreiborza in [#242](https://github.com/getsentry/chartcuterie/pull/242)
+- Remove disabled changelog-preview workflow by @oioki in [#241](https://github.com/getsentry/chartcuterie/pull/241)
+- Update Node.js to 20.20.0 by @oioki in [#204](https://github.com/getsentry/chartcuterie/pull/204)
+
 ## 0.11.2
 
 ### Various fixes & improvements
