@@ -7,5 +7,19 @@ Sentry.init({
   tracesSampleRate: 1,
   profileLifecycle: 'trace',
   profileSessionSampleRate: 1,
-  enableLogs: true,
+  // Matches the v10 `sendDefaultPii: false` baseline. v11 defaults are more
+  // permissive, so each category is set explicitly.
+  dataCollection: {
+    userInfo: false,
+    cookies: false,
+    httpHeaders: {
+      request: {deny: ['forwarded', '-ip', 'remote-', 'via', '-user']},
+      response: {deny: ['forwarded', '-ip', 'remote-', 'via', '-user']},
+    },
+    httpBodies: [],
+    urlQueryParams: {deny: ['forwarded', '-ip', 'remote-', 'via', '-user']},
+    graphQL: {document: false, variables: false},
+    genAI: {inputs: false, outputs: false},
+    databaseQueryData: false,
+  },
 });
