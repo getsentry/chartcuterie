@@ -1,5 +1,11 @@
 # Changelong 
 
+## 0.14.0
+
+### Internal Changes 🔧
+
+- Update @sentry/node to 11.0.0-alpha.2 by @andreiborza in [#246](https://github.com/getsentry/chartcuterie/pull/246)
+
 ## 0.13.0
 
 ### Internal Changes 🔧
