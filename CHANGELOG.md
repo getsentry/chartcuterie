@@ -1,5 +1,12 @@
 # Changelong 
 
+## 0.15.1
+
+### Internal Changes 🔧
+
+- (gocd) Use GitHub App credentials by @joshuarli in [#245](https://github.com/getsentry/chartcuterie/pull/245)
+- Update @sentry/node to 11.0.0-beta.1 by @nicohrubec in [#249](https://github.com/getsentry/chartcuterie/pull/249)
+
 ## 0.15.0
 
 ### Internal Changes 🔧
