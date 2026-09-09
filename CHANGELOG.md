@@ -1,5 +1,11 @@
 # Changelong 
 
+## 0.15.2
+
+### Internal Changes 🔧
+
+- Update @sentry/node and @sentry/profiling-node to 11.0.0-beta.2 by @andreiborza in [#250](https://github.com/getsentry/chartcuterie/pull/250)
+
 ## 0.15.1
 
 ### Internal Changes 🔧
