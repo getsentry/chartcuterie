@@ -911,15 +911,14 @@
   resolved "https://registry.npmjs.org/@rtsao/scc/-/scc-1.1.0.tgz"
   integrity sha512-zt6OdqaDoOnJ1ZYsCYGt9YmWzDXl4vQdKTyJev62gFhRGKdx7mcT54V9KIjg+d2wi9EXsPvAPKe7i7WjfVWB8g==
 
-"@sentry/bundler-plugins@11.0.0-beta.1":
-  version "11.0.0-beta.1"
-  resolved "https://sfw.security.sentry.io/npm/@sentry/bundler-plugins/-/bundler-plugins-11.0.0-beta.1.tgz#db8641f274bdac04286c228e9d2331f63d7b13c5"
-  integrity sha512-DdnwWSduyX/cbIFinzllaQQR0nDfBFygKYXQl+kQYyts+I+Cr7ZO0nFnvLSzqMtxkHKRc788tTxkxOisGDQZ3Q==
+"@sentry/bundler-plugins@11.0.0-beta.2":
+  version "11.0.0-beta.2"
+  resolved "https://sfw.security.sentry.io/npm/@sentry/bundler-plugins/-/bundler-plugins-11.0.0-beta.2.tgz#c94e2e88c6ee1c2bf066fe5da01435861c594d6d"
+  integrity sha512-1dNkJiBlCwP2plIRJwqRXfxcpvYETdDgZPKDj7OlyOTavctDipb4NstnyYmL1HrHXZJDN21k+lW9DpQm3IPscA==
   dependencies:
     "@babel/core" "^7.18.5"
-    "@sentry/core" "11.0.0-beta.1"
+    "@sentry/core" "11.0.0-beta.2"
     dotenv "^17.4.2"
-    find-up "^5.0.0"
     glob "^13.0.6"
     magic-string "~0.30.8"
     sentry "^0.44.0"
@@ -930,10 +929,10 @@
   resolved "https://sfw.security.sentry.io/npm/@sentry/conventions/-/conventions-0.20.0.tgz#f73f6f46934d754dacef447755b5adf1bf7f3245"
   integrity sha512-nAL3tL+xgom6Dbuxq0NCEZZfBNIrUspjDJRcMMRl3WLiBCSeZzNCa7an48IpnrZoVMpAi2NQ2v9rFU+EQziKuQ==
 
-"@sentry/core@11.0.0-beta.1":
-  version "11.0.0-beta.1"
-  resolved "https://sfw.security.sentry.io/npm/@sentry/core/-/core-11.0.0-beta.1.tgz#f15d2350c707491d234c9d28dfb1aceba0f3a3c8"
-  integrity sha512-3WjVylthppTrxkA5k5r1+UKPMngqhxlGvZzniGC1JqfhTb1UidoM6s/qq4DWP4YO3DBXtoqN1u5SoQacq7kanA==
+"@sentry/core@11.0.0-beta.2":
+  version "11.0.0-beta.2"
+  resolved "https://sfw.security.sentry.io/npm/@sentry/core/-/core-11.0.0-beta.2.tgz#b4577e4e39abd5c95053aa3313a498b115a01bf3"
+  integrity sha512-dci1vUZ1GR4oj5WI6NJC3ilT3DJxliwG1tcN8ONKAvORQHj4+BbWuUKT5YoZJIjj4LWmROH1o+PlrmDjg2U+UA==
   dependencies:
     "@sentry/conventions" "^0.20.0"
 
@@ -945,52 +944,52 @@
     detect-libc "^2.0.3"
     node-abi "^3.73.0"
 
-"@sentry/node@11.0.0-beta.1":
-  version "11.0.0-beta.1"
-  resolved "https://sfw.security.sentry.io/npm/@sentry/node/-/node-11.0.0-beta.1.tgz#a8b58eda46ddcdb6b705b9afe18d69036e8c591e"
-  integrity sha512-XMdu/Jp0MKYlFQw+wI+zmTk4LsivR77h/O6TAs4+lNTlSPaC75r5aOjAzfnnUbwL8SzmjKthoa2bcJLrORyISw==
+"@sentry/node@11.0.0-beta.2":
+  version "11.0.0-beta.2"
+  resolved "https://sfw.security.sentry.io/npm/@sentry/node/-/node-11.0.0-beta.2.tgz#8e4a1df431669064325ce9a18230b4c32008c364"
+  integrity sha512-h6sme3q12aWS2uJAWbXg8hfQ1NRBjMbp0G5Ce7sxaIo/k6386r17iOXYdwQZZ+bE0/AJJ8RXJxvFvFDfVfVQLQ==
   dependencies:
     "@opentelemetry/api" "^1.9.1"
-    "@sentry/bundler-plugins" "11.0.0-beta.1"
+    "@sentry/bundler-plugins" "11.0.0-beta.2"
     "@sentry/conventions" "^0.20.0"
-    "@sentry/core" "11.0.0-beta.1"
-    "@sentry/opentelemetry" "11.0.0-beta.1"
-    "@sentry/server-runtime-injection" "11.0.0-beta.1"
-    "@sentry/server-utils" "11.0.0-beta.1"
+    "@sentry/core" "11.0.0-beta.2"
+    "@sentry/opentelemetry" "11.0.0-beta.2"
+    "@sentry/server-runtime-injection" "11.0.0-beta.2"
+    "@sentry/server-utils" "11.0.0-beta.2"
 
-"@sentry/opentelemetry@11.0.0-beta.1":
-  version "11.0.0-beta.1"
-  resolved "https://sfw.security.sentry.io/npm/@sentry/opentelemetry/-/opentelemetry-11.0.0-beta.1.tgz#0e25dd823129b441000a9dc335b7e93f0e70baaf"
-  integrity sha512-axGagTVnjAoPF4WabSi4IBKuGQTocUp2sMW0Ij0nkgvCPUzuObgSORCYeTrei8EELjblAa13JRMPdbQMrhx9Zg==
+"@sentry/opentelemetry@11.0.0-beta.2":
+  version "11.0.0-beta.2"
+  resolved "https://sfw.security.sentry.io/npm/@sentry/opentelemetry/-/opentelemetry-11.0.0-beta.2.tgz#4a7f23062f40f541f82a94a4e5178e41a549c476"
+  integrity sha512-ltDMwRqjoX023mH7oUpWkOm+V1CrkIeWbdHqFhWQlVR1a/0FbL80mtI/c06bBDJh0AkZ5iLvTpzWXooq3AQW8w==
   dependencies:
     "@sentry/conventions" "^0.20.0"
-    "@sentry/core" "11.0.0-beta.1"
+    "@sentry/core" "11.0.0-beta.2"
 
-"@sentry/profiling-node@11.0.0-beta.1":
-  version "11.0.0-beta.1"
-  resolved "https://sfw.security.sentry.io/npm/@sentry/profiling-node/-/profiling-node-11.0.0-beta.1.tgz#247c21ddfd9245babe40256aa38f8d2cb14cb7c2"
-  integrity sha512-B6VnJQNLVUeHabMbiR+32A8opPtAbqvLgg1kBn8XI1n9RKAttVley0zzNr6EmI7lGYT2GHinAYm9YoDyGHFJYA==
+"@sentry/profiling-node@11.0.0-beta.2":
+  version "11.0.0-beta.2"
+  resolved "https://sfw.security.sentry.io/npm/@sentry/profiling-node/-/profiling-node-11.0.0-beta.2.tgz#1754678214bf549064d1eb99875ef43e9955a72b"
+  integrity sha512-ssUQ5Jx2xnAMTVQozqAe22Jydk0fbMZDdUUC1iNviZGbKnOoSupoDfgH8vqJoclyqRxLMHw1rMfhSM+gVG4inw==
   dependencies:
-    "@sentry/core" "11.0.0-beta.1"
-    "@sentry/node" "11.0.0-beta.1"
+    "@sentry/core" "11.0.0-beta.2"
+    "@sentry/node" "11.0.0-beta.2"
     "@sentry/node-cpu-profiler" "^2.4.3"
 
-"@sentry/server-runtime-injection@11.0.0-beta.1":
-  version "11.0.0-beta.1"
-  resolved "https://sfw.security.sentry.io/npm/@sentry/server-runtime-injection/-/server-runtime-injection-11.0.0-beta.1.tgz#5f9b919bf7becebe95d76fb732b2f1318873b9d4"
-  integrity sha512-98CQHmkJlM2joxhuwZHK3ubWnG+zWJHTSM/Sma9dEepIT0x7ZYUeBL8B/yXaOmKD5eL3VVwHgOLQ3GPtdiw+rA==
+"@sentry/server-runtime-injection@11.0.0-beta.2":
+  version "11.0.0-beta.2"
+  resolved "https://sfw.security.sentry.io/npm/@sentry/server-runtime-injection/-/server-runtime-injection-11.0.0-beta.2.tgz#91549a9e9526aebbcb14a7e6dea813ac61af5249"
+  integrity sha512-U+Xa+NqXS0IqhP2tBcSNk6/q498zsOggh/73TcJ6f5y0IHksN8h9+QId4pSvygh1/n2B0wDHcDB9lvB1ddBX4A==
   dependencies:
-    "@sentry/core" "11.0.0-beta.1"
-    "@sentry/server-utils" "11.0.0-beta.1"
+    "@sentry/core" "11.0.0-beta.2"
+    "@sentry/server-utils" "11.0.0-beta.2"
 
-"@sentry/server-utils@11.0.0-beta.1":
-  version "11.0.0-beta.1"
-  resolved "https://sfw.security.sentry.io/npm/@sentry/server-utils/-/server-utils-11.0.0-beta.1.tgz#78c9deabc0aefc4e3bec7469d8b689c4443b9240"
-  integrity sha512-yykBiydSvgr/muD0pSWc6Jz/9KrgPtH7rBQdCJ+SXTZ4ZRdak8swv5JQSPNkK7JjQGY6+/V7RpgXNNSRkca1Ag==
+"@sentry/server-utils@11.0.0-beta.2":
+  version "11.0.0-beta.2"
+  resolved "https://sfw.security.sentry.io/npm/@sentry/server-utils/-/server-utils-11.0.0-beta.2.tgz#0d979116d549b1f20b4ec0931412b5e99b6d8397"
+  integrity sha512-VUi7BuOWBNV7nM5+w408oQb6WPsM52jFN99aSgK5/GQ5t82G+LCpStf+gyV4ScOMbmzP887sbkD7MuTnNwgvJA==
   dependencies:
     "@opentelemetry/api" "^1.9.1"
     "@sentry/conventions" "^0.20.0"
-    "@sentry/core" "11.0.0-beta.1"
+    "@sentry/core" "11.0.0-beta.2"
 
 "@sideway/address@^4.1.3":
   version "4.1.4"
