@@ -1,4 +1,4 @@
-FROM ghcr.io/getsentry/dhi/node:24-debian13-dev AS builder
+FROM us-docker.pkg.dev/sentryio/dhi-mirror/node:24-debian13-dev AS builder
 
 WORKDIR /build
 
@@ -37,7 +37,7 @@ RUN apt-get update -qq && \
     rm -rf /var/lib/apt/lists/*
 
 
-FROM ghcr.io/getsentry/dhi/node:24-debian13
+FROM us-docker.pkg.dev/sentryio/dhi-mirror/node:24-debian13
 
 ENV NODE_ENV=production
 
