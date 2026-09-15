@@ -53,7 +53,6 @@ function(region) {
             },
             tasks: [
               gocdtasks.script(importstr '../bash/check-github-runs.sh'),
-              gocdtasks.script(importstr '../bash/check-cloudbuild.sh'),
             ],
           },
         },

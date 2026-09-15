@@ -24,7 +24,7 @@ jobs:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
 
       - name: Build and push chartcuterie image
-        uses: getsentry/action-build-and-push-images@b172ab61a5f7eabd58bd42ce231b517e79947c01
+        uses: getsentry/action-build-and-push-images@dd9b907092cdd2dbc6c1a409f7290df1b391f6ee
         with:
           image_name: 'chartcuterie'
           platforms: linux/${{ matrix.platform }}
@@ -35,6 +35,30 @@ jobs:
           google_ar: false
           tag_nightly: false
           tag_latest: false
+
+  build-production:
+    runs-on: ubuntu-24.04
+    name: Build and push production image
+    if: ${{ (github.ref_name == 'master' || startsWith(github.ref_name, 'release/')) && github.event_name != 'pull_request' }}
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+
+      - name: Build and push production image to Google AR
+        uses: getsentry/action-build-and-push-images@dd9b907092cdd2dbc6c1a409f7290df1b391f6ee
+        with:
+          image_name: 'chartcuterie'
+          platforms: linux/amd64
+          dockerfile_path: './Dockerfile'
+          ghcr: false
+          tag_nightly: false
+          tag_latest: false
+          google_ar: true
+          google_ar_image_name: us-docker.pkg.dev/sentryio/chartcuterie-mr/image
+          google_workload_identity_provider: projects/868781662168/locations/global/workloadIdentityPools/prod-github/providers/github-oidc-pool
+          google_service_account: gha-chartcuterie-push@sac-prod-sa.iam.gserviceaccount.com
 
   assemble-chartcuterie-image:
     runs-on: ubuntu-latest
