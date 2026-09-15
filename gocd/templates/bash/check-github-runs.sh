@@ -3,4 +3,5 @@
 checks-githubactions-checkruns2 \
   "getsentry/chartcuterie" \
   "${GO_REVISION_CHARTCUTERIE_REPO}" \
-  "build"
+  "build" \
+  "Build and push production image"
