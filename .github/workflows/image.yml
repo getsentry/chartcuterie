@@ -36,9 +36,6 @@ jobs:
           tag_nightly: false
           tag_latest: false
 
-  # Production image for GoCD deploys and craft releases. Publishes the same
-  # <sha> tag to Google AR that the Cloud Build trigger used to, so the deploy
-  # and release paths no longer depend on Cloud Build.
   build-production:
     runs-on: ubuntu-24.04
     name: Build and push production image
