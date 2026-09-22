@@ -1013,7 +1013,7 @@
 
 "@sentry/bundler-plugins@11.0.0-rc.1":
   version "11.0.0-rc.1"
-  resolved "https://registry.yarnpkg.com/@sentry/bundler-plugins/-/bundler-plugins-11.0.0-rc.1.tgz#5ed43846cc161df03740ff0f2b1dfdac6288afa8"
+  resolved "https://sfw.security.sentry.io/npm/@sentry/bundler-plugins/-/bundler-plugins-11.0.0-rc.1.tgz#5ed43846cc161df03740ff0f2b1dfdac6288afa8"
   integrity sha512-NB6gYXxxuT3ynw8TA7wtQRu/bFl69c+L9NLaWTKx+KRF7ujblw32gGkSorZdSL1na4GVCFHSluv4LH8roKBDfg==
   dependencies:
     "@babel/core" "^7.18.5"
@@ -1027,12 +1027,12 @@
 
 "@sentry/conventions@^0.23.0":
   version "0.23.0"
-  resolved "https://registry.yarnpkg.com/@sentry/conventions/-/conventions-0.23.0.tgz#26ecad45f91bcf70940325ab9af2b9544fa18242"
+  resolved "https://sfw.security.sentry.io/npm/@sentry/conventions/-/conventions-0.23.0.tgz#26ecad45f91bcf70940325ab9af2b9544fa18242"
   integrity sha512-+Euyo7CNVecoOusgUnq27oV97oshifgceKfnGnuKfXrPUVWA/cisvii3E1rlvy2yBrKvl9K1gCEo1Jqog5zjEQ==
 
 "@sentry/core@11.0.0-rc.1":
   version "11.0.0-rc.1"
-  resolved "https://registry.yarnpkg.com/@sentry/core/-/core-11.0.0-rc.1.tgz#0779c5028298527efd79b477c7bab0041e4552ef"
+  resolved "https://sfw.security.sentry.io/npm/@sentry/core/-/core-11.0.0-rc.1.tgz#0779c5028298527efd79b477c7bab0041e4552ef"
   integrity sha512-YXQRZTL6CWljXRrkazw2fCA7LGmwLApIlEG05cqCg62kY0T//Af2AzwG0hPqEEMzTitQZ4wfwS2d4hvRRV2uNA==
   dependencies:
     "@sentry/conventions" "^0.23.0"
@@ -1047,7 +1047,7 @@
 
 "@sentry/node@11.0.0-rc.1":
   version "11.0.0-rc.1"
-  resolved "https://registry.yarnpkg.com/@sentry/node/-/node-11.0.0-rc.1.tgz#c4cc401c3339c2158cd80ac41ada17391727f039"
+  resolved "https://sfw.security.sentry.io/npm/@sentry/node/-/node-11.0.0-rc.1.tgz#c4cc401c3339c2158cd80ac41ada17391727f039"
   integrity sha512-B2UU6xlEldbTDreQYASnMJdNqJloubuGV/2FItYxdhDk4dAulm2RqmBekH9q5D8L9bPNuVwjSQQy/7pdzg/d6A==
   dependencies:
     "@opentelemetry/api" "^1.9.1"
@@ -1060,7 +1060,7 @@
 
 "@sentry/opentelemetry@11.0.0-rc.1":
   version "11.0.0-rc.1"
-  resolved "https://registry.yarnpkg.com/@sentry/opentelemetry/-/opentelemetry-11.0.0-rc.1.tgz#beabfee4737ebbba761c2f0ff63707b29aa888e2"
+  resolved "https://sfw.security.sentry.io/npm/@sentry/opentelemetry/-/opentelemetry-11.0.0-rc.1.tgz#beabfee4737ebbba761c2f0ff63707b29aa888e2"
   integrity sha512-8X2bTlo9aSzTxP2zVBltqV4y1qQ7Zk0+sK6Gb/e6nuWpVFyOMlxG202BKvz73d84K933ybMSk9khT9Cw4pvFTA==
   dependencies:
     "@sentry/conventions" "^0.23.0"
@@ -1068,7 +1068,7 @@
 
 "@sentry/profiling-node@11.0.0-rc.1":
   version "11.0.0-rc.1"
-  resolved "https://registry.yarnpkg.com/@sentry/profiling-node/-/profiling-node-11.0.0-rc.1.tgz#7d4e942d99d9cfec840c4c77dec051f2ac03a046"
+  resolved "https://sfw.security.sentry.io/npm/@sentry/profiling-node/-/profiling-node-11.0.0-rc.1.tgz#7d4e942d99d9cfec840c4c77dec051f2ac03a046"
   integrity sha512-R2/qg1Fi0B7W+o4+Chxp7zby6lc+PnXC6fHeHL3u7cMYhk/tuWxO/AVBYCXufV8puAISWEtSoCSUd9rhiDt7Ag==
   dependencies:
     "@sentry/core" "11.0.0-rc.1"
@@ -1077,7 +1077,7 @@
 
 "@sentry/server-runtime-injection@11.0.0-rc.1":
   version "11.0.0-rc.1"
-  resolved "https://registry.yarnpkg.com/@sentry/server-runtime-injection/-/server-runtime-injection-11.0.0-rc.1.tgz#f75f05d7e7ae52008d47b1f60abbf22eb31bc663"
+  resolved "https://sfw.security.sentry.io/npm/@sentry/server-runtime-injection/-/server-runtime-injection-11.0.0-rc.1.tgz#f75f05d7e7ae52008d47b1f60abbf22eb31bc663"
   integrity sha512-kKiitppKxxMdOrnFHu2rxewCbUOP1lZIKextsWNZpuXrPePANkTJnP4F/AHFREHrPeLhzuls+ZrQqWYb3MDSiA==
   dependencies:
     "@sentry/core" "11.0.0-rc.1"
@@ -1085,7 +1085,7 @@
 
 "@sentry/server-utils@11.0.0-rc.1":
   version "11.0.0-rc.1"
-  resolved "https://registry.yarnpkg.com/@sentry/server-utils/-/server-utils-11.0.0-rc.1.tgz#b4f36a32c0ddf18c1075462714e0545323bb56f9"
+  resolved "https://sfw.security.sentry.io/npm/@sentry/server-utils/-/server-utils-11.0.0-rc.1.tgz#b4f36a32c0ddf18c1075462714e0545323bb56f9"
   integrity sha512-RxbPq5ZDPiEIjtPZd3UHQKsWyWEr98ZHnBh/jfOYGBwPSBCJQEVI0/iGEDkwTuVHqOTQPf/tokO991TKc45pXw==
   dependencies:
     "@opentelemetry/api" "^1.9.1"
