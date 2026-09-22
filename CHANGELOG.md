@@ -1,5 +1,30 @@
 # Changelong 
 
+## 0.15.3
+
+### New Features ✨
+
+- (ci) Publish the production image from GitHub Actions by @oioki in [#252](https://github.com/getsentry/chartcuterie/pull/252)
+
+### Internal Changes 🔧
+
+#### Deps
+
+- Bump JavaScript SDK to 11.0.0-rc.1 by @sentry-junior in [#258](https://github.com/getsentry/chartcuterie/pull/258)
+- Bump qs from 6.15.3 to 6.16.0 by @dependabot in [#257](https://github.com/getsentry/chartcuterie/pull/257)
+- Bump body-parser from 2.2.2 to 2.3.0 by @dependabot in [#238](https://github.com/getsentry/chartcuterie/pull/238)
+- Bump lodash from 4.17.23 to 4.18.1 by @dependabot in [#223](https://github.com/getsentry/chartcuterie/pull/223)
+- Bump joi from 17.6.0 to 17.13.6 by @dependabot in [#253](https://github.com/getsentry/chartcuterie/pull/253)
+- Bump qs from 6.15.0 to 6.16.0 by @dependabot in [#254](https://github.com/getsentry/chartcuterie/pull/254)
+- Bump browserslist from 4.28.1 to 4.29.0 by @dependabot in [#256](https://github.com/getsentry/chartcuterie/pull/256)
+- Bump path-to-regexp from 8.3.0 to 8.4.0 by @dependabot in [#221](https://github.com/getsentry/chartcuterie/pull/221)
+- Bump brace-expansion from 2.0.3 to 2.1.4 by @dependabot in [#240](https://github.com/getsentry/chartcuterie/pull/240)
+- Bump form-data from 4.0.5 to 4.0.6 by @dependabot in [#230](https://github.com/getsentry/chartcuterie/pull/230)
+
+#### Other
+
+- (docker) Pull DHI base from the AR pull-through mirror by @oioki in [#251](https://github.com/getsentry/chartcuterie/pull/251)
+
 ## 0.15.2
 
 ### Internal Changes 🔧
