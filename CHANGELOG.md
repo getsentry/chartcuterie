@@ -1,5 +1,11 @@
 # Changelong 
 
+## 0.15.4
+
+### Internal Changes 🔧
+
+- (deps) Bump Sentry JavaScript SDK to 11.0.0 by @sentry-junior in [#259](https://github.com/getsentry/chartcuterie/pull/259)
+
 ## 0.15.3
 
 ### New Features ✨
