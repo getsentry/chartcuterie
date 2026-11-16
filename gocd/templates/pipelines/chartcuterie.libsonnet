@@ -1,5 +1,14 @@
 local gocdtasks = import 'github.com/getsentry/gocd-jsonnet/libs/gocd-tasks.libsonnet';
 
+// Regions that deploy by committing images to materialized-ops and waiting for ArgoCD.
+local argocd_only_regions = ['s4s2'];
+
+local argocd_only_env(region) =
+  if std.member(argocd_only_regions, region) then {
+    ARGOCD_ONLY: 'true',
+    ARGOCD_SERVICE: 'chartcuterie',
+  } else {};
+
 local deploy_canary(region) =
   if region == 'us' || region == 'de' then
     [
@@ -15,7 +24,7 @@ local deploy_canary(region) =
                 GITHUB_APP_ID: '{{SECRET:[devinfra-github][app_id]}}',
                 GITHUB_APP_PRIVATE_KEY: '{{SECRET:[devinfra-github][private_key]}}',
                 LABEL_SELECTOR: 'service=chartcuterie,env=canary',
-              },
+              } + argocd_only_env(region),
               tasks: [
                 gocdtasks.script(importstr '../bash/deploy.sh'),
                 gocdtasks.script(importstr '../bash/wait-canary.sh'),
@@ -74,7 +83,7 @@ function(region) {
               GITHUB_APP_ID: '{{SECRET:[devinfra-github][app_id]}}',
               GITHUB_APP_PRIVATE_KEY: '{{SECRET:[devinfra-github][private_key]}}',
               LABEL_SELECTOR: 'service=chartcuterie',
-            },
+            } + argocd_only_env(region),
             tasks: [
               gocdtasks.script(importstr '../bash/deploy.sh'),
             ],
