@@ -16,13 +16,18 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Tag release version
+        env:
+          REF_NAME: ${{ github.ref_name }}
+          GITHUB_SHA: ${{ github.sha }}
         run: |
           docker buildx imagetools create --tag \
-           ghcr.io/getsentry/chartcuterie:${{ github.ref_name }} \
-           ghcr.io/getsentry/chartcuterie:${{ github.sha }}
+           ghcr.io/getsentry/chartcuterie:"$REF_NAME" \
+           ghcr.io/getsentry/chartcuterie:"$GITHUB_SHA"
 
       - name: Tag latest version
+        env:
+          GITHUB_SHA: ${{ github.sha }}
         run: |
           docker buildx imagetools create --tag \
            ghcr.io/getsentry/chartcuterie:latest \
-           ghcr.io/getsentry/chartcuterie:${{ github.sha }}
+           ghcr.io/getsentry/chartcuterie:"$GITHUB_SHA"
