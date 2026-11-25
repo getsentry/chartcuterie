@@ -15,6 +15,8 @@ local deploy_canary(region) =
                 GITHUB_APP_ID: '{{SECRET:[devinfra-github][app_id]}}',
                 GITHUB_APP_PRIVATE_KEY: '{{SECRET:[devinfra-github][private_key]}}',
                 LABEL_SELECTOR: 'service=chartcuterie,env=canary',
+                ARGOCD_ONLY: 'true',
+                ARGOCD_SERVICE: 'chartcuterie',
               },
               tasks: [
                 gocdtasks.script(importstr '../bash/deploy.sh'),
@@ -74,10 +76,9 @@ function(region) {
               GITHUB_APP_ID: '{{SECRET:[devinfra-github][app_id]}}',
               GITHUB_APP_PRIVATE_KEY: '{{SECRET:[devinfra-github][private_key]}}',
               LABEL_SELECTOR: 'service=chartcuterie',
-            } + (if region == 's4s2' then {
-                   ARGOCD_ONLY: 'true',
-                   ARGOCD_SERVICE: 'chartcuterie',
-                 } else {}),
+              ARGOCD_ONLY: 'true',
+              ARGOCD_SERVICE: 'chartcuterie',
+            },
             tasks: [
               gocdtasks.script(importstr '../bash/deploy.sh'),
             ],
