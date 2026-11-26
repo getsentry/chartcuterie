@@ -1,8 +1,13 @@
+minVersion: 3.9.0
 github:
   owner: getsentry
   repo: chartcuterie
 
-changelogPolicy: auto
+changelog:
+  policy: auto
+preReleaseCommand: bash scripts/bump-version.sh
+versioning:
+  policy: manual
 
 statusProvider:
   name: github
